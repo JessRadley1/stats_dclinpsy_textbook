@@ -10,12 +10,14 @@ longitudinal
 beyond-the-basics
 t-test
 exercise
-exploratory-data-analysis
+hypothesis-testing-vs.-hypothesis-generation
 exploratory-vs.-confirmatory-research
 pre-registering-confirmatory-research
 doing-both-exploratory-and-confirmatory-research
 significance
 statistical-significance
+measuring-variability-and-uncertainty
+exercise-1
 clinical-significance-and-effect-sizes
 effect-sizes
 minimally-clinically-important-differences-mcid

@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 5 Hypothesis testing vs. hypothesis generation | A Practical Guide to Statistics</title>
+  <meta name="description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.</p>" />
+  <meta name="generator" content="bookdown 0.47 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 5 Hypothesis testing vs. hypothesis generation | A Practical Guide to Statistics" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.</p>" />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 5 Hypothesis testing vs. hypothesis generation | A Practical Guide to Statistics" />
+  
+  <meta name="twitter:description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.</p>" />
+  
+
+<meta name="author" content="Dr Jess Radley" />
+
+
+<meta name="date" content="2026-10-08" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="t-test.html"/>
+<link rel="next" href="significance.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">A Minimal Book Example</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> About</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#learning-objectives"><i class="fa fa-check"></i><b>1.1</b> Learning objectives</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="using-jasp.html"><a href="using-jasp.html"><i class="fa fa-check"></i><b>2</b> Using JASP</a></li>
+<li class="chapter" data-level="3" data-path="choosing-a-statistical-test.html"><a href="choosing-a-statistical-test.html"><i class="fa fa-check"></i><b>3</b> Choosing a statistical test</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="choosing-a-statistical-test.html"><a href="choosing-a-statistical-test.html#cross-sectional"><i class="fa fa-check"></i><b>3.1</b> Cross-sectional</a></li>
+<li class="chapter" data-level="3.2" data-path="choosing-a-statistical-test.html"><a href="choosing-a-statistical-test.html#longitudinal"><i class="fa fa-check"></i><b>3.2</b> Longitudinal</a></li>
+<li class="chapter" data-level="3.3" data-path="choosing-a-statistical-test.html"><a href="choosing-a-statistical-test.html#beyond-the-basics"><i class="fa fa-check"></i><b>3.3</b> Beyond the basics</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="t-test.html"><a href="t-test.html"><i class="fa fa-check"></i><b>4</b> t-test</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="t-test.html"><a href="t-test.html#exercise"><i class="fa fa-check"></i><b>4.1</b> Exercise</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="hypothesis-testing-vs.-hypothesis-generation.html"><a href="hypothesis-testing-vs.-hypothesis-generation.html"><i class="fa fa-check"></i><b>5</b> Hypothesis testing vs. hypothesis generation</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="hypothesis-testing-vs.-hypothesis-generation.html"><a href="hypothesis-testing-vs.-hypothesis-generation.html#exploratory-vs.-confirmatory-research"><i class="fa fa-check"></i><b>5.1</b> Exploratory vs. Confirmatory Research</a></li>
+<li class="chapter" data-level="5.2" data-path="hypothesis-testing-vs.-hypothesis-generation.html"><a href="hypothesis-testing-vs.-hypothesis-generation.html#pre-registering-confirmatory-research"><i class="fa fa-check"></i><b>5.2</b> Pre-registering Confirmatory Research</a></li>
+<li class="chapter" data-level="5.3" data-path="hypothesis-testing-vs.-hypothesis-generation.html"><a href="hypothesis-testing-vs.-hypothesis-generation.html#doing-both-exploratory-and-confirmatory-research"><i class="fa fa-check"></i><b>5.3</b> Doing both Exploratory and Confirmatory Research</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="significance.html"><a href="significance.html"><i class="fa fa-check"></i><b>6</b> Significance</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="significance.html"><a href="significance.html#statistical-significance"><i class="fa fa-check"></i><b>6.1</b> Statistical significance</a></li>
+<li class="chapter" data-level="6.2" data-path="significance.html"><a href="significance.html#measuring-variability-and-uncertainty"><i class="fa fa-check"></i><b>6.2</b> Measuring variability and uncertainty</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="significance.html"><a href="significance.html#exercise-1"><i class="fa fa-check"></i><b>6.2.1</b> Exercise</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="significance.html"><a href="significance.html#clinical-significance-and-effect-sizes"><i class="fa fa-check"></i><b>6.3</b> Clinical significance and effect sizes</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="significance.html"><a href="significance.html#effect-sizes"><i class="fa fa-check"></i><b>6.3.1</b> Effect sizes</a></li>
+<li class="chapter" data-level="6.3.2" data-path="significance.html"><a href="significance.html#minimally-clinically-important-differences-mcid"><i class="fa fa-check"></i><b>6.3.2</b> Minimally clinically important differences (MCID)</a></li>
+<li class="chapter" data-level="6.3.3" data-path="significance.html"><a href="significance.html#proportion-of-participants-reaching-clinically-meaningful-improvement"><i class="fa fa-check"></i><b>6.3.3</b> Proportion of participants reaching clinically meaningful improvement</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="descriptive-statistics.html"><a href="descriptive-statistics.html"><i class="fa fa-check"></i><b>7</b> Descriptive statistics</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="descriptive-statistics.html"><a href="descriptive-statistics.html#continuous-data---large-dataset"><i class="fa fa-check"></i><b>7.1</b> Continuous data - large dataset</a></li>
+<li class="chapter" data-level="7.2" data-path="descriptive-statistics.html"><a href="descriptive-statistics.html#continuous-and-categorical-data---small-dataset"><i class="fa fa-check"></i><b>7.2</b> Continuous and categorical data - small dataset</a></li>
+<li class="chapter" data-level="7.3" data-path="descriptive-statistics.html"><a href="descriptive-statistics.html#pre-analysis-steps"><i class="fa fa-check"></i><b>7.3</b> Pre-analysis steps</a>
+<ul>
+<li class="chapter" data-level="7.3.1" data-path="descriptive-statistics.html"><a href="descriptive-statistics.html#normality"><i class="fa fa-check"></i><b>7.3.1</b> Normality</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>8</b> References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">A Practical Guide to Statistics</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="hypothesis-testing-vs.-hypothesis-generation" class="section level1 hasAnchor" number="5">
+<h1><span class="header-section-number">Chapter 5</span> Hypothesis testing vs. hypothesis generation<a href="hypothesis-testing-vs.-hypothesis-generation.html#hypothesis-testing-vs.-hypothesis-generation" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="exploratory-vs.-confirmatory-research" class="section level2 hasAnchor" number="5.1">
+<h2><span class="header-section-number">5.1</span> Exploratory vs. Confirmatory Research<a href="hypothesis-testing-vs.-hypothesis-generation.html#exploratory-vs.-confirmatory-research" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Before we discuss how to conduct the statistical tests you are familiar with, it is first important for us to understand why you would choose to conduct a statistical test and what is the right parameters to do so.</p>
+<p>Chris Chambers in his 2019 book ‘The seven deadly sins of psychology: A manifesto for reforming the culture of scientific practice’ emphasises the difference between hypothesis-generating (exploratory) and hypothesis-confirming (confirmatory) analysis. When deriving your research question and aims, you should be clear about whether it is exploratory or confirmatory.</p>
+<p>An exploratory research question would look like <strong>How are different patterns of social media use associated with different aspects of adolescent well-being?</strong></p>
+<p>A confirmatory research question would like like <strong>Do adolescents who use social media for more than three hours per day report lower sleep quality than adolescents who use it for less than one hour per day?</strong> This confirmatory research question would naturally lead on to specific hypotheses, for example, <strong>Adolescents who use social media for more than three hours per day will report lower sleep quality than adolescents who use it for less than one hour per day.</strong></p>
+<p>Importantly, confirmatory research with hypotheses requires a power analysis to determine whether you are able to detect an effect, should it exist. Exploratory research does not necessarily require a power analysis (but you should always be able to justify your sample size).</p>
+</div>
+<div id="pre-registering-confirmatory-research" class="section level2 hasAnchor" number="5.2">
+<h2><span class="header-section-number">5.2</span> Pre-registering Confirmatory Research<a href="hypothesis-testing-vs.-hypothesis-generation.html#pre-registering-confirmatory-research" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>If you have confirmatory research questions with prior hypothesis, you should be completing a pre-registration prior to conducting your analyses. If you do not do this, there is a danger of HARKing (Hypothesising After Results are Known) (Kerr, 1998), where scientists alter their original hypothesis in their published write-up to better fit with the patterns they have observed in the data. There is also the danger of p-hacking, where unplanned analyses are carried out until one analysis manages to find a p-value that is smaller than .05. You can pre-register your study on the Open Science Framework (<a href="https://osf.io/" class="uri">https://osf.io/</a>). Even better, you could submit the introduction and methods of your paper as a Registered Report format to a journal who provide you with peer-review before you carry out your analysis and guarantee they will publish the results and discussion no matter what you find. A list of journals that support the registered report format can be found here: <a href="https://www.cos.io/initiatives/registered-reports" class="uri">https://www.cos.io/initiatives/registered-reports</a>. Pre-registration also reduces the chances of something going unpublished solely because it has null results and interestingly since the registered report format has been increasingly used, it has been found that only 44% of results in registered reports are ‘positive’, compared to 96% of results in traditional psychology publications (Scheel et al., 2021)</p>
+</div>
+<div id="doing-both-exploratory-and-confirmatory-research" class="section level2 hasAnchor" number="5.3">
+<h2><span class="header-section-number">5.3</span> Doing both Exploratory and Confirmatory Research<a href="hypothesis-testing-vs.-hypothesis-generation.html#doing-both-exploratory-and-confirmatory-research" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The good news is you do not need to choose between confirmatory and exploratory research. You may have a few hypotheses based on prior literature on which you design your study. Following your study, you may choose to conduct further exploratory research on your results based on patterns you have observed. The most important thing is to be clear about which research questions were designed before and after seeing the data.</p>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="t-test.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="significance.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+  "sharing": {
+    "github": false,
+    "facebook": true,
+    "twitter": true,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": "https://github.com/USERNAME/REPO/edit/BRANCH/04-exploratory_confirmatory.Rmd",
+    "text": "Edit"
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": ["_main.pdf", "_main.epub"],
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "subsection"
+  }
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

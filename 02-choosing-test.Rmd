@@ -1,6 +1,6 @@
 # Choosing a statistical test
 
-Let's review which statistical test matches which design. Have a read of each diagram explaining which statistical test matches what kind of research design and then have a go at the quiz.
+Let's review which statistical test matches which design. Have a read of each diagram explaining which statistical test matches what kind of research design and then have a go at the quizzes.
 
 ## Cross-sectional
 

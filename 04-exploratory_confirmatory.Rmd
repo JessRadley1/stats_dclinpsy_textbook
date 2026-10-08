@@ -1,4 +1,4 @@
-# Exploratory Data Analysis
+# Hypothesis testing vs. hypothesis generation
 
 ## Exploratory vs. Confirmatory Research
 
@@ -10,7 +10,7 @@ An exploratory research question would look like **How are different patterns of
 
 A confirmatory research question would like like **Do adolescents who use social media for more than three hours per day report lower sleep quality than adolescents who use it for less than one hour per day?** This confirmatory research question would naturally lead on to specific hypotheses, for example, **Adolescents who use social media for more than three hours per day will report lower sleep quality than adolescents who use it for less than one hour per day.** 
 
-Importantly, confirmatory research with hypotheses requires a power analysis to determine whether you are able to detect an effect, should it exist. Exploratory research does not require this.
+Importantly, confirmatory research with hypotheses requires a power analysis to determine whether you are able to detect an effect, should it exist. Exploratory research does not necessarily require a power analysis (but you should always be able to justify your sample size).
 
 ## Pre-registering Confirmatory Research 
 
