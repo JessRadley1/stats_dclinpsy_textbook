@@ -1,0 +1,6 @@
+`r if (knitr::is_html_output()) '
+# References
+'`
+Scheel, A. M., Schijen, M. R., & Lakens, D. (2021). An excess of positive results: Comparing the standard psychology literature with registered reports. Advances in Methods and Practices in Psychological Science, 4(2), 25152459211007467.
+Chambers, C. (2019). The seven deadly sins of psychology: A manifesto for reforming the culture of scientific practice.
+Kerr, N. L. (1998). HARKing: Hypothesizing after the results are known. Personality and social psychology review, 2(3), 196-217.

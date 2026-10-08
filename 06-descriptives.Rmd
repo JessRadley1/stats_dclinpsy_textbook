@@ -1,0 +1,52 @@
+# Descriptive statistics
+
+Load the dataset 'Scatter plot' by clicking on the top-left icon-> Open-> Data Library -> 1. Descriptives -> Scatter plot. Click on the red 'X' to close any modelling that loads so you can see just the data.
+
+## Continuous data - large dataset
+
+1. Click on Descriptives -> Descriptive Statistics. Look at the descriptive statistics by clicking on each variable and moving them over to 'variables' using the arrow. 
+
+2. Click on the __bold title Descriptive Statistics__ and name it something that is more specific to the dataset. For example, you might want to call it something to do with personality.
+
+3. Add a note to the bottom of the table by clicking on the *italics Descriptive Statistics* and then selecting 'Add note'. A grey box should appear. In the grey box, comment on any notable observations, for example, which personality trait participants were highest in.
+
+4. What happens when you click 'transpose descriptives table'? Click on it. Consider which format you like best and leave it in your preferred format. Untick 'valid' and 'missing' under sample size - where could you put this information instead?
+
+5. Under statistics, experiment with adding more descriptive statistics, e.g., central tendency (mode and median), distribution (skewness, kurtosis) etc... Hover you mouse over each option to get further information.
+
+6. Under statistics, create a correlation table by ticking 'correlation' under 'association matrix'. Under the correlation matrix, add a note commenting on the strongest positive and strongest negative correlation.
+
+7. Spend some time looking at basic plots and customizable plots to see what kinds of plots you can create.
+
+8. Now let's look at JASP's new plot builder tool. Click on Descriptives -> Plot Builder. Choose a variable for the x-axis and a variable for the y-axis. Then under 'data and geometries' click on 'individual data points'. Change the options for point size, jitter height etc... and see what happens.
+
+9. Scroll down to 'axis settings and annotations'. Change the name of the x-axis and y-axis. Make the limits reflect the range of the each variable.
+
+## Continuous and categorical data - small dataset
+Now load the dataset 'Sleep' by clicking on the top-left icon-> Open-> Data Library -> 1. Descriptives -> Sleep
+
+## Pre-analysis steps
+It is essential to examine your data before conducting your analyses. This helps you understand the distribution of variables, exmaning missing data and assess the assumptions relevant to the statistical analyses you plan to conduct. 
+
+### Normality
+Normality of variables is an assumption for many analyses. Occasionally, data will be non-normal. Normality can be assessed in multiple ways:
+
+1. Descriptively, by looking at skewness and kurtosis
+
+2. Testing using Shapiro-Wilk. If the test is significant (p < .05), that indicates a departure from normality
+
+3. Visually by inspecting plots
+
+If you find some indications of a variable being non-normally distributed, it may not be an issue especially if there is a large sample size. If all assessments of normality indicate that the non-normality is severe and the sample size is not particularly large...
+
+#### Transformation
+-positive skew, square-root, logarithmic
+-negative skew - options here?
+detail in JASP
+
+Check the data afterwards, how is the skew now?
+
+#### Non-parametric tests
+In particularly small sample sizes where data skew is severe
+
+

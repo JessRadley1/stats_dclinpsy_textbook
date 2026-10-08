@@ -1,0 +1,36 @@
+--- 
+title: "A Practical Guide to Statistics"
+author: "Dr Jess Radley"
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+documentclass: book
+bibliography: [book.bib, packages.bib]
+# url: your book url like https://pkg.yihui.org/bookdown
+# cover-image: path to the social sharing image like images/cover.jpg
+description: |
+  This is a minimal example of using the bookdown package to write a book.
+  The HTML output format for this example is bookdown::gitbook,
+  set in the _output.yml file.
+link-citations: yes
+github-repo: rstudio/bookdown-demo
+---
+
+# About
+
+This textbook will illustrate how to choose and use common statistical techniques in psychology.
+
+## Learning objectives 
+
+1. Describe the difference between exploratory and confirmatory research
+2. Describe statistical significance and clinical significance 
+3. Match research designs to statistical tests
+4. Use JASP statistical software
+5. Apply knowledge of statistics to statistical testing 
+6. Generate and interpret statistical analyses and graphs 
+
+```{r include=FALSE}
+# automatically create a bib database for R packages
+knitr::write_bib(c(
+  .packages(), 'bookdown', 'knitr', 'rmarkdown'
+), 'packages.bib')
+```

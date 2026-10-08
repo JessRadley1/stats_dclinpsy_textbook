@@ -1,0 +1,52 @@
+# t-test
+
+Here is a video from the JASP video library on how to conduct an independent samples t-tests. You can find further videos, including assumption checks, plot and effect size here https://jasp-stats.github.io/jasp-video-library/All_T-Tests.html.
+
+```{=html}
+<video width="600" controls>
+  <source src="https://jasp-stats.github.io/jasp-video-library/assets/videos/All_T-Tests/1_TTest/TTest_1_Independent-Main-Analysis.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+```
+
+[Watch video in browser](https://jasp-stats.github.io/jasp-video-library/assets/videos/All_T-Tests/1_TTest/TTest_1_Independent-Main-Analysis.mp4)
+
+## Exercise
+
+Load the dataset 'Exam Anxiety' by clicking on the top-left icon-> Open-> Data Library -> Books -> Andy Field -> Exam anxiety. This is a fictional dataset created by Andy  Field *Field, A. P. (2017). Discovering Statistics Using IBM SPSS Statistics (5th ed.). London: Sage. [Fictional data set]*. 
+
+Click on the red 'X' to get rid of the Correlations analysis that loads (since you want to practise doing it yourself!) Once you have clicked this 'X' you should be left looking at a dataset.
+
+Once you have the data loaded, click on 'T-tests' and then 'Classical - Independent Samples T-Test'. 
+
+1. Conduct an independent samples t-test to determine whether there is a difference in time spent revising between male and female participants. You will need to figure out which variable is the grouping variable and which variable is in the dependent variable. Click on the __bold title Independent Samples T-Test__ and name it something that is more specific to your analysis. For example, you might want to call it __An Independent Samples T-Test of ...__ 
+
+2. Under 'Additional statistics', add Cohen's *d* effect size. Next, add 'Descriptives'.
+
+3. After that, add a note to the bottom of the table by clicking on the *italics Independent Samples T-Test* and then selecting 'Add note'. A grey box should appear. Using the information you produced, report your results in this box. Report means, standard deviations, degrees of freedom, t-statistics, Cohen's *d* to two decimal points, and report p values to three decimal points.
+
+<div style="background-color: #f7f7f8; border: 1px solid #e0e0e0; border-radius: 8px; padding: 15px 20px; margin: 15px 0;">
+
+<p><strong>Reporting an independent samples t-test</strong></p>
+
+<p>An independent samples t-test was used to compare [outcome] between [groups] [Group 1] (M = ?, SD = ?) and [Group 2] (M = ?, SD = ?) <em>differed significantly/did not differ significantly</em> on [outcome] (t(<em>df</em>) = <em>t</em>, p = <em>p</em>, d = <em>d</em>).</p>
+
+</div>
+
+4. Click on the blue 'i' button. Take 5-10 minutes to read through the help file. Then, remind yourself of the four assumptions for independent samples t-test. Which of these assumptions are related to study design and which are related to statistical analysis? Close the file and run the assumption checks. On the internet, look up the difference between Brown-Forsythe's and Levene's test of equality of variance. Decided which one you should report. Report the results from the test of normality and test of equality of variance by adding a note underneath each box.
+
+<div style="background-color: #f7f7f8; border: 1px solid #e0e0e0; border-radius: 8px; padding: 15px 20px; margin: 15px 0;">
+
+<p><strong>Reporting normality and equality of variances</strong></p>
+
+<p>A Shapiro–Wilk test indicated that [outcome] was <em>normally distributed/significantly differed from normality</em> (W(<em>n</em>) = <em>W</em>, p = <em>p</em>).</p>
+
+<p>Levene's/Brown-Forsythe's test indicated that the assumption of equal variances for [outcome] was met/violated (F(<em>df1, df2</em>) = <em>F</em>, p = <em>p</em>).</p>
+
+</div>
+
+5. Have a look at a raincloud plot. How does looking at these plots give further information to what you learned from the test of normality? Look up the difference between positive and negative skew. Then label the plot with further interpretation about normality.
+
+6. Click on the blue 'R' button at the top of the screen on the lefthand side to have a look at the R syntax. If you wanted to reduce these analyses in R you can copy and paste that code into R studio.
+
+7. Scroll back up the right hand page to start of your analysis. Click on your title and click 'export results' and save this file. Then click on your title and click 'copy' and paste into a word document and save that file. Then email both files (the html file and the word document) to a peer. Compare your results. Share what you have learned so far about JASP.

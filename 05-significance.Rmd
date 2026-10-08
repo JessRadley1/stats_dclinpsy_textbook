@@ -1,0 +1,332 @@
+# Significance
+
+There are two types of significance: statistical significance and clinical significance. Consider a research trial finds a statistically significant difference between participants' depression scores before and after 12 sessions of therapy which amounts to a 1.0 change on the PHQ-9. Despite this statistically significant chaange, it's unlikely that those participants would feel that this therapy had a meaningful impact on their lives, despite reaching statistical significance.
+
+__Statistical significance:__ Is this effect real or due to random variation?
+__Clinical significance:__ Is this effect large enough to matter?
+
+## Statistical significance
+
+Statistics is often done using the frequentist (or classical) approach which is based in null hypothesis statistical testing (NHST). This type of statistics always starts with a null hypothesis (H₀) which usually states that there is no difference between groups, conditions or variables and an alternative hypothesis that an effect or difference exists (Ha). After data are collected, a test statistic is calculated. The specific test statistic depends on the analysis being conducted (e.g., t for t-tests, F for ANOVAs, and χ² for chi-square tests). These statistics represent the size of the observed effect relative to the amount of random variation expected under the null hypothesis. In other words, they indicate how far the observed data deviate from what we would expect if there were truly no effect.
+
+The test statistic is then compared against its sampling distribution, which allows a p-value to be calculated. The p-value represents the probability of obtaining results at least as extreme as those observed, assuming that the null hypothesis is true. Therefore, a smaller p-value indicates that the observed data would be relatively unlikely if there were no real effect. For example, a p-value of 0.03 means that, if the null hypothesis were true, there would be a 3% probability of obtaining results this extreme or more extreme due to random variation.
+
+In 1925, Fisher published Statistical Methods for Research Workers and suggested that results occurring less than 5% of the time under the null hypothesis should be considered noteworthy. Over time, this suggestion became formalised into the convention of using p < .05 as a threshold for rejecting the null hypothesis, although Fisher himself did not intend this to be a rigid rule.
+
+An alternative approach to frequentist/classical statistics is Bayesian statistics. A key limitation of NHST is that it does not allow researchers to directly calculate the probability that a hypothesis is true. Instead, it evaluates how compatible the observed data are with the null hypothesis. Bayesian statistics takes a different approach by estimating the relative evidence for competing hypotheses (such as the null and alternative hypotheses) and allows researchers to update their beliefs about hypotheses in light of new data.
+
+<!-- null hypothesis -->
+<div style="border: 1px solid #ddd; padding: 15px; border-radius: 8px; max-width: 600px;">
+
+<p><strong>Question 1</strong></p>
+
+<p>What is the purpose of the null hypothesis (H₀) in frequentist statistics?</p>
+
+<select id="q1">
+  <option value="">-- Select an answer --</option>
+  <option value="correct">It usually states that there is no difference or effect</option>
+  <option value="wrong">It states that the researcher's theory is definitely true</option>
+  <option value="wrong">It calculates the size of the effect being studied</option>
+  <option value="wrong">It proves that groups are identical</option>
+</select>
+
+<button onclick="checkAnswer1()">Check answer</button>
+
+<p id="feedback1"></p>
+
+</div>
+
+<script>
+function checkAnswer1() {
+  var answer = document.getElementById("q1").value;
+  var feedback = document.getElementById("feedback1");
+
+  if (answer === "correct") {
+    feedback.style.color = "green";
+    feedback.innerHTML = "Correct! The null hypothesis usually proposes that there is no difference, association, or effect.";
+  } else if (answer === "wrong") {
+    feedback.style.color = "red";
+    feedback.innerHTML = "Not quite. Remember that the null hypothesis represents the absence of an effect.";
+  } else {
+    feedback.innerHTML = "Please select an answer.";
+  }
+}
+</script>
+
+<!-- test statistics -->
+<div style="border: 1px solid #ddd; padding: 15px; border-radius: 8px; max-width: 600px;">
+
+<p><strong>Question 2</strong></p>
+
+<p>What does a test statistic represent?</p>
+
+<select id="q2">
+  <option value="">-- Select an answer --</option>
+  <option value="wrong">The probability that the alternative hypothesis is true</option>
+  <option value="correct">The size of the observed effect relative to expected random variation</option>
+  <option value="wrong">The number of participants needed for a study</option>
+  <option value="wrong">The percentage of participants who improved</option>
+</select>
+
+<button onclick="checkAnswer2()">Check answer</button>
+
+<p id="feedback2"></p>
+
+</div>
+
+<script>
+function checkAnswer2() {
+  var answer = document.getElementById("q2").value;
+  var feedback = document.getElementById("feedback2");
+
+  if (answer === "correct") {
+    feedback.style.color = "green";
+    feedback.innerHTML = "Correct! Test statistics show how large the observed effect is compared with the variation expected under the null hypothesis.";
+  } else if (answer === "wrong") {
+    feedback.style.color = "red";
+    feedback.innerHTML = "Not quite. Think about how a test statistic compares the observed data with what would be expected by chance.";
+  } else {
+    feedback.innerHTML = "Please select an answer.";
+  }
+}
+</script>
+
+<!-- p-values -->
+<div style="border: 1px solid #ddd; padding: 15px; border-radius: 8px; max-width: 600px;">
+
+<p><strong>Question 3</strong></p>
+
+<p>A study reports p = 0.025. What does this mean?</p>
+
+<select id="q3">
+  <option value="">-- Select an answer --</option>
+  <option value="wrong">There is a 3% chance that the alternative hypothesis is true</option>
+  <option value="correct">If the null hypothesis were true, there would be a 2.5% chance of observing results this extreme or more extreme</option>
+  <option value="wrong">The study has a 97.5% chance of being correct</option>
+  <option value="wrong">The effect size is 2.5%</option>
+</select>
+
+<button onclick="checkAnswer3()">Check answer</button>
+
+<p id="feedback3"></p>
+
+</div>
+
+<script>
+function checkAnswer3() {
+  var answer = document.getElementById("q3").value;
+  var feedback = document.getElementById("feedback3");
+
+  if (answer === "correct") {
+    feedback.style.color = "green";
+    feedback.innerHTML = "Correct! A p-value describes how unusual the observed data would be if the null hypothesis were true.";
+  } else if (answer === "wrong") {
+    feedback.style.color = "red";
+    feedback.innerHTML = "Not quite. A p-value does not tell us the probability that a hypothesis is true.";
+  } else {
+    feedback.innerHTML = "Please select an answer.";
+  }
+}
+</script>
+
+## Clinical significance and effect sizes
+Clinical significance tells us whether our finding is large enough to be meaningful in pratice. There are several ways of assessing clinical significance. Three common approaches are:
+
+__1. Reporting an effect size__: this tells us how large the observed difference or association is, rather than simply whether it is statistically significant.
+
+__2. Comparing the effect with a pre-established minimally clinically important difference (MCID)__: this tells us whether the change is large enough to be considered meaningful from a clinical perspective.
+
+__3. Reporting the proportion of participants who achieve a clinically meaningful improvement__: for example, the percentage of patients whose symptoms improve by at least a pre-defined amount.
+
+### Effect sizes
+An effect size is a measure of the magnitude of a finding. The appropriate effect sizes depends on the type of analysis being conducted. For example:
+
+__Differences between groups__: mean difference or standardardised mean difference like Cohen's *d*
+
+__Associations between variables__: correlation coefficient (*r*)
+
+__Categorical outcomes__: odds ratios or risk ratios
+
+Once you have calculated an effect size, there are then common conventions to interpreting the effect size:
+
+| Effect size | Small | Medium | Large |
+|:------------|------:|-------:|------:|
+| Cohen's *d* | 0.20 | 0.50 | 0.80 |
+| *r* | 0.10 | 0.30 | 0.50 |
+| Odds ratio | 1.68 | 3.47 | 6.71 |
+| Risk ratio | 1.22 | 1.86 | 3.00 |
+
+Chen, H., Cohen, P., & Chen, S. (2010). How big is a big odds ratio? Interpreting the magnitudes of odds ratios in epidemiological studies. Communications in Statistics—simulation and Computation®, 39(4), 860-864.
+
+Sullivan, G. M., & Feinn, R. (2012). Using effect size—or why the P value is  not enough. Journal of graduate medical education, 4(3), 279-282
+
+### Minimally clinically important differences (MCID)
+Another way of assessing clinical significance is by using pre-established thresholds of minimally clinically important differences on commonly used outcome measures. For example, the PHQ-9 has a MCID of 3.7 points (Bauer-Staeb et al., 2021) and the GAD-7 has a MCID of 4 points (Toussaint et al., 2020). When comparing participants before and after the study, you could report the average change in your primary outcome measure and compare this to the MCID and you could also calculate what percentage of individual participants' scores changed more than the MCID.
+
+Bauer-Staeb, C., et al. (2021). Effective dose 50 method as the minimal clinically important difference: Evidence from depression trials. Journal of Clinical Epidemiology.
+
+Toussaint, A., et al. (2020). Sensitivity to change and minimal clinically important difference of the 7-item Generalized Anxiety Disorder Questionnaire (GAD-7). Journal of Affective Disorders.
+
+### Proportion of participants reaching clinically meaningful improvement
+Finally, you may choose to assess clinical significance by reporting what percentage of participants reached meaningful improvement. You can do this using MCID as noted above. If you are using an outcome measure with pre-established cut-offs, you may choose to report how many participants changed from having 'moderate' to 'mild' symptoms on the measure you have used.
+
+For example, the CORE-10 categorises psychological distress as 
+0-10 = healthy
+11-15 = mild distress
+16-20 = moderate distress
+21-25 = moderately severe distress
+26-40 = severe distress
+
+Then after an intervention using the CORE-10 as an outcome measure, you might want to report what proportion of individual participants decreased from severe to moderate distress or from moderate distress to healthy.
+
+<!-- effect sizes -->
+<div style="border: 1px solid #ddd; padding: 15px; border-radius: 8px; max-width: 600px;">
+
+<p><strong>Question 4</strong></p>
+
+<p>What does an effect size tell us?</p>
+
+<select id="q4">
+  <option value="">-- Select an answer --</option>
+  <option value="wrong">Whether the null hypothesis is true</option>
+  <option value="correct">The magnitude of the observed effect or association</option>
+  <option value="wrong">The probability that the result occurred by chance</option>
+  <option value="wrong">The percentage of participants who improved</option>
+</select>
+
+<button onclick="checkAnswer4()">Check answer</button>
+
+<p id="feedback4"></p>
+
+</div>
+
+<script>
+function checkAnswer4() {
+  var answer = document.getElementById("q4").value;
+  var feedback = document.getElementById("feedback4");
+
+  if (answer === "correct") {
+    feedback.style.color = "green";
+    feedback.innerHTML = "Correct! An effect size describes the magnitude of an observed difference or association.";
+  } else if (answer === "wrong") {
+    feedback.style.color = "red";
+    feedback.innerHTML = "Not quite. An effect size tells us how large an effect is, rather than whether it is statistically significant or whether the null hypothesis is true.";
+  } else {
+    feedback.innerHTML = "Please select an answer.";
+  }
+}
+</script>
+
+<!-- interpreting effect sizes -->
+<div style="border: 1px solid #ddd; padding: 15px; border-radius: 8px; max-width: 600px;">
+
+<p><strong>Question 5</strong></p>
+
+<p>A study reports Cohen's <em>d</em> = 0.20. What does this indicate according to commonly used conventions?</p>
+
+<select id="q5">
+  <option value="">-- Select an answer --</option>
+  <option value="correct">A small effect</option>
+  <option value="wrong">A medium effect</option>
+  <option value="wrong">A large effect</option>
+  <option value="wrong">That the result is statistically significant</option>
+</select>
+
+<button onclick="checkAnswer5()">Check answer</button>
+
+<p id="feedback5"></p>
+
+</div>
+
+<script>
+function checkAnswer5() {
+  var answer = document.getElementById("q5").value;
+  var feedback = document.getElementById("feedback5");
+
+  if (answer === "correct") {
+    feedback.style.color = "green";
+    feedback.innerHTML = "Correct! Cohen's d = 0.20 is commonly interpreted as a small effect, although these thresholds are only conventions and should be interpreted in context.";
+  } else if (answer === "wrong") {
+    feedback.style.color = "red";
+    feedback.innerHTML = "Not quite. According to commonly used conventions, Cohen's d = 0.20 represents a small effect. Remember that these conventions are only rules of thumb.";
+  } else {
+    feedback.innerHTML = "Please select an answer.";
+  }
+}
+</script>
+
+<!-- MCID -->
+<div style="border: 1px solid #ddd; padding: 15px; border-radius: 8px; max-width: 600px;">
+
+<p><strong>Question 6</strong></p>
+
+<p>What is the purpose of a minimally clinically important difference (MCID)?</p>
+
+<select id="q6">
+  <option value="">-- Select an answer --</option>
+  <option value="wrong">To determine whether a result is statistically significant</option>
+  <option value="correct">To identify the smallest change considered clinically meaningful</option>
+  <option value="wrong">To calculate the probability that the treatment is effective</option>
+  <option value="wrong">To determine the size of the study sample</option>
+</select>
+
+<button onclick="checkAnswer6()">Check answer</button>
+
+<p id="feedback6"></p>
+
+</div>
+
+<script>
+function checkAnswer6() {
+  var answer = document.getElementById("q6").value;
+  var feedback = document.getElementById("feedback6");
+
+  if (answer === "correct") {
+    feedback.style.color = "green";
+    feedback.innerHTML = "Correct! An MCID provides a pre-established threshold for deciding whether a change is large enough to be considered clinically meaningful.";
+  } else if (answer === "wrong") {
+    feedback.style.color = "red";
+    feedback.innerHTML = "Not quite. An MCID concerns whether a change is clinically meaningful, rather than whether it is statistically significant.";
+  } else {
+    feedback.innerHTML = "Please select an answer.";
+  }
+}
+</script>
+
+<!-- clinically meaningful improvement -->
+<div style="border: 1px solid #ddd; padding: 15px; border-radius: 8px; max-width: 600px;">
+
+<p><strong>Question 7</strong></p>
+
+<p>A psychological intervention is given to 100 participants. The MCID for the outcome measure is a 5-point reduction. After the intervention, 62 participants have improved by at least 5 points. What can be reported?</p>
+
+<select id="q7">
+  <option value="">-- Select an answer --</option>
+  <option value="wrong">The intervention had a 62% effect size</option>
+  <option value="correct">62% of participants achieved a clinically meaningful improvement</option>
+  <option value="wrong">The intervention was statistically significant in 62% of participants</option>
+  <option value="wrong">The intervention reduced symptoms by an average of 62 points</option>
+</select>
+
+<button onclick="checkAnswer7()">Check answer</button>
+
+<p id="feedback7"></p>
+
+</div>
+
+<script>
+function checkAnswer7() {
+  var answer = document.getElementById("q7").value;
+  var feedback = document.getElementById("feedback7");
+
+  if (answer === "correct") {
+    feedback.style.color = "green";
+    feedback.innerHTML = "Correct! Sixty-two out of 100 participants improved by at least the MCID, so 62% achieved a clinically meaningful improvement.";
+  } else if (answer === "wrong") {
+    feedback.style.color = "red";
+    feedback.innerHTML = "Not quite. The MCID defines the threshold for meaningful improvement, and 62% of participants reached that threshold. This is a proportion, not an effect size or p-value.";
+  } else {
+    feedback.innerHTML = "Please select an answer.";
+  }
+}
+</script>

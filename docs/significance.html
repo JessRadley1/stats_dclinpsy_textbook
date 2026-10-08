@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 6 Significance | A Practical Guide to Statistics</title>
+  <meta name="description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.</p>" />
+  <meta name="generator" content="bookdown 0.47 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 6 Significance | A Practical Guide to Statistics" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.</p>" />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 6 Significance | A Practical Guide to Statistics" />
+  
+  <meta name="twitter:description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.</p>" />
+  
+
+<meta name="author" content="Dr Jess Radley" />
+
+
+<meta name="date" content="2026-10-08" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="exploratory-data-analysis.html"/>
+<link rel="next" href="descriptive-statistics.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">A Minimal Book Example</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> About</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#learning-objectives"><i class="fa fa-check"></i><b>1.1</b> Learning objectives</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="using-jasp.html"><a href="using-jasp.html"><i class="fa fa-check"></i><b>2</b> Using JASP</a></li>
+<li class="chapter" data-level="3" data-path="choosing-a-statistical-test.html"><a href="choosing-a-statistical-test.html"><i class="fa fa-check"></i><b>3</b> Choosing a statistical test</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="choosing-a-statistical-test.html"><a href="choosing-a-statistical-test.html#cross-sectional"><i class="fa fa-check"></i><b>3.1</b> Cross-sectional</a></li>
+<li class="chapter" data-level="3.2" data-path="choosing-a-statistical-test.html"><a href="choosing-a-statistical-test.html#longitudinal"><i class="fa fa-check"></i><b>3.2</b> Longitudinal</a></li>
+<li class="chapter" data-level="3.3" data-path="choosing-a-statistical-test.html"><a href="choosing-a-statistical-test.html#beyond-the-basics"><i class="fa fa-check"></i><b>3.3</b> Beyond the basics</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="t-test.html"><a href="t-test.html"><i class="fa fa-check"></i><b>4</b> t-test</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="t-test.html"><a href="t-test.html#exercise"><i class="fa fa-check"></i><b>4.1</b> Exercise</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html"><i class="fa fa-check"></i><b>5</b> Exploratory Data Analysis</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#exploratory-vs.-confirmatory-research"><i class="fa fa-check"></i><b>5.1</b> Exploratory vs. Confirmatory Research</a></li>
+<li class="chapter" data-level="5.2" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#pre-registering-confirmatory-research"><i class="fa fa-check"></i><b>5.2</b> Pre-registering Confirmatory Research</a></li>
+<li class="chapter" data-level="5.3" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#doing-both-exploratory-and-confirmatory-research"><i class="fa fa-check"></i><b>5.3</b> Doing both Exploratory and Confirmatory Research</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="significance.html"><a href="significance.html"><i class="fa fa-check"></i><b>6</b> Significance</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="significance.html"><a href="significance.html#statistical-significance"><i class="fa fa-check"></i><b>6.1</b> Statistical significance</a></li>
+<li class="chapter" data-level="6.2" data-path="significance.html"><a href="significance.html#clinical-significance-and-effect-sizes"><i class="fa fa-check"></i><b>6.2</b> Clinical significance and effect sizes</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="significance.html"><a href="significance.html#effect-sizes"><i class="fa fa-check"></i><b>6.2.1</b> Effect sizes</a></li>
+<li class="chapter" data-level="6.2.2" data-path="significance.html"><a href="significance.html#minimally-clinically-important-differences-mcid"><i class="fa fa-check"></i><b>6.2.2</b> Minimally clinically important differences (MCID)</a></li>
+<li class="chapter" data-level="6.2.3" data-path="significance.html"><a href="significance.html#proportion-of-participants-reaching-clinically-meaningful-improvement"><i class="fa fa-check"></i><b>6.2.3</b> Proportion of participants reaching clinically meaningful improvement</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="descriptive-statistics.html"><a href="descriptive-statistics.html"><i class="fa fa-check"></i><b>7</b> Descriptive statistics</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="descriptive-statistics.html"><a href="descriptive-statistics.html#continuous-data---large-dataset"><i class="fa fa-check"></i><b>7.1</b> Continuous data - large dataset</a></li>
+<li class="chapter" data-level="7.2" data-path="descriptive-statistics.html"><a href="descriptive-statistics.html#continuous-and-categorical-data---small-dataset"><i class="fa fa-check"></i><b>7.2</b> Continuous and categorical data - small dataset</a></li>
+<li class="chapter" data-level="7.3" data-path="descriptive-statistics.html"><a href="descriptive-statistics.html#pre-analysis-steps"><i class="fa fa-check"></i><b>7.3</b> Pre-analysis steps</a>
+<ul>
+<li class="chapter" data-level="7.3.1" data-path="descriptive-statistics.html"><a href="descriptive-statistics.html#normality"><i class="fa fa-check"></i><b>7.3.1</b> Normality</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>8</b> References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">A Practical Guide to Statistics</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="significance" class="section level1 hasAnchor" number="6">
+<h1><span class="header-section-number">Chapter 6</span> Significance<a href="significance.html#significance" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>There are two types of significance: statistical significance and clinical significance. Consider a research trial finds a statistically significant difference between participants’ depression scores before and after 12 sessions of therapy which amounts to a 1.0 change on the PHQ-9. Despite this statistically significant chaange, it’s unlikely that those participants would feel that this therapy had a meaningful impact on their lives, despite reaching statistical significance.</p>
+<p><strong>Statistical significance:</strong> Is this effect real or due to random variation?
+<strong>Clinical significance:</strong> Is this effect large enough to matter?</p>
+<div id="statistical-significance" class="section level2 hasAnchor" number="6.1">
+<h2><span class="header-section-number">6.1</span> Statistical significance<a href="significance.html#statistical-significance" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Statistics is often done using the frequentist (or classical) approach which is based in null hypothesis statistical testing (NHST). This type of statistics always starts with a null hypothesis (H₀) which usually states that there is no difference between groups, conditions or variables and an alternative hypothesis that an effect or difference exists (Ha). After data are collected, a test statistic is calculated. The specific test statistic depends on the analysis being conducted (e.g., t for t-tests, F for ANOVAs, and χ² for chi-square tests). These statistics represent the size of the observed effect relative to the amount of random variation expected under the null hypothesis. In other words, they indicate how far the observed data deviate from what we would expect if there were truly no effect.</p>
+<p>The test statistic is then compared against its sampling distribution, which allows a p-value to be calculated. The p-value represents the probability of obtaining results at least as extreme as those observed, assuming that the null hypothesis is true. Therefore, a smaller p-value indicates that the observed data would be relatively unlikely if there were no real effect. For example, a p-value of 0.03 means that, if the null hypothesis were true, there would be a 3% probability of obtaining results this extreme or more extreme due to random variation.</p>
+<p>In 1925, Fisher published Statistical Methods for Research Workers and suggested that results occurring less than 5% of the time under the null hypothesis should be considered noteworthy. Over time, this suggestion became formalised into the convention of using p &lt; .05 as a threshold for rejecting the null hypothesis, although Fisher himself did not intend this to be a rigid rule.</p>
+<p>An alternative approach to frequentist/classical statistics is Bayesian statistics. A key limitation of NHST is that it does not allow researchers to directly calculate the probability that a hypothesis is true. Instead, it evaluates how compatible the observed data are with the null hypothesis. Bayesian statistics takes a different approach by estimating the relative evidence for competing hypotheses (such as the null and alternative hypotheses) and allows researchers to update their beliefs about hypotheses in light of new data.</p>
+<!-- null hypothesis -->
+<div style="border: 1px solid #ddd; padding: 15px; border-radius: 8px; max-width: 600px;">
+<p>
+<strong>Question 1</strong>
+</p>
+<p>
+What is the purpose of the null hypothesis (H₀) in frequentist statistics?
+</p>
+<p><select id="q1">
+<option value="">– Select an answer –</option>
+<option value="correct">It usually states that there is no difference or effect</option>
+<option value="wrong">It states that the researcher’s theory is definitely true</option>
+<option value="wrong">It calculates the size of the effect being studied</option>
+<option value="wrong">It proves that groups are identical</option>
+</select></p>
+<button onclick="checkAnswer1()">
+Check answer
+</button>
+<p id="feedback1">
+</p>
+</div>
+<script>
+function checkAnswer1() {
+  var answer = document.getElementById("q1").value;
+  var feedback = document.getElementById("feedback1");
+
+  if (answer === "correct") {
+    feedback.style.color = "green";
+    feedback.innerHTML = "Correct! The null hypothesis usually proposes that there is no difference, association, or effect.";
+  } else if (answer === "wrong") {
+    feedback.style.color = "red";
+    feedback.innerHTML = "Not quite. Remember that the null hypothesis represents the absence of an effect.";
+  } else {
+    feedback.innerHTML = "Please select an answer.";
+  }
+}
+</script>
+<!-- test statistics -->
+<div style="border: 1px solid #ddd; padding: 15px; border-radius: 8px; max-width: 600px;">
+<p>
+<strong>Question 2</strong>
+</p>
+<p>
+What does a test statistic represent?
+</p>
+<p><select id="q2">
+<option value="">– Select an answer –</option>
+<option value="wrong">The probability that the alternative hypothesis is true</option>
+<option value="correct">The size of the observed effect relative to expected random variation</option>
+<option value="wrong">The number of participants needed for a study</option>
+<option value="wrong">The percentage of participants who improved</option>
+</select></p>
+<button onclick="checkAnswer2()">
+Check answer
+</button>
+<p id="feedback2">
+</p>
+</div>
+<script>
+function checkAnswer2() {
+  var answer = document.getElementById("q2").value;
+  var feedback = document.getElementById("feedback2");
+
+  if (answer === "correct") {
+    feedback.style.color = "green";
+    feedback.innerHTML = "Correct! Test statistics show how large the observed effect is compared with the variation expected under the null hypothesis.";
+  } else if (answer === "wrong") {
+    feedback.style.color = "red";
+    feedback.innerHTML = "Not quite. Think about how a test statistic compares the observed data with what would be expected by chance.";
+  } else {
+    feedback.innerHTML = "Please select an answer.";
+  }
+}
+</script>
+<!-- p-values -->
+<div style="border: 1px solid #ddd; padding: 15px; border-radius: 8px; max-width: 600px;">
+<p>
+<strong>Question 3</strong>
+</p>
+<p>
+A study reports p = 0.025. What does this mean?
+</p>
+<p><select id="q3">
+<option value="">– Select an answer –</option>
+<option value="wrong">There is a 3% chance that the alternative hypothesis is true</option>
+<option value="correct">If the null hypothesis were true, there would be a 2.5% chance of observing results this extreme or more extreme</option>
+<option value="wrong">The study has a 97.5% chance of being correct</option>
+<option value="wrong">The effect size is 2.5%</option>
+</select></p>
+<button onclick="checkAnswer3()">
+Check answer
+</button>
+<p id="feedback3">
+</p>
+</div>
+<script>
+function checkAnswer3() {
+  var answer = document.getElementById("q3").value;
+  var feedback = document.getElementById("feedback3");
+
+  if (answer === "correct") {
+    feedback.style.color = "green";
+    feedback.innerHTML = "Correct! A p-value describes how unusual the observed data would be if the null hypothesis were true.";
+  } else if (answer === "wrong") {
+    feedback.style.color = "red";
+    feedback.innerHTML = "Not quite. A p-value does not tell us the probability that a hypothesis is true.";
+  } else {
+    feedback.innerHTML = "Please select an answer.";
+  }
+}
+</script>
+</div>
+<div id="clinical-significance-and-effect-sizes" class="section level2 hasAnchor" number="6.2">
+<h2><span class="header-section-number">6.2</span> Clinical significance and effect sizes<a href="significance.html#clinical-significance-and-effect-sizes" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Clinical significance tells us whether our finding is large enough to be meaningful in pratice. There are several ways of assessing clinical significance. Three common approaches are:</p>
+<p><strong>1. Reporting an effect size</strong>: this tells us how large the observed difference or association is, rather than simply whether it is statistically significant.</p>
+<p><strong>2. Comparing the effect with a pre-established minimally clinically important difference (MCID)</strong>: this tells us whether the change is large enough to be considered meaningful from a clinical perspective.</p>
+<p><strong>3. Reporting the proportion of participants who achieve a clinically meaningful improvement</strong>: for example, the percentage of patients whose symptoms improve by at least a pre-defined amount.</p>
+<div id="effect-sizes" class="section level3 hasAnchor" number="6.2.1">
+<h3><span class="header-section-number">6.2.1</span> Effect sizes<a href="significance.html#effect-sizes" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>An effect size is a measure of the magnitude of a finding. The appropriate effect sizes depends on the type of analysis being conducted. For example:</p>
+<p><strong>Differences between groups</strong>: mean difference or standardardised mean difference like Cohen’s <em>d</em></p>
+<p><strong>Associations between variables</strong>: correlation coefficient (<em>r</em>)</p>
+<p><strong>Categorical outcomes</strong>: odds ratios or risk ratios</p>
+<p>Once you have calculated an effect size, there are then common conventions to interpreting the effect size:</p>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Effect size</th>
+<th align="right">Small</th>
+<th align="right">Medium</th>
+<th align="right">Large</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Cohen’s <em>d</em></td>
+<td align="right">0.20</td>
+<td align="right">0.50</td>
+<td align="right">0.80</td>
+</tr>
+<tr class="even">
+<td align="left"><em>r</em></td>
+<td align="right">0.10</td>
+<td align="right">0.30</td>
+<td align="right">0.50</td>
+</tr>
+<tr class="odd">
+<td align="left">Odds ratio</td>
+<td align="right">1.68</td>
+<td align="right">3.47</td>
+<td align="right">6.71</td>
+</tr>
+<tr class="even">
+<td align="left">Risk ratio</td>
+<td align="right">1.22</td>
+<td align="right">1.86</td>
+<td align="right">3.00</td>
+</tr>
+</tbody>
+</table>
+<p>Chen, H., Cohen, P., &amp; Chen, S. (2010). How big is a big odds ratio? Interpreting the magnitudes of odds ratios in epidemiological studies. Communications in Statistics—simulation and Computation®, 39(4), 860-864.</p>
+<p>Sullivan, G. M., &amp; Feinn, R. (2012). Using effect size—or why the P value is not enough. Journal of graduate medical education, 4(3), 279-282</p>
+</div>
+<div id="minimally-clinically-important-differences-mcid" class="section level3 hasAnchor" number="6.2.2">
+<h3><span class="header-section-number">6.2.2</span> Minimally clinically important differences (MCID)<a href="significance.html#minimally-clinically-important-differences-mcid" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Another way of assessing clinical significance is by using pre-established thresholds of minimally clinically important differences on commonly used outcome measures. For example, the PHQ-9 has a MCID of 3.7 points (Bauer-Staeb et al., 2021) and the GAD-7 has a MCID of 4 points (Toussaint et al., 2020). When comparing participants before and after the study, you could report the average change in your primary outcome measure and compare this to the MCID and you could also calculate what percentage of individual participants’ scores changed more than the MCID.</p>
+<p>Bauer-Staeb, C., et al. (2021). Effective dose 50 method as the minimal clinically important difference: Evidence from depression trials. Journal of Clinical Epidemiology.</p>
+<p>Toussaint, A., et al. (2020). Sensitivity to change and minimal clinically important difference of the 7-item Generalized Anxiety Disorder Questionnaire (GAD-7). Journal of Affective Disorders.</p>
+</div>
+<div id="proportion-of-participants-reaching-clinically-meaningful-improvement" class="section level3 hasAnchor" number="6.2.3">
+<h3><span class="header-section-number">6.2.3</span> Proportion of participants reaching clinically meaningful improvement<a href="significance.html#proportion-of-participants-reaching-clinically-meaningful-improvement" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Finally, you may choose to assess clinical significance by reporting what percentage of participants reached meaningful improvement. You can do this using MCID as noted above. If you are using an outcome measure with pre-established cut-offs, you may choose to report how many participants changed from having ‘moderate’ to ‘mild’ symptoms on the measure you have used.</p>
+<p>For example, the CORE-10 categorises psychological distress as
+0-10 = healthy
+11-15 = mild distress
+16-20 = moderate distress
+21-25 = moderately severe distress
+26-40 = severe distress</p>
+<p>Then after an intervention using the CORE-10 as an outcome measure, you might want to report what proportion of individual participants decreased from severe to moderate distress or from moderate distress to healthy.</p>
+<!-- effect sizes -->
+<div style="border: 1px solid #ddd; padding: 15px; border-radius: 8px; max-width: 600px;">
+<p>
+<strong>Question 4</strong>
+</p>
+<p>
+What does an effect size tell us?
+</p>
+<p><select id="q4">
+<option value="">– Select an answer –</option>
+<option value="wrong">Whether the null hypothesis is true</option>
+<option value="correct">The magnitude of the observed effect or association</option>
+<option value="wrong">The probability that the result occurred by chance</option>
+<option value="wrong">The percentage of participants who improved</option>
+</select></p>
+<button onclick="checkAnswer4()">
+Check answer
+</button>
+<p id="feedback4">
+</p>
+</div>
+<script>
+function checkAnswer4() {
+  var answer = document.getElementById("q4").value;
+  var feedback = document.getElementById("feedback4");
+
+  if (answer === "correct") {
+    feedback.style.color = "green";
+    feedback.innerHTML = "Correct! An effect size describes the magnitude of an observed difference or association.";
+  } else if (answer === "wrong") {
+    feedback.style.color = "red";
+    feedback.innerHTML = "Not quite. An effect size tells us how large an effect is, rather than whether it is statistically significant or whether the null hypothesis is true.";
+  } else {
+    feedback.innerHTML = "Please select an answer.";
+  }
+}
+</script>
+<!-- interpreting effect sizes -->
+<div style="border: 1px solid #ddd; padding: 15px; border-radius: 8px; max-width: 600px;">
+<p>
+<strong>Question 5</strong>
+</p>
+<p>
+A study reports Cohen’s <em>d</em> = 0.20. What does this indicate according to commonly used conventions?
+</p>
+<p><select id="q5">
+<option value="">– Select an answer –</option>
+<option value="correct">A small effect</option>
+<option value="wrong">A medium effect</option>
+<option value="wrong">A large effect</option>
+<option value="wrong">That the result is statistically significant</option>
+</select></p>
+<button onclick="checkAnswer5()">
+Check answer
+</button>
+<p id="feedback5">
+</p>
+</div>
+<script>
+function checkAnswer5() {
+  var answer = document.getElementById("q5").value;
+  var feedback = document.getElementById("feedback5");
+
+  if (answer === "correct") {
+    feedback.style.color = "green";
+    feedback.innerHTML = "Correct! Cohen's d = 0.20 is commonly interpreted as a small effect, although these thresholds are only conventions and should be interpreted in context.";
+  } else if (answer === "wrong") {
+    feedback.style.color = "red";
+    feedback.innerHTML = "Not quite. According to commonly used conventions, Cohen's d = 0.20 represents a small effect. Remember that these conventions are only rules of thumb.";
+  } else {
+    feedback.innerHTML = "Please select an answer.";
+  }
+}
+</script>
+<!-- MCID -->
+<div style="border: 1px solid #ddd; padding: 15px; border-radius: 8px; max-width: 600px;">
+<p>
+<strong>Question 6</strong>
+</p>
+<p>
+What is the purpose of a minimally clinically important difference (MCID)?
+</p>
+<p><select id="q6">
+<option value="">– Select an answer –</option>
+<option value="wrong">To determine whether a result is statistically significant</option>
+<option value="correct">To identify the smallest change considered clinically meaningful</option>
+<option value="wrong">To calculate the probability that the treatment is effective</option>
+<option value="wrong">To determine the size of the study sample</option>
+</select></p>
+<button onclick="checkAnswer6()">
+Check answer
+</button>
+<p id="feedback6">
+</p>
+</div>
+<script>
+function checkAnswer6() {
+  var answer = document.getElementById("q6").value;
+  var feedback = document.getElementById("feedback6");
+
+  if (answer === "correct") {
+    feedback.style.color = "green";
+    feedback.innerHTML = "Correct! An MCID provides a pre-established threshold for deciding whether a change is large enough to be considered clinically meaningful.";
+  } else if (answer === "wrong") {
+    feedback.style.color = "red";
+    feedback.innerHTML = "Not quite. An MCID concerns whether a change is clinically meaningful, rather than whether it is statistically significant.";
+  } else {
+    feedback.innerHTML = "Please select an answer.";
+  }
+}
+</script>
+<!-- clinically meaningful improvement -->
+<div style="border: 1px solid #ddd; padding: 15px; border-radius: 8px; max-width: 600px;">
+<p>
+<strong>Question 7</strong>
+</p>
+<p>
+A psychological intervention is given to 100 participants. The MCID for the outcome measure is a 5-point reduction. After the intervention, 62 participants have improved by at least 5 points. What can be reported?
+</p>
+<p><select id="q7">
+<option value="">– Select an answer –</option>
+<option value="wrong">The intervention had a 62% effect size</option>
+<option value="correct">62% of participants achieved a clinically meaningful improvement</option>
+<option value="wrong">The intervention was statistically significant in 62% of participants</option>
+<option value="wrong">The intervention reduced symptoms by an average of 62 points</option>
+</select></p>
+<button onclick="checkAnswer7()">
+Check answer
+</button>
+<p id="feedback7">
+</p>
+</div>
+<script>
+function checkAnswer7() {
+  var answer = document.getElementById("q7").value;
+  var feedback = document.getElementById("feedback7");
+
+  if (answer === "correct") {
+    feedback.style.color = "green";
+    feedback.innerHTML = "Correct! Sixty-two out of 100 participants improved by at least the MCID, so 62% achieved a clinically meaningful improvement.";
+  } else if (answer === "wrong") {
+    feedback.style.color = "red";
+    feedback.innerHTML = "Not quite. The MCID defines the threshold for meaningful improvement, and 62% of participants reached that threshold. This is a proportion, not an effect size or p-value.";
+  } else {
+    feedback.innerHTML = "Please select an answer.";
+  }
+}
+</script>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="exploratory-data-analysis.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="descriptive-statistics.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+  "sharing": {
+    "github": false,
+    "facebook": true,
+    "twitter": true,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": "https://github.com/USERNAME/REPO/edit/BRANCH/05-significance.Rmd",
+    "text": "Edit"
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": ["_main.pdf", "_main.epub"],
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "subsection"
+  }
+});
+});
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,13 @@
+# Using JASP 
+
+This textbook will use JASP for statistical analysis. JASP is an open-source project supported by the University of Amsterdam. You can download JASP here: https://jasp-stats.org/. Please watch this 5-minute video before continuing to read.
+
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%;">
+  <iframe 
+    src="https://www.youtube.com/embed/APRaBFC2lEQ" 
+    frameborder="0" 
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+    allowfullscreen
+    style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;">
+  </iframe>
+</div>

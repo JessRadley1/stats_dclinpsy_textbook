@@ -1,0 +1,21 @@
+# Exploratory Data Analysis
+
+## Exploratory vs. Confirmatory Research
+
+Before we discuss how to conduct the statistical tests you are familiar with, it is first important for us to understand why you would choose to conduct a statistical test and what is the right parameters to do so.
+
+Chris Chambers in his 2019 book 'The seven deadly sins of psychology: A manifesto for reforming the culture of scientific practice' emphasises the difference between hypothesis-generating (exploratory) and hypothesis-confirming (confirmatory) analysis. When deriving your research question and aims, you should be clear about whether it is exploratory or confirmatory.
+
+An exploratory research question would look like **How are different patterns of social media use associated with different aspects of adolescent well-being?**
+
+A confirmatory research question would like like **Do adolescents who use social media for more than three hours per day report lower sleep quality than adolescents who use it for less than one hour per day?** This confirmatory research question would naturally lead on to specific hypotheses, for example, **Adolescents who use social media for more than three hours per day will report lower sleep quality than adolescents who use it for less than one hour per day.** 
+
+Importantly, confirmatory research with hypotheses requires a power analysis to determine whether you are able to detect an effect, should it exist. Exploratory research does not require this.
+
+## Pre-registering Confirmatory Research 
+
+If you have confirmatory research questions with prior hypothesis, you should be completing a pre-registration prior to conducting your analyses. If you do not do this, there is a danger of HARKing (Hypothesising After Results are Known) (Kerr, 1998), where scientists alter their original hypothesis in their published write-up to better fit with the patterns they have observed in the data. There is also the danger of p-hacking, where unplanned analyses are carried out until one analysis manages to find a p-value that is smaller than .05. You can pre-register your study on the Open Science Framework (https://osf.io/). Even better, you could submit the introduction and methods of your paper as a Registered Report format to a journal who provide you with peer-review before you carry out your analysis and guarantee they will publish the results and discussion no matter what you find. A list of journals that support the registered report format can be found here: https://www.cos.io/initiatives/registered-reports. Pre-registration also reduces the chances of something going unpublished solely because it has null results and interestingly since the registered report format has been increasingly used, it has been found that only 44% of results in registered reports are 'positive', compared to 96% of results in traditional psychology publications (Scheel et al., 2021)
+
+## Doing both Exploratory and Confirmatory Research
+
+The good news is you do not need to choose between confirmatory and exploratory research. You may have a few hypotheses based on prior literature on which you design your study. Following your study, you may choose to conduct further exploratory research on your results based on patterns you have observed. The most important thing is to be clear about which research questions were designed before and after seeing the data.
