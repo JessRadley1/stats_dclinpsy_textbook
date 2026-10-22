@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 7 Descriptive statistics &amp; Pre-analysis steps | A Practical Guide to Statistics</title>
+  <meta name="description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.</p>" />
+  <meta name="generator" content="bookdown 0.47 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 7 Descriptive statistics &amp; Pre-analysis steps | A Practical Guide to Statistics" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.</p>" />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 7 Descriptive statistics &amp; Pre-analysis steps | A Practical Guide to Statistics" />
+  
+  <meta name="twitter:description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.</p>" />
+  
+
+<meta name="author" content="Dr Jess Radley" />
+
+
+<meta name="date" content="2026-10-22" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="significance.html"/>
+<link rel="next" href="references.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">A Minimal Book Example</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> About</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#learning-objectives"><i class="fa fa-check"></i><b>1.1</b> Learning objectives</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="using-jasp.html"><a href="using-jasp.html"><i class="fa fa-check"></i><b>2</b> Using JASP</a></li>
+<li class="chapter" data-level="3" data-path="choosing-a-statistical-test.html"><a href="choosing-a-statistical-test.html"><i class="fa fa-check"></i><b>3</b> Choosing a statistical test</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="choosing-a-statistical-test.html"><a href="choosing-a-statistical-test.html#cross-sectional"><i class="fa fa-check"></i><b>3.1</b> Cross-sectional</a></li>
+<li class="chapter" data-level="3.2" data-path="choosing-a-statistical-test.html"><a href="choosing-a-statistical-test.html#longitudinal"><i class="fa fa-check"></i><b>3.2</b> Longitudinal</a></li>
+<li class="chapter" data-level="3.3" data-path="choosing-a-statistical-test.html"><a href="choosing-a-statistical-test.html#beyond-the-basics"><i class="fa fa-check"></i><b>3.3</b> Beyond the basics</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="t-test.html"><a href="t-test.html"><i class="fa fa-check"></i><b>4</b> t-test</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="t-test.html"><a href="t-test.html#exercise"><i class="fa fa-check"></i><b>4.1</b> Exercise</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="hypothesis-testing-vs.-hypothesis-generation.html"><a href="hypothesis-testing-vs.-hypothesis-generation.html"><i class="fa fa-check"></i><b>5</b> Hypothesis testing vs. hypothesis generation</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="hypothesis-testing-vs.-hypothesis-generation.html"><a href="hypothesis-testing-vs.-hypothesis-generation.html#exploratory-vs.-confirmatory-research"><i class="fa fa-check"></i><b>5.1</b> Exploratory vs. Confirmatory Research</a></li>
+<li class="chapter" data-level="5.2" data-path="hypothesis-testing-vs.-hypothesis-generation.html"><a href="hypothesis-testing-vs.-hypothesis-generation.html#pre-registering-confirmatory-research"><i class="fa fa-check"></i><b>5.2</b> Pre-registering Confirmatory Research</a></li>
+<li class="chapter" data-level="5.3" data-path="hypothesis-testing-vs.-hypothesis-generation.html"><a href="hypothesis-testing-vs.-hypothesis-generation.html#doing-both-exploratory-and-confirmatory-research"><i class="fa fa-check"></i><b>5.3</b> Doing both Exploratory and Confirmatory Research</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="significance.html"><a href="significance.html"><i class="fa fa-check"></i><b>6</b> Significance</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="significance.html"><a href="significance.html#statistical-significance"><i class="fa fa-check"></i><b>6.1</b> Statistical significance</a></li>
+<li class="chapter" data-level="6.2" data-path="significance.html"><a href="significance.html#measuring-variability-and-uncertainty"><i class="fa fa-check"></i><b>6.2</b> Measuring variability and uncertainty</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="significance.html"><a href="significance.html#exercise-1"><i class="fa fa-check"></i><b>6.2.1</b> Exercise</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="significance.html"><a href="significance.html#clinical-significance-and-effect-sizes"><i class="fa fa-check"></i><b>6.3</b> Clinical significance and effect sizes</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="significance.html"><a href="significance.html#effect-sizes"><i class="fa fa-check"></i><b>6.3.1</b> Effect sizes</a></li>
+<li class="chapter" data-level="6.3.2" data-path="significance.html"><a href="significance.html#minimally-clinically-important-differences-mcid"><i class="fa fa-check"></i><b>6.3.2</b> Minimally clinically important differences (MCID)</a></li>
+<li class="chapter" data-level="6.3.3" data-path="significance.html"><a href="significance.html#proportion-of-participants-reaching-clinically-meaningful-improvement"><i class="fa fa-check"></i><b>6.3.3</b> Proportion of participants reaching clinically meaningful improvement</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="descriptive-statistics-pre-analysis-steps.html"><a href="descriptive-statistics-pre-analysis-steps.html"><i class="fa fa-check"></i><b>7</b> Descriptive statistics &amp; Pre-analysis steps</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="descriptive-statistics-pre-analysis-steps.html"><a href="descriptive-statistics-pre-analysis-steps.html#data-cleaning"><i class="fa fa-check"></i><b>7.1</b> Data cleaning</a>
+<ul>
+<li class="chapter" data-level="7.1.1" data-path="descriptive-statistics-pre-analysis-steps.html"><a href="descriptive-statistics-pre-analysis-steps.html#check-the-variables"><i class="fa fa-check"></i><b>7.1.1</b> Check the variables</a></li>
+<li class="chapter" data-level="7.1.2" data-path="descriptive-statistics-pre-analysis-steps.html"><a href="descriptive-statistics-pre-analysis-steps.html#checking-that-missing-responses-are-coded-correctly"><i class="fa fa-check"></i><b>7.1.2</b> Checking that missing responses are coded correctly</a></li>
+<li class="chapter" data-level="7.1.3" data-path="descriptive-statistics-pre-analysis-steps.html"><a href="descriptive-statistics-pre-analysis-steps.html#checking-data-entry"><i class="fa fa-check"></i><b>7.1.3</b> Checking data entry</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="descriptive-statistics-pre-analysis-steps.html"><a href="descriptive-statistics-pre-analysis-steps.html#missingness"><i class="fa fa-check"></i><b>7.2</b> Missingness</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="descriptive-statistics-pre-analysis-steps.html"><a href="descriptive-statistics-pre-analysis-steps.html#investigate-missingness"><i class="fa fa-check"></i><b>7.2.1</b> Investigate missingness</a></li>
+<li class="chapter" data-level="7.2.2" data-path="descriptive-statistics-pre-analysis-steps.html"><a href="descriptive-statistics-pre-analysis-steps.html#imputation"><i class="fa fa-check"></i><b>7.2.2</b> Imputation</a></li>
+<li class="chapter" data-level="7.2.3" data-path="descriptive-statistics-pre-analysis-steps.html"><a href="descriptive-statistics-pre-analysis-steps.html#deletion"><i class="fa fa-check"></i><b>7.2.3</b> Deletion</a></li>
+<li class="chapter" data-level="7.2.4" data-path="descriptive-statistics-pre-analysis-steps.html"><a href="descriptive-statistics-pre-analysis-steps.html#model-based-approaches"><i class="fa fa-check"></i><b>7.2.4</b> Model-based approaches</a></li>
+<li class="chapter" data-level="7.2.5" data-path="descriptive-statistics-pre-analysis-steps.html"><a href="descriptive-statistics-pre-analysis-steps.html#sensitivity-analyses"><i class="fa fa-check"></i><b>7.2.5</b> Sensitivity analyses</a></li>
+<li class="chapter" data-level="7.2.6" data-path="descriptive-statistics-pre-analysis-steps.html"><a href="descriptive-statistics-pre-analysis-steps.html#quiz"><i class="fa fa-check"></i><b>7.2.6</b> Quiz</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="descriptive-statistics-pre-analysis-steps.html"><a href="descriptive-statistics-pre-analysis-steps.html#normality"><i class="fa fa-check"></i><b>7.3</b> Normality</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>8</b> References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">A Practical Guide to Statistics</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="descriptive-statistics-pre-analysis-steps" class="section level1 hasAnchor" number="7">
+<h1><span class="header-section-number">Chapter 7</span> Descriptive statistics &amp; Pre-analysis steps<a href="descriptive-statistics-pre-analysis-steps.html#descriptive-statistics-pre-analysis-steps" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>Load the dataset ‘depression_anxiety_practice_data.csv’ into JASP by clicking Open -&gt; Computer and then finding where you have saved the dataset on your computer.</p>
+<p><strong>Data dictionary</strong></p>
+<table>
+<colgroup>
+<col width="25%" />
+<col width="75%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">Variable</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">id</td>
+<td align="left">Participant ID</td>
+</tr>
+<tr class="even">
+<td align="left">age</td>
+<td align="left">Age in years</td>
+</tr>
+<tr class="odd">
+<td align="left">gender</td>
+<td align="left">Gender</td>
+</tr>
+<tr class="even">
+<td align="left">ethnicity</td>
+<td align="left">Ethnicity (UK Census 2021 high-level groups)</td>
+</tr>
+<tr class="odd">
+<td align="left">PHQ-9</td>
+<td align="left">The nine PHQ-9 depression items</td>
+</tr>
+<tr class="even">
+<td align="left">GAD-7</td>
+<td align="left">The seven GAD-7 anxiety items</td>
+</tr>
+<tr class="odd">
+<td align="left">previous_mh_diagnosis</td>
+<td align="left">Previously diagnosed with a mental health condition?</td>
+</tr>
+<tr class="even">
+<td align="left">currently_in_therapy</td>
+<td align="left">Currently receiving therapy?</td>
+</tr>
+<tr class="odd">
+<td align="left">caring_responsibilities</td>
+<td align="left">Has caring responsibilities?</td>
+</tr>
+<tr class="even">
+<td align="left">retired</td>
+<td align="left">Retired?</td>
+</tr>
+<tr class="odd">
+<td align="left">completion_mins</td>
+<td align="left">Minutes taken to complete the questionnaire</td>
+</tr>
+</tbody>
+</table>
+<div id="data-cleaning" class="section level2 hasAnchor" number="7.1">
+<h2><span class="header-section-number">7.1</span> Data cleaning<a href="descriptive-statistics-pre-analysis-steps.html#data-cleaning" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="check-the-variables" class="section level3 hasAnchor" number="7.1.1">
+<h3><span class="header-section-number">7.1.1</span> Check the variables<a href="descriptive-statistics-pre-analysis-steps.html#check-the-variables" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>JASP has three options for variable types.</p>
+<p><em>Nominal</em> - categorical with no inherent order</p>
+<p><em>Ordinal</em> - categorical with a meaningful order but intervals between categories are not necessarily equal</p>
+<p><em>Scale</em> - continuous numeric variables with meaningful distances</p>
+<p><em>Tip</em>: Individual items on a questionnaire/Likert scale are often treated as an ‘ordinal’ variable whereas the summed score of all items is often treated as a ‘scale’ variable.</p>
+<ol style="list-style-type: decimal">
+<li>Has JASP automatically assigned the right variable type to each variable? If not, double-click on the header row and change the variable type.</li>
+</ol>
+</div>
+<div id="checking-that-missing-responses-are-coded-correctly" class="section level3 hasAnchor" number="7.1.2">
+<h3><span class="header-section-number">7.1.2</span> Checking that missing responses are coded correctly<a href="descriptive-statistics-pre-analysis-steps.html#checking-that-missing-responses-are-coded-correctly" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Missing variables can be coded in many ways e.g., ‘.’, ‘99’, ‘999’, ‘-99’, ‘NA’, ‘NaN’ or simply as a blank. JASP as a default considers the following variables as missing: ‘.’, ‘NA’, ‘NaN’ and ‘nan’.</p>
+<ol start="2" style="list-style-type: decimal">
+<li>We need to make sure JASP understands which variables are missing/not ‘real variables’. Scroll down enough column and if you spot any missingness indicators that aren’t already covered by JASP’s default settings double-click on the column name and click ‘use custom values’, then enter any variable that should be considered as missing for that column e.g., ‘99’. You should see that this value immediately appears in greyscale on the dataview. To permanently ask JASP to recognise ‘99’ as a missing indicator click on the topleft button -&gt; Preferences -&gt; Data -&gt; Missing value settings and add ‘99’ to the ‘missing values setting’.</li>
+</ol>
+</div>
+<div id="checking-data-entry" class="section level3 hasAnchor" number="7.1.3">
+<h3><span class="header-section-number">7.1.3</span> Checking data entry<a href="descriptive-statistics-pre-analysis-steps.html#checking-data-entry" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Although entering data by hand is less common nowadays, errors in data entry can still occur. Consider what you know about your variables to think about what would be an impossible or unlikely entry for that variable. For example, it would be unlikely than anyone aged over 110 took part in your study. If we know the range of the questionnaires, for example, the PHQ-9 ranges from 0-&gt;3, then it would be impossible for anyone to score a ‘4’ or higher or a negative number on an item. If we find that there is incorrect data entered (and there is no way to identity the correct data for this cell), then we need to treat this item as missing.</p>
+<ol start="3" style="list-style-type: decimal">
+<li><p>Let’s move from data view to analysis. Click on the green ‘Analyses’ button in the topleft corner. Then click on ‘Descriptives -&gt; ’Descriptive statistics’. You will see you now have three panels - data on the lefthand side, data analysis in the middle and output on the righthand side. You can use the arrows and three dots on either side of the analysis panel to change what you can see.</p></li>
+<li><p>Bring every variable except ‘id’ over from the box on the lefthand side to ‘variables’. You can use ‘Ctrl + A’ to select all variables and then ‘Ctrl’ to deselect ‘id’. Click ‘transpose descriptives table’. Under ‘statistics’, check that ‘minimum’ and ‘maximum’ are selected. Look at each variable. Do any of the minimum or maximums surprise you? Make a note of everything that doesn’t look right.</p></li>
+<li><p>Click on ‘Tables’ and then ‘Frequency tables’. This number of each distinct entry for nominal and ordinal variables. Is anything miscoded here? Make a note.</p></li>
+<li><p>You now need to edit the data file to fix these errors. That is called ‘data cleaning’. Whenever you make changes to the file, it is important to not write over the original file. Therefore click on the top left button -&gt; Export Data and then save the file somewhere on your computer. You might want to name this version ‘depression_anxiety_practice_data_v0.1_clean’ or similar. You might also want to include today’s date in the file. Then click on ‘Edit Data’ on the top left button. Find all the cells with impossible/improbable data, click on the cell and clear the data (e.g., by clicking on backspace) so that it becomes registered as missing. If you click on ‘Analyses’ and haven’t closed the file, you will see the analyses will have automatically updated to reflect any changes you have made in the file.</p></li>
+<li><p>To double-check your data is now ‘clean’, you could use the filter option which is to the left of ‘id’. A box will pop up with variables down the left hand side and a calculator in the middle. Click on ‘age’ then ‘&gt;’ then type ‘110’. Then click ‘apply pass-through filter’. This will highlight all the rows where the participants age is listed as more than 110. If you want to get rid of the filter double-click on the rubbish bin.</p></li>
+</ol>
+<p><strong>Congratulations you have now cleaned your data!</strong></p>
+</div>
+</div>
+<div id="missingness" class="section level2 hasAnchor" number="7.2">
+<h2><span class="header-section-number">7.2</span> Missingness<a href="descriptive-statistics-pre-analysis-steps.html#missingness" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>There are three main reasons why data can be missing.</p>
+<table>
+<colgroup>
+<col width="33%" />
+<col width="33%" />
+<col width="33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">Reason for missingness</th>
+<th align="left">Description</th>
+<th align="left">Example</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">Missing Completely at Random (MCAR)</td>
+<td align="left">Missingness is unrelated to anything, observed or unobserved</td>
+<td align="left">A participant’s wifi goes down halfway through the survey</td>
+</tr>
+<tr class="even">
+<td align="left">Missing at Random (MAR)</td>
+<td align="left">Missingness is related to <em>observed</em> variables i.e., something you have measured</td>
+<td align="left">Younger participants skip an item more often, and age is recorded</td>
+</tr>
+<tr class="odd">
+<td align="left">Missing Not at Random (MNAR)</td>
+<td align="left">Missingness is related to the missing value itself</td>
+<td align="left">People experiencing the most severe suicidal thoughts skip PHQ-9 item 9</td>
+</tr>
+</tbody>
+</table>
+<p>When you discover data is missing, you have two options: 1) Imputation, 2) Deletion, 3) Model-based approaches</p>
+<p>If your data is MCAR, you can delete the individuals with missing data and analyse only those without missing data (also known as ‘listwise deletion’ or ‘complete case analysis’), however do keep in mind the sample size needed from your power analysis.</p>
+<div id="investigate-missingness" class="section level3 hasAnchor" number="7.2.1">
+<h3><span class="header-section-number">7.2.1</span> Investigate missingness<a href="descriptive-statistics-pre-analysis-steps.html#investigate-missingness" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ol style="list-style-type: decimal">
+<li>Have a look again at your Descriptives. Which variable has the highest amount of missing data? Why might that be?</li>
+</ol>
+<p>Let’s investigate the missingness of the PHQ9_9 and also learn to calculate variables. Let’s say we want to figure out if those with missing data on the PHQ9_9 also have higher scores across the other items of the PHQ9. We’ll need to calculate a total sum of the other 8 items in the PHQ9 and a binary variable indicating if the PHQ9 is missing or not.</p>
+<ol start="2" style="list-style-type: decimal">
+<li><p>JASP can only add together ‘scale’ items. Change all the items of the PHQ9 from ‘ordinal’ to ‘scale’. Click the green plus at the rightmost side of the columns. Call the column PHQ8_total. Column type should be ‘scale’ and computed type should be ‘computed with drag-and-drop’. Then click on ‘computed column definition’. Add the first eight items from the PHQ_9 together. Remember to click ‘compute column’. Notice how if any item is missing then the summed variable is also missing.</p></li>
+<li><p>Make a new variable called ‘PHQ9_9_missing’. This should be a nominal variable. Click ‘computed with R code’. Then copy and paste this code into the box that pops up</p></li>
+</ol>
+<div style="background-color: #f7f7f8; border: 1px solid #e0e0e0; border-radius: 8px; padding: 15px 20px; margin: 15px 0;">
+<p>
+ifelse(is.na(PHQ9_9), “Missing”, “Observed”)
+</p>
+</div>
+<p>Remember to click ‘compute column’.</p>
+<ol start="4" style="list-style-type: decimal">
+<li>Click on ‘Analyses’ -&gt; Descriptives -&gt; ‘Descriptive Statistics’. Your first analyses should minimise and a new Descriptive Statistics box should open. Split the analyses by your new variable PH9_9_missing. Then bring ‘PHQ8_total’ into variables. Bring anything else that you are interested in seeing whether it is related to the missingness of PHQ9_9 variable. What do you notice? Scroll back up to the table of types of missingness. Could the missingness of the PHQ9_9 variable be MCAR? Do we have a definitive way of proving whether it is MNAR or MAR?</li>
+</ol>
+</div>
+<div id="imputation" class="section level3 hasAnchor" number="7.2.2">
+<h3><span class="header-section-number">7.2.2</span> Imputation<a href="descriptive-statistics-pre-analysis-steps.html#imputation" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<div id="prorating-person-mean-imputation" class="section level4 hasAnchor" number="7.2.2.1">
+<h4><span class="header-section-number">7.2.2.1</span> Prorating (person-mean imputation)<a href="descriptive-statistics-pre-analysis-steps.html#prorating-person-mean-imputation" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>One way to address missing data is to impute i.e., replace missingness with a datapoint using an appropriate strategy. If the missing data is related to a questionnaire, the first thing you want to do is check the questionnaire’s instructions. For example, some questionnaires will contain instructions that if one data item is missing, it should be replaced by the participant’s average scores across other items before creating the summed total and may also have a rule that if a participant is missing 2 or more items for a questionnaire, then you should not impute any missing items (i.e., their summed total is treated as missing). It is easy to do this outside of JASP, e.g., in Excel.</p>
+</div>
+<div id="mean-median-mode-imputation" class="section level4 hasAnchor" number="7.2.2.2">
+<h4><span class="header-section-number">7.2.2.2</span> Mean, median, mode imputation<a href="descriptive-statistics-pre-analysis-steps.html#mean-median-mode-imputation" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Rather than replacing a variable at person-level, you can replace a missing item with the average score for that item. For example, you could calculate the average of the PHQ8_total item you created a replace all missing items with that average. However, this shrinks variance and weakens correlations. It is also only truly appropriate in data that is assumed to be MCAR.</p>
+<p>If the variable is categorical, then the equivalent is ‘mode imputation’ where you take the most common variable and use that for imputation.</p>
+</div>
+<div id="multiple-imputation" class="section level4 hasAnchor" number="7.2.2.3">
+<h4><span class="header-section-number">7.2.2.3</span> Multiple imputation<a href="descriptive-statistics-pre-analysis-steps.html#multiple-imputation" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Multiple imputation creates several completed datasets (often 20 or more), each with slightly different imputed values reflecting the uncertainty. You analyse each one and pool the results using Rubin’s rules, so the standard errors account for imputation uncertainty. This is not possible in JASP (yet!) so you would need to use R and the ‘mice’ package to use this method. This approach assumes data is MAR.</p>
+</div>
+</div>
+<div id="deletion" class="section level3 hasAnchor" number="7.2.3">
+<h3><span class="header-section-number">7.2.3</span> Deletion<a href="descriptive-statistics-pre-analysis-steps.html#deletion" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Deletion methods are used within analyses.</p>
+<div id="listwise-deletioncomplete-case-analysis" class="section level4 hasAnchor" number="7.2.3.1">
+<h4><span class="header-section-number">7.2.3.1</span> Listwise deletion/complete case analysis<a href="descriptive-statistics-pre-analysis-steps.html#listwise-deletioncomplete-case-analysis" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Listwise deletion/complete case analysis removes any person from the analysis who has missing data in any variable. This approach is only appropriate if data are MCAR, however removing participants from your data will affect power.</p>
+</div>
+<div id="pairwise-deletion" class="section level4 hasAnchor" number="7.2.3.2">
+<h4><span class="header-section-number">7.2.3.2</span> Pairwise deletion<a href="descriptive-statistics-pre-analysis-steps.html#pairwise-deletion" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>Pairwise deletion is also available as an option in JASP called ‘exclude cases per dependent variable’. The difference with listwise deletion is that when you are computing multiple analyses, participants are only excluded from analyses where there is missing data.</p>
+</div>
+</div>
+<div id="model-based-approaches" class="section level3 hasAnchor" number="7.2.4">
+<h3><span class="header-section-number">7.2.4</span> Model-based approaches<a href="descriptive-statistics-pre-analysis-steps.html#model-based-approaches" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>It may be the case that you can leave your data as missing for now until you get to the analysis stage. For example in structural equation modelling, and multilevel/mixed-effects models, full information maximum likelihood (FIML) estimates the model using all available data from each case. This approach assumes data is MAR.</p>
+</div>
+<div id="sensitivity-analyses" class="section level3 hasAnchor" number="7.2.5">
+<h3><span class="header-section-number">7.2.5</span> Sensitivity analyses<a href="descriptive-statistics-pre-analysis-steps.html#sensitivity-analyses" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>All of this information is confusing with no clear answer. Here is a guide to use with missing data.</p>
+<ol style="list-style-type: decimal">
+<li>Take time to inspect your data. Use your clinical and practical knowledge to understand why data might be missing.</li>
+<li>Use multiple methods to approach missing data. Listwise is rarely recommended, but if you do choose to use it, use another method (e.g., multiple imputation) as well as compare whether the interpretation of your results meaningfully differs.</li>
+</ol>
+</div>
+<div id="quiz" class="section level3 hasAnchor" number="7.2.6">
+<h3><span class="header-section-number">7.2.6</span> Quiz<a href="descriptive-statistics-pre-analysis-steps.html#quiz" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<!-- ============================================================
+  MISSING DATA QUIZ - paste into your .Rmd / .md file as raw HTML.
+  Self-contained: styles are scoped to .mq-quiz, scripts use the prefix "mq".
+  No packages needed.
+============================================================= -->
+<style>
+.mq-quiz { margin: 1.5em 0; }
+.mq-quiz h3 { margin-top: 0; }
+.mq-quiz .mq-q {
+  border: 1px solid rgba(128,128,128,.35);
+  border-radius: 8px;
+  padding: 14px 18px;
+  margin: 14px 0;
+  background: rgba(128,128,128,.07);
+}
+.mq-quiz .mq-prompt { margin: 0 0 10px 0; }
+.mq-quiz .mq-opt {
+  display: block;
+  width: 100%;
+  text-align: left;
+  margin: 6px 0;
+  padding: 8px 12px;
+  font: inherit;
+  color: inherit;
+  background: rgba(128,128,128,.10);
+  border: 1px solid rgba(128,128,128,.4);
+  border-radius: 6px;
+  cursor: pointer;
+}
+.mq-quiz .mq-opt:hover { background: rgba(128,128,128,.22); }
+.mq-quiz .mq-q.mq-done .mq-opt { cursor: default; }
+.mq-quiz .mq-q.mq-done .mq-opt:hover { background: rgba(128,128,128,.10); }
+.mq-quiz .mq-opt.mq-correct {
+  background: rgba(46,160,67,.22);
+  border-color: rgb(46,160,67);
+}
+.mq-quiz .mq-opt.mq-wrong {
+  background: rgba(220,53,69,.20);
+  border-color: rgb(220,53,69);
+}
+.mq-quiz .mq-fb { margin-top: 10px; padding: 8px 12px; border-left: 4px solid rgba(128,128,128,.6); }
+.mq-quiz .mq-fb.mq-fb-good { border-left-color: rgb(46,160,67); }
+.mq-quiz .mq-fb.mq-fb-bad { border-left-color: rgb(220,53,69); }
+.mq-quiz .mq-score { font-weight: bold; margin: 10px 0; }
+.mq-quiz .mq-reset {
+  font: inherit; color: inherit; padding: 6px 14px; cursor: pointer;
+  background: rgba(128,128,128,.10); border: 1px solid rgba(128,128,128,.4); border-radius: 6px;
+}
+</style>
+<div id="mq-quiz-missing" class="mq-quiz">
+<h3>
+Check your understanding: missing data
+</h3>
+<p>
+Click an answer to see whether it is right and why. You can reset the quiz at the bottom.
+</p>
+<!-- Q1 -->
+<div class="mq-q" data-correct="b">
+<p class="mq-prompt">
+<strong>1.</strong> In a depression survey, male participants are more likely than female participants to skip the mood items, and gender was recorded for everyone. Which type of missingness is this?
+</p>
+<button class="mq-opt" data-opt="a" onclick="mqPick(this)">Missing completely at random (MCAR)</button>
+<button class="mq-opt" data-opt="b" onclick="mqPick(this)">Missing at random (MAR)</button>
+<button class="mq-opt" data-opt="c" onclick="mqPick(this)">Missing not at random (MNAR)</button>
+<div class="mq-fb" hidden="">
+
+</div>
+<div class="mq-expl" hidden="">
+The missingness is related to an <em>observed</em> variable (gender), which is the definition of MAR. If it were unrelated to anything, it would be MCAR. If it depended on the person’s own mood score, it would be MNAR.
+</div>
+</div>
+<!-- Q2 -->
+<div class="mq-q" data-correct="c">
+<p class="mq-prompt">
+<strong>2.</strong> In a survey about alcohol use, the heaviest drinkers are the most likely to leave the “units per week” question blank. Which type of missingness is this?
+</p>
+<button class="mq-opt" data-opt="a" onclick="mqPick(this)">MCAR</button>
+<button class="mq-opt" data-opt="b" onclick="mqPick(this)">MAR</button>
+<button class="mq-opt" data-opt="c" onclick="mqPick(this)">MNAR</button>
+<div class="mq-fb" hidden="">
+
+</div>
+<div class="mq-expl" hidden="">
+The probability of being missing depends on the value that is missing (high alcohol use). That is MNAR. It is also the same logic as people with the most severe suicidal thoughts skipping PHQ-9 item 9.
+</div>
+</div>
+<!-- Q3 -->
+<div class="mq-q" data-correct="b">
+<p class="mq-prompt">
+<strong>3.</strong> In JASP you split the descriptives by <code>PHQ9_9_missing</code>. Participants who skipped PHQ-9 item 9 have clearly higher <code>PHQ8_total</code> scores than those who answered it. What does this suggest?
+</p>
+<button class="mq-opt" data-opt="a" onclick="mqPick(this)">The data are definitely MNAR</button>
+<button class="mq-opt" data-opt="b" onclick="mqPick(this)">The data are probably not MCAR, because missingness is related to an observed variable</button>
+<button class="mq-opt" data-opt="c" onclick="mqPick(this)">The data are definitely MCAR</button>
+<button class="mq-opt" data-opt="d" onclick="mqPick(this)">Nothing: you can never investigate missingness</button>
+<div class="mq-fb" hidden="">
+
+</div>
+<div class="mq-expl" hidden="">
+A relationship with an observed variable is evidence against MCAR. It is consistent with MAR, but it is also consistent with MNAR, because the missing item’s own values are never observed. You can’t prove either from the data alone: the argument for MNAR comes from knowing the item is sensitive.
+</div>
+</div>
+<!-- Q4 -->
+<div class="mq-q" data-correct="b">
+<p class="mq-prompt">
+<strong>4.</strong> You compare people with and without missing PHQ9_9 data on several variables and find no significant differences (only 6 people were missing). Can you conclude the data are MCAR?
+</p>
+<button class="mq-opt" data-opt="a" onclick="mqPick(this)">Yes: no differences means the data are MCAR</button>
+<button class="mq-opt" data-opt="b" onclick="mqPick(this)">No: with so few cases the comparison has low power, and unobserved reasons could still be involved</button>
+<button class="mq-opt" data-opt="c" onclick="mqPick(this)">Yes, but only if the p-values are above .10</button>
+<div class="mq-fb" hidden="">
+
+</div>
+<div class="mq-expl" hidden="">
+Absence of evidence is not evidence of absence. With a group of 6, only very large differences would reach significance, and missingness could depend on variables you didn’t measure (or on the missing value itself). Look at the sizes of the differences, not just the p-values.
+</div>
+</div>
+<!-- Q5 -->
+<div class="mq-q" data-correct="d">
+<p class="mq-prompt">
+<strong>5.</strong> A participant answered 8 of the 9 PHQ-9 items. The scoring instructions allow one missing item to be replaced before summing. Which description matches prorating (person-mean imputation)?
+</p>
+<button class="mq-opt" data-opt="a" onclick="mqPick(this)">Replace the missing item with the average of that item across all participants</button>
+<button class="mq-opt" data-opt="b" onclick="mqPick(this)">Delete the participant from the dataset</button>
+<button class="mq-opt" data-opt="c" onclick="mqPick(this)">Replace the missing item with zero</button>
+<button class="mq-opt" data-opt="d" onclick="mqPick(this)">Replace the missing item with the participant’s own average across their other answered items, then sum</button>
+<div class="mq-fb" hidden="">
+
+</div>
+<div class="mq-expl" hidden="">
+Prorating uses the participant’s <em>own</em> responses. Option A describes mean imputation, which is a different method. Always check the questionnaire’s scoring instructions: the number of missing items that is allowed varies by scale, and if more items are missing than allowed the total is treated as missing.
+</div>
+</div>
+<!-- Q6 -->
+<div class="mq-q" data-correct="a">
+<p class="mq-prompt">
+<strong>6.</strong> What is the main statistical problem with replacing missing values with the variable’s mean?
+</p>
+<button class="mq-opt" data-opt="a" onclick="mqPick(this)">It shrinks the variance and weakens correlations</button>
+<button class="mq-opt" data-opt="b" onclick="mqPick(this)">It can only be done in R</button>
+<button class="mq-opt" data-opt="c" onclick="mqPick(this)">It makes the mean of the variable much larger</button>
+<button class="mq-opt" data-opt="d" onclick="mqPick(this)">It assumes the data are MNAR</button>
+<div class="mq-fb" hidden="">
+
+</div>
+<div class="mq-expl" hidden="">
+Every imputed value sits exactly at the mean, so the variable looks less spread out than it really is and relationships with other variables are weakened. It also treats imputed values as if they were real observations, so standard errors are too small. For this reason it is generally not recommended, even when data may be MCAR.
+</div>
+</div>
+<!-- Q7 -->
+<div class="mq-q" data-correct="c">
+<p class="mq-prompt">
+<strong>7.</strong> Which statement about multiple imputation is correct?
+</p>
+<button class="mq-opt" data-opt="a" onclick="mqPick(this)">It fills in each missing value once with the single best estimate</button>
+<button class="mq-opt" data-opt="b" onclick="mqPick(this)">It is designed for data that are MNAR</button>
+<button class="mq-opt" data-opt="c" onclick="mqPick(this)">It creates several completed datasets, analyses each, and pools the results so standard errors reflect imputation uncertainty</button>
+<button class="mq-opt" data-opt="d" onclick="mqPick(this)">It deletes cases until the dataset is complete</button>
+<div class="mq-fb" hidden="">
+
+</div>
+<div class="mq-expl" hidden="">
+Multiple imputation produces many plausible completed datasets (often 20 or more) and combines the results using Rubin’s rules. It usually assumes the data are MAR, and in R it is often done with the <code>mice</code> package.
+</div>
+</div>
+<!-- Q8 -->
+<div class="mq-q" data-correct="b">
+<p class="mq-prompt">
+<strong>8.</strong> Which statement about full information maximum likelihood (FIML) is correct?
+</p>
+<button class="mq-opt" data-opt="a" onclick="mqPick(this)">It replaces missing values with the participant’s mean before the analysis</button>
+<button class="mq-opt" data-opt="b" onclick="mqPick(this)">It estimates the model using all available data from each case, without filling in missing values, and typically assumes MAR</button>
+<button class="mq-opt" data-opt="c" onclick="mqPick(this)">It is the same as listwise deletion</button>
+<button class="mq-opt" data-opt="d" onclick="mqPick(this)">It can fix any type of missingness, including MNAR</button>
+<div class="mq-fb" hidden="">
+
+</div>
+<div class="mq-expl" hidden="">
+FIML is not imputation: every case contributes whatever data it has to the model’s likelihood. It is available in methods such as structural equation modelling and mixed-effects models. Like multiple imputation, it does not solve MNAR on its own.
+</div>
+</div>
+<!-- Q9 -->
+<div class="mq-q" data-correct="a">
+<p class="mq-prompt">
+<strong>9.</strong> A participant is missing a value on variable C only. You run three analyses, using A and B, A and C, and B and C. What happens under <em>pairwise</em> deletion, compared with <em>listwise</em> deletion?
+</p>
+<button class="mq-opt" data-opt="a" onclick="mqPick(this)">Pairwise: they are excluded only from the analyses that involve C. Listwise: they are excluded from every analysis</button>
+<button class="mq-opt" data-opt="b" onclick="mqPick(this)">Pairwise: they are excluded from every analysis. Listwise: they are excluded only from analyses involving C</button>
+<button class="mq-opt" data-opt="c" onclick="mqPick(this)">Both methods keep them in all three analyses</button>
+<div class="mq-fb" hidden="">
+
+</div>
+<div class="mq-expl" hidden="">
+Pairwise deletion keeps more data, but each analysis ends up with a different sample size, which makes results harder to compare. Both approaches generally give unbiased results only if the data are MCAR, and both reduce power, so always check the N reported in your output.
+</div>
+</div>
+<!-- Q10 -->
+<div class="mq-q" data-correct="c">
+<p class="mq-prompt">
+<strong>10.</strong> Which of the following is the best approach to missing data in a real project?
+</p>
+<button class="mq-opt" data-opt="a" onclick="mqPick(this)">Try several methods and report only the one that gives a significant result</button>
+<button class="mq-opt" data-opt="b" onclick="mqPick(this)">Use listwise deletion without checking how much data are lost</button>
+<button class="mq-opt" data-opt="c" onclick="mqPick(this)">Decide your approach in advance, report how much data were missing and the assumed mechanism, and check whether conclusions change with a second method</button>
+<button class="mq-opt" data-opt="d" onclick="mqPick(this)">Ignore missing data, since software handles it automatically</button>
+<div class="mq-fb" hidden="">
+
+</div>
+<div class="mq-expl" hidden="">
+Choosing your method after seeing which one “works” is a form of p-hacking. Good practice is to inspect the data, think about why values are missing, pre-specify the approach, report it clearly, and run a sensitivity check (for example, comparing complete-case results with multiple imputation). Software defaults often silently use listwise deletion, so check the N.
+</div>
+</div>
+<p class="mq-score" id="mq-score-missing" aria-live="polite">
+Score: 0 / 10 answered correctly (0 answered)
+</p>
+<button class="mq-reset" onclick="mqReset(&#39;mq-quiz-missing&#39;)">
+Reset quiz
+</button>
+</div>
+<script>
+function mqPick(btn) {
+  var q = btn.closest('.mq-q');
+  if (q.classList.contains('mq-done')) { return; }
+  q.classList.add('mq-done');
+  var correct = q.getAttribute('data-correct');
+  var chosen = btn.getAttribute('data-opt');
+  var opts = q.querySelectorAll('.mq-opt');
+  for (var i = 0; i < opts.length; i++) {
+    if (opts[i].getAttribute('data-opt') === correct) { opts[i].classList.add('mq-correct'); }
+  }
+  var fb = q.querySelector('.mq-fb');
+  var expl = q.querySelector('.mq-expl').innerHTML;
+  if (chosen === correct) {
+    q.setAttribute('data-result', 'right');
+    fb.className = 'mq-fb mq-fb-good';
+    fb.innerHTML = '<strong>Correct.</strong> ' + expl;
+  } else {
+    btn.classList.add('mq-wrong');
+    q.setAttribute('data-result', 'wrong');
+    fb.className = 'mq-fb mq-fb-bad';
+    fb.innerHTML = '<strong>Not quite.</strong> ' + expl;
+  }
+  fb.hidden = false;
+  mqScore(q.closest('.mq-quiz'));
+}
+
+function mqScore(quiz) {
+  var qs = quiz.querySelectorAll('.mq-q');
+  var right = 0, answered = 0;
+  for (var i = 0; i < qs.length; i++) {
+    var r = qs[i].getAttribute('data-result');
+    if (r) { answered++; }
+    if (r === 'right') { right++; }
+  }
+  quiz.querySelector('.mq-score').textContent =
+    'Score: ' + right + ' / ' + qs.length + ' answered correctly (' + answered + ' answered)';
+}
+
+function mqReset(id) {
+  var quiz = document.getElementById(id);
+  var qs = quiz.querySelectorAll('.mq-q');
+  for (var i = 0; i < qs.length; i++) {
+    qs[i].classList.remove('mq-done');
+    qs[i].removeAttribute('data-result');
+    var opts = qs[i].querySelectorAll('.mq-opt');
+    for (var j = 0; j < opts.length; j++) {
+      opts[j].classList.remove('mq-correct');
+      opts[j].classList.remove('mq-wrong');
+    }
+    var fb = qs[i].querySelector('.mq-fb');
+    fb.hidden = true;
+    fb.innerHTML = '';
+    fb.className = 'mq-fb';
+  }
+  mqScore(quiz);
+}
+</script>
+</div>
+</div>
+<div id="normality" class="section level2 hasAnchor" number="7.3">
+<h2><span class="header-section-number">7.3</span> Normality<a href="descriptive-statistics-pre-analysis-steps.html#normality" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Most models (t-tests, ANOVA, regression) assume that the residuals (errors) are approximately normal, not that every raw variable is normal. A skewed predictor is usually not a problem. A skewed outcome often leads to non-normal residuals, but not always. For example, in an independent samples t-test, you check each group separately; in a regression, you check the residuals. A pooled variable made up of two groups with different means can look non-normal even when each group is perfectly normal. That is why you sometimes check the variables first, and then check again after fitting the model.</p>
+<p>Normality of variables is an assumption for many analyses. Occasionally, data will be non-normal. Normality can be assessed in multiple ways:</p>
+<ol style="list-style-type: decimal">
+<li><p>Descriptively, by looking at skewness and kurtosis</p></li>
+<li><p>Testing using Shapiro-Wilk. If the test is significant (p &lt; .05), that indicates a departure from normality</p></li>
+<li><p>Visually by inspecting plots</p></li>
+</ol>
+<p>If you find some indications of a variable being non-normally distributed, it may not be an issue especially if there is a large sample size. If all assessments of normality indicate that the non-normality is severe and the sample size is not particularly large…</p>
+<div id="transformation" class="section level4 hasAnchor" number="7.3.0.1">
+<h4><span class="header-section-number">7.3.0.1</span> Transformation<a href="descriptive-statistics-pre-analysis-steps.html#transformation" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>-positive skew, square-root, logarithmic
+-negative skew - options here?
+detail in JASP</p>
+<p>Check the data afterwards, how is the skew now?</p>
+</div>
+<div id="non-parametric-tests" class="section level4 hasAnchor" number="7.3.0.2">
+<h4><span class="header-section-number">7.3.0.2</span> Non-parametric tests<a href="descriptive-statistics-pre-analysis-steps.html#non-parametric-tests" class="anchor-section" aria-label="Anchor link to header"></a></h4>
+<p>In particularly small sample sizes where data skew is severe</p>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="significance.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+  "sharing": {
+    "github": false,
+    "facebook": true,
+    "twitter": true,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": "https://github.com/USERNAME/REPO/edit/BRANCH/06-descriptives.Rmd",
+    "text": "Edit"
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": ["_main.pdf", "_main.epub"],
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "subsection"
+  }
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

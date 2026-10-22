@@ -1,34 +1,365 @@
-# Descriptive statistics
+# Descriptive statistics & Pre-analysis steps
 
-Load the dataset 'Scatter plot' by clicking on the top-left icon-> Open-> Data Library -> 1. Descriptives -> Scatter plot. Click on the red 'X' to close any modelling that loads so you can see just the data.
+Load the dataset 'depression_anxiety_practice_data.csv' into JASP by clicking Open -> Computer and then finding where you have saved the dataset on your computer.
 
-## Continuous data - large dataset
+__Data dictionary__
 
-1. Click on Descriptives -> Descriptive Statistics. Look at the descriptive statistics by clicking on each variable and moving them over to 'variables' using the arrow. 
+| Variable | Description |
+|:--|:--------|
+| id| Participant ID |
+| age | Age in years |
+| gender | Gender |
+| ethnicity | Ethnicity (UK Census 2021 high-level groups) |
+| PHQ-9 | The nine PHQ-9 depression items |
+| GAD-7 | The seven GAD-7 anxiety items |
+| previous_mh_diagnosis | Previously diagnosed with a mental health condition? |
+| currently_in_therapy | Currently receiving therapy? |
+| caring_responsibilities | Has caring responsibilities? |
+| retired | Retired? |
+| completion_mins | Minutes taken to complete the questionnaire |
 
-2. Click on the __bold title Descriptive Statistics__ and name it something that is more specific to the dataset. For example, you might want to call it something to do with personality.
+## Data cleaning
 
-3. Add a note to the bottom of the table by clicking on the *italics Descriptive Statistics* and then selecting 'Add note'. A grey box should appear. In the grey box, comment on any notable observations, for example, which personality trait participants were highest in.
+### Check the variables
 
-4. What happens when you click 'transpose descriptives table'? Click on it. Consider which format you like best and leave it in your preferred format. Untick 'valid' and 'missing' under sample size - where could you put this information instead?
+JASP has three options for variable types.
 
-5. Under statistics, experiment with adding more descriptive statistics, e.g., central tendency (mode and median), distribution (skewness, kurtosis) etc... Hover you mouse over each option to get further information.
+_Nominal_ - categorical with no inherent order
 
-6. Under statistics, create a correlation table by ticking 'correlation' under 'association matrix'. Under the correlation matrix, add a note commenting on the strongest positive and strongest negative correlation.
+_Ordinal_ - categorical with a meaningful order but intervals between categories are not necessarily equal 
 
-7. Spend some time looking at basic plots and customizable plots to see what kinds of plots you can create.
+_Scale_ - continuous numeric variables with meaningful distances 
 
-8. Now let's look at JASP's new plot builder tool. Click on Descriptives -> Plot Builder. Choose a variable for the x-axis and a variable for the y-axis. Then under 'data and geometries' click on 'individual data points'. Change the options for point size, jitter height etc... and see what happens.
+_Tip_: Individual items on a questionnaire/Likert scale are often treated as an 'ordinal' variable whereas the summed score of all items is often treated as a 'scale' variable.
 
-9. Scroll down to 'axis settings and annotations'. Change the name of the x-axis and y-axis. Make the limits reflect the range of the each variable.
+1. Has JASP automatically assigned the right variable type to each variable? If not, double-click on the header row and change the variable type.
 
-## Continuous and categorical data - small dataset
-Now load the dataset 'Sleep' by clicking on the top-left icon-> Open-> Data Library -> 1. Descriptives -> Sleep
+### Checking that missing responses are coded correctly
 
-## Pre-analysis steps
-It is essential to examine your data before conducting your analyses. This helps you understand the distribution of variables, exmaning missing data and assess the assumptions relevant to the statistical analyses you plan to conduct. 
+Missing variables can be coded in many ways e.g., '.', '99', '999', '-99', 'NA', 'NaN' or simply as a blank. JASP as a default considers the following variables as missing: '.', 'NA', 'NaN' and 'nan'.
 
-### Normality
+2. We need to make sure JASP understands which variables are missing/not 'real variables'. Scroll down enough column and if you spot any missingness indicators that aren't already covered by JASP's default settings double-click on the column  name and click 'use custom values', then enter any variable that should be considered as missing for that column e.g., '99'. You should see that this value immediately appears in greyscale on the dataview. To permanently ask JASP to recognise '99' as a missing indicator click on the topleft button -> Preferences -> Data -> Missing value settings and add '99' to the 'missing values setting'.
+
+### Checking data entry
+
+Although entering data by hand is less common nowadays, errors in data entry can still occur. Consider what you know about your variables to think about what would be an impossible or unlikely entry for that variable. For example, it would be unlikely than anyone aged over 110 took part in your study. If we know the range of the questionnaires, for example, the PHQ-9 ranges from 0->3, then it would be impossible for anyone to score a '4' or higher or a negative number on an item. If we find that there is incorrect data entered (and there is no way to identity the correct data for this cell), then we need to treat this item as missing.
+
+3. Let's move from data view to analysis. Click on the green 'Analyses' button in the topleft corner. Then click on 'Descriptives -> 'Descriptive statistics'. You will see you now have three panels - data on the lefthand side, data analysis in the middle and output on the righthand side. You can use the arrows and three dots on either side of the analysis panel to change what you can see.
+
+4. Bring every variable except 'id' over from the box on the lefthand side to 'variables'. You can use 'Ctrl + A' to select all variables and then 'Ctrl' to deselect 'id'. Click 'transpose descriptives table'. Under 'statistics', check that 'minimum' and 'maximum' are selected. Look at each variable. Do any of the minimum or maximums surprise you? Make a note of everything that doesn't look right.
+
+5. Click on 'Tables' and then 'Frequency tables'. This number of each distinct entry for nominal and ordinal variables. Is anything miscoded here? Make a note.
+
+6. You now need to edit the data file to fix these errors. That is called 'data cleaning'. Whenever you make changes to the file, it is important to not write over the original file. Therefore click on the top left button -> Export Data and then save the file somewhere on your computer. You might want to name this version 'depression_anxiety_practice_data_v0.1_clean' or similar. You might also want to include today's date in the file. Then click on 'Edit Data' on the top left button. Find all the cells with impossible/improbable data, click on the cell and clear the data (e.g., by clicking on backspace) so that it becomes registered as missing. If you click on 'Analyses' and haven't closed the file, you will see the analyses will have automatically updated to reflect any changes you have made in the file.
+
+7. To double-check your data is now 'clean', you could use the filter option which is to the left of 'id'. A box will pop up with variables down the left hand side and a calculator in the middle. Click on 'age' then '>' then type '110'. Then click 'apply pass-through filter'. This will highlight all the rows where the participants age is listed as more than 110. If you want to get rid of the filter double-click on the rubbish bin.
+
+__Congratulations you have now cleaned your data!__
+
+## Missingness
+
+There are three main reasons why data can be missing.
+
+| Reason for missingness | Description | Example
+|:--------|:--------|:--------|
+|Missing Completely at Random (MCAR)| Missingness is unrelated to anything, observed or unobserved | A participant's wifi goes down halfway through the survey
+|Missing at Random (MAR)| Missingness is related to _observed_ variables i.e., something you have measured | Younger participants skip an item more often, and age is recorded
+|Missing Not at Random (MNAR)| Missingness is related to the missing value itself | People experiencing the most severe suicidal thoughts skip PHQ-9 item 9
+
+When you discover data is missing, you have two options: 1) Imputation, 2) Deletion, 3) Model-based approaches
+
+If your data is MCAR, you can delete the individuals with missing data and analyse only those without missing data (also known as 'listwise deletion' or 'complete case analysis'), however do keep in mind the sample size needed from your power analysis.
+
+### Investigate missingness
+
+1. Have a look again at your Descriptives. Which variable has the highest amount of missing data? Why might that be?
+
+Let's investigate the missingness of the PHQ9_9 and also learn to calculate variables. Let's say we want to figure out if those with missing data on the PHQ9_9 also have higher scores across the other items of the PHQ9. We'll need to calculate a total sum of the other 8 items in the PHQ9 and a binary variable indicating if the PHQ9 is missing or not.
+
+2. JASP can only add together 'scale' items. Change all the items of the PHQ9 from 'ordinal' to 'scale'. Click the green plus at the rightmost side of the columns. Call the column PHQ8_total. Column type should be 'scale' and computed type should be 'computed with drag-and-drop'. Then click on 'computed column definition'. Add the first eight items from the PHQ_9 together. Remember to click 'compute column'. Notice how if any item is missing then the summed variable is also missing. 
+
+3. Make a new variable called 'PHQ9_9_missing'. This should be a nominal variable. Click 'computed with R code'. Then copy and paste this code into the box that pops up
+
+<div style="background-color: #f7f7f8; border: 1px solid #e0e0e0; border-radius: 8px; padding: 15px 20px; margin: 15px 0;">
+
+<p>ifelse(is.na(PHQ9_9), "Missing", "Observed")</p>
+
+</div>
+
+Remember to click 'compute column'.
+
+4. Click on 'Analyses' -> Descriptives -> 'Descriptive Statistics'. Your first analyses should minimise and a new Descriptive Statistics box should open. Split the analyses by your new variable PH9_9_missing. Then bring 'PHQ8_total' into variables. Bring anything else that you are interested in seeing whether it is related to the missingness of PHQ9_9 variable. What do you notice? Scroll back up to the table of types of missingness. Could the missingness of the PHQ9_9 variable be MCAR? Do we have a definitive way of proving whether it is MNAR or MAR?
+
+### Imputation
+
+#### Prorating (person-mean imputation)
+
+One way to address missing data is to impute i.e., replace missingness with a datapoint using an appropriate strategy. If the missing data is related to a questionnaire, the first thing you want to do is check the questionnaire's instructions. For example, some questionnaires will contain instructions that if one data item is missing, it should be replaced by the participant's average scores across other items before creating the summed total and may also have a rule that if a participant is missing 2 or more items for a questionnaire, then you should not impute any missing items (i.e., their summed total is treated as missing). It is easy to do this outside of JASP, e.g., in Excel.
+
+#### Mean, median, mode imputation
+
+Rather than replacing a variable at person-level, you can replace a missing item with the average score for that item. For example, you could calculate the average of the PHQ8_total item you created a replace all missing items with that average. However, this shrinks variance and weakens correlations. It is also only truly appropriate in data that is assumed to be MCAR.
+
+If the variable is categorical, then the equivalent is 'mode imputation' where you take the most common variable and use that for imputation.
+
+#### Multiple imputation
+
+Multiple imputation creates several completed datasets (often 20 or more), each with slightly different imputed values reflecting the uncertainty. You analyse each one and pool the results using Rubin’s rules, so the standard errors account for imputation uncertainty. This is not possible in JASP (yet!) so you would need to use R and the 'mice' package to use this method. This approach assumes data is MAR.
+
+### Deletion
+
+Deletion methods are used within analyses.
+
+#### Listwise deletion/complete case analysis
+
+Listwise deletion/complete case analysis removes any person from the analysis who has missing data in any variable. This approach is only appropriate if data are MCAR, however removing participants from your data will affect power.
+
+#### Pairwise deletion
+
+Pairwise deletion is also available as an option in JASP called 'exclude cases per dependent variable'. The difference with listwise deletion is that when you are computing multiple analyses, participants are only excluded from analyses where there is missing data.
+
+### Model-based approaches
+
+It may be the case that you can leave your data as missing for now until you get to the analysis stage. For example in structural equation modelling, and multilevel/mixed-effects models, full information maximum likelihood (FIML) estimates the model using all available data from each case. This approach assumes data is MAR.
+
+### Sensitivity analyses
+
+All of this information is confusing with no clear answer. Here is a guide to use with missing data.
+
+1. Take time to inspect your data. Use your clinical and practical knowledge to understand why data might be missing.
+2. Use multiple methods to approach missing data. Listwise is rarely recommended, but if you do choose to use it, use another method (e.g., multiple imputation) as well as compare whether the interpretation of your results meaningfully differs.
+
+### Quiz
+
+<!-- ============================================================
+  MISSING DATA QUIZ - paste into your .Rmd / .md file as raw HTML.
+  Self-contained: styles are scoped to .mq-quiz, scripts use the prefix "mq".
+  No packages needed.
+============================================================= -->
+
+<style>
+.mq-quiz { margin: 1.5em 0; }
+.mq-quiz h3 { margin-top: 0; }
+.mq-quiz .mq-q {
+  border: 1px solid rgba(128,128,128,.35);
+  border-radius: 8px;
+  padding: 14px 18px;
+  margin: 14px 0;
+  background: rgba(128,128,128,.07);
+}
+.mq-quiz .mq-prompt { margin: 0 0 10px 0; }
+.mq-quiz .mq-opt {
+  display: block;
+  width: 100%;
+  text-align: left;
+  margin: 6px 0;
+  padding: 8px 12px;
+  font: inherit;
+  color: inherit;
+  background: rgba(128,128,128,.10);
+  border: 1px solid rgba(128,128,128,.4);
+  border-radius: 6px;
+  cursor: pointer;
+}
+.mq-quiz .mq-opt:hover { background: rgba(128,128,128,.22); }
+.mq-quiz .mq-q.mq-done .mq-opt { cursor: default; }
+.mq-quiz .mq-q.mq-done .mq-opt:hover { background: rgba(128,128,128,.10); }
+.mq-quiz .mq-opt.mq-correct {
+  background: rgba(46,160,67,.22);
+  border-color: rgb(46,160,67);
+}
+.mq-quiz .mq-opt.mq-wrong {
+  background: rgba(220,53,69,.20);
+  border-color: rgb(220,53,69);
+}
+.mq-quiz .mq-fb { margin-top: 10px; padding: 8px 12px; border-left: 4px solid rgba(128,128,128,.6); }
+.mq-quiz .mq-fb.mq-fb-good { border-left-color: rgb(46,160,67); }
+.mq-quiz .mq-fb.mq-fb-bad { border-left-color: rgb(220,53,69); }
+.mq-quiz .mq-score { font-weight: bold; margin: 10px 0; }
+.mq-quiz .mq-reset {
+  font: inherit; color: inherit; padding: 6px 14px; cursor: pointer;
+  background: rgba(128,128,128,.10); border: 1px solid rgba(128,128,128,.4); border-radius: 6px;
+}
+</style>
+
+<div class="mq-quiz" id="mq-quiz-missing">
+
+<h3>Check your understanding: missing data</h3>
+<p>Click an answer to see whether it is right and why. You can reset the quiz at the bottom.</p>
+
+<!-- Q1 -->
+<div class="mq-q" data-correct="b">
+  <p class="mq-prompt"><strong>1.</strong> In a depression survey, male participants are more likely than female participants to skip the mood items, and gender was recorded for everyone. Which type of missingness is this?</p>
+  <button class="mq-opt" data-opt="a" onclick="mqPick(this)">Missing completely at random (MCAR)</button>
+  <button class="mq-opt" data-opt="b" onclick="mqPick(this)">Missing at random (MAR)</button>
+  <button class="mq-opt" data-opt="c" onclick="mqPick(this)">Missing not at random (MNAR)</button>
+  <div class="mq-fb" hidden></div>
+  <div class="mq-expl" hidden>The missingness is related to an <em>observed</em> variable (gender), which is the definition of MAR. If it were unrelated to anything, it would be MCAR. If it depended on the person&rsquo;s own mood score, it would be MNAR.</div>
+</div>
+
+<!-- Q2 -->
+<div class="mq-q" data-correct="c">
+  <p class="mq-prompt"><strong>2.</strong> In a survey about alcohol use, the heaviest drinkers are the most likely to leave the &ldquo;units per week&rdquo; question blank. Which type of missingness is this?</p>
+  <button class="mq-opt" data-opt="a" onclick="mqPick(this)">MCAR</button>
+  <button class="mq-opt" data-opt="b" onclick="mqPick(this)">MAR</button>
+  <button class="mq-opt" data-opt="c" onclick="mqPick(this)">MNAR</button>
+  <div class="mq-fb" hidden></div>
+  <div class="mq-expl" hidden>The probability of being missing depends on the value that is missing (high alcohol use). That is MNAR. It is also the same logic as people with the most severe suicidal thoughts skipping PHQ-9 item 9.</div>
+</div>
+
+<!-- Q3 -->
+<div class="mq-q" data-correct="b">
+  <p class="mq-prompt"><strong>3.</strong> In JASP you split the descriptives by <code>PHQ9_9_missing</code>. Participants who skipped PHQ-9 item 9 have clearly higher <code>PHQ8_total</code> scores than those who answered it. What does this suggest?</p>
+  <button class="mq-opt" data-opt="a" onclick="mqPick(this)">The data are definitely MNAR</button>
+  <button class="mq-opt" data-opt="b" onclick="mqPick(this)">The data are probably not MCAR, because missingness is related to an observed variable</button>
+  <button class="mq-opt" data-opt="c" onclick="mqPick(this)">The data are definitely MCAR</button>
+  <button class="mq-opt" data-opt="d" onclick="mqPick(this)">Nothing: you can never investigate missingness</button>
+  <div class="mq-fb" hidden></div>
+  <div class="mq-expl" hidden>A relationship with an observed variable is evidence against MCAR. It is consistent with MAR, but it is also consistent with MNAR, because the missing item&rsquo;s own values are never observed. You can&rsquo;t prove either from the data alone: the argument for MNAR comes from knowing the item is sensitive.</div>
+</div>
+
+<!-- Q4 -->
+<div class="mq-q" data-correct="b">
+  <p class="mq-prompt"><strong>4.</strong> You compare people with and without missing PHQ9_9 data on several variables and find no significant differences (only 6 people were missing). Can you conclude the data are MCAR?</p>
+  <button class="mq-opt" data-opt="a" onclick="mqPick(this)">Yes: no differences means the data are MCAR</button>
+  <button class="mq-opt" data-opt="b" onclick="mqPick(this)">No: with so few cases the comparison has low power, and unobserved reasons could still be involved</button>
+  <button class="mq-opt" data-opt="c" onclick="mqPick(this)">Yes, but only if the p-values are above .10</button>
+  <div class="mq-fb" hidden></div>
+  <div class="mq-expl" hidden>Absence of evidence is not evidence of absence. With a group of 6, only very large differences would reach significance, and missingness could depend on variables you didn&rsquo;t measure (or on the missing value itself). Look at the sizes of the differences, not just the p-values.</div>
+</div>
+
+<!-- Q5 -->
+<div class="mq-q" data-correct="d">
+  <p class="mq-prompt"><strong>5.</strong> A participant answered 8 of the 9 PHQ-9 items. The scoring instructions allow one missing item to be replaced before summing. Which description matches prorating (person-mean imputation)?</p>
+  <button class="mq-opt" data-opt="a" onclick="mqPick(this)">Replace the missing item with the average of that item across all participants</button>
+  <button class="mq-opt" data-opt="b" onclick="mqPick(this)">Delete the participant from the dataset</button>
+  <button class="mq-opt" data-opt="c" onclick="mqPick(this)">Replace the missing item with zero</button>
+  <button class="mq-opt" data-opt="d" onclick="mqPick(this)">Replace the missing item with the participant&rsquo;s own average across their other answered items, then sum</button>
+  <div class="mq-fb" hidden></div>
+  <div class="mq-expl" hidden>Prorating uses the participant&rsquo;s <em>own</em> responses. Option A describes mean imputation, which is a different method. Always check the questionnaire&rsquo;s scoring instructions: the number of missing items that is allowed varies by scale, and if more items are missing than allowed the total is treated as missing.</div>
+</div>
+
+<!-- Q6 -->
+<div class="mq-q" data-correct="a">
+  <p class="mq-prompt"><strong>6.</strong> What is the main statistical problem with replacing missing values with the variable&rsquo;s mean?</p>
+  <button class="mq-opt" data-opt="a" onclick="mqPick(this)">It shrinks the variance and weakens correlations</button>
+  <button class="mq-opt" data-opt="b" onclick="mqPick(this)">It can only be done in R</button>
+  <button class="mq-opt" data-opt="c" onclick="mqPick(this)">It makes the mean of the variable much larger</button>
+  <button class="mq-opt" data-opt="d" onclick="mqPick(this)">It assumes the data are MNAR</button>
+  <div class="mq-fb" hidden></div>
+  <div class="mq-expl" hidden>Every imputed value sits exactly at the mean, so the variable looks less spread out than it really is and relationships with other variables are weakened. It also treats imputed values as if they were real observations, so standard errors are too small. For this reason it is generally not recommended, even when data may be MCAR.</div>
+</div>
+
+<!-- Q7 -->
+<div class="mq-q" data-correct="c">
+  <p class="mq-prompt"><strong>7.</strong> Which statement about multiple imputation is correct?</p>
+  <button class="mq-opt" data-opt="a" onclick="mqPick(this)">It fills in each missing value once with the single best estimate</button>
+  <button class="mq-opt" data-opt="b" onclick="mqPick(this)">It is designed for data that are MNAR</button>
+  <button class="mq-opt" data-opt="c" onclick="mqPick(this)">It creates several completed datasets, analyses each, and pools the results so standard errors reflect imputation uncertainty</button>
+  <button class="mq-opt" data-opt="d" onclick="mqPick(this)">It deletes cases until the dataset is complete</button>
+  <div class="mq-fb" hidden></div>
+  <div class="mq-expl" hidden>Multiple imputation produces many plausible completed datasets (often 20 or more) and combines the results using Rubin&rsquo;s rules. It usually assumes the data are MAR, and in R it is often done with the <code>mice</code> package.</div>
+</div>
+
+<!-- Q8 -->
+<div class="mq-q" data-correct="b">
+  <p class="mq-prompt"><strong>8.</strong> Which statement about full information maximum likelihood (FIML) is correct?</p>
+  <button class="mq-opt" data-opt="a" onclick="mqPick(this)">It replaces missing values with the participant&rsquo;s mean before the analysis</button>
+  <button class="mq-opt" data-opt="b" onclick="mqPick(this)">It estimates the model using all available data from each case, without filling in missing values, and typically assumes MAR</button>
+  <button class="mq-opt" data-opt="c" onclick="mqPick(this)">It is the same as listwise deletion</button>
+  <button class="mq-opt" data-opt="d" onclick="mqPick(this)">It can fix any type of missingness, including MNAR</button>
+  <div class="mq-fb" hidden></div>
+  <div class="mq-expl" hidden>FIML is not imputation: every case contributes whatever data it has to the model&rsquo;s likelihood. It is available in methods such as structural equation modelling and mixed-effects models. Like multiple imputation, it does not solve MNAR on its own.</div>
+</div>
+
+<!-- Q9 -->
+<div class="mq-q" data-correct="a">
+  <p class="mq-prompt"><strong>9.</strong> A participant is missing a value on variable C only. You run three analyses, using A and B, A and C, and B and C. What happens under <em>pairwise</em> deletion, compared with <em>listwise</em> deletion?</p>
+  <button class="mq-opt" data-opt="a" onclick="mqPick(this)">Pairwise: they are excluded only from the analyses that involve C. Listwise: they are excluded from every analysis</button>
+  <button class="mq-opt" data-opt="b" onclick="mqPick(this)">Pairwise: they are excluded from every analysis. Listwise: they are excluded only from analyses involving C</button>
+  <button class="mq-opt" data-opt="c" onclick="mqPick(this)">Both methods keep them in all three analyses</button>
+  <div class="mq-fb" hidden></div>
+  <div class="mq-expl" hidden>Pairwise deletion keeps more data, but each analysis ends up with a different sample size, which makes results harder to compare. Both approaches generally give unbiased results only if the data are MCAR, and both reduce power, so always check the N reported in your output.</div>
+</div>
+
+<!-- Q10 -->
+<div class="mq-q" data-correct="c">
+  <p class="mq-prompt"><strong>10.</strong> Which of the following is the best approach to missing data in a real project?</p>
+  <button class="mq-opt" data-opt="a" onclick="mqPick(this)">Try several methods and report only the one that gives a significant result</button>
+  <button class="mq-opt" data-opt="b" onclick="mqPick(this)">Use listwise deletion without checking how much data are lost</button>
+  <button class="mq-opt" data-opt="c" onclick="mqPick(this)">Decide your approach in advance, report how much data were missing and the assumed mechanism, and check whether conclusions change with a second method</button>
+  <button class="mq-opt" data-opt="d" onclick="mqPick(this)">Ignore missing data, since software handles it automatically</button>
+  <div class="mq-fb" hidden></div>
+  <div class="mq-expl" hidden>Choosing your method after seeing which one &ldquo;works&rdquo; is a form of p-hacking. Good practice is to inspect the data, think about why values are missing, pre-specify the approach, report it clearly, and run a sensitivity check (for example, comparing complete-case results with multiple imputation). Software defaults often silently use listwise deletion, so check the N.</div>
+</div>
+
+<p class="mq-score" id="mq-score-missing" aria-live="polite">Score: 0 / 10 answered correctly (0 answered)</p>
+<button class="mq-reset" onclick="mqReset('mq-quiz-missing')">Reset quiz</button>
+
+</div>
+
+<script>
+function mqPick(btn) {
+  var q = btn.closest('.mq-q');
+  if (q.classList.contains('mq-done')) { return; }
+  q.classList.add('mq-done');
+  var correct = q.getAttribute('data-correct');
+  var chosen = btn.getAttribute('data-opt');
+  var opts = q.querySelectorAll('.mq-opt');
+  for (var i = 0; i < opts.length; i++) {
+    if (opts[i].getAttribute('data-opt') === correct) { opts[i].classList.add('mq-correct'); }
+  }
+  var fb = q.querySelector('.mq-fb');
+  var expl = q.querySelector('.mq-expl').innerHTML;
+  if (chosen === correct) {
+    q.setAttribute('data-result', 'right');
+    fb.className = 'mq-fb mq-fb-good';
+    fb.innerHTML = '<strong>Correct.</strong> ' + expl;
+  } else {
+    btn.classList.add('mq-wrong');
+    q.setAttribute('data-result', 'wrong');
+    fb.className = 'mq-fb mq-fb-bad';
+    fb.innerHTML = '<strong>Not quite.</strong> ' + expl;
+  }
+  fb.hidden = false;
+  mqScore(q.closest('.mq-quiz'));
+}
+
+function mqScore(quiz) {
+  var qs = quiz.querySelectorAll('.mq-q');
+  var right = 0, answered = 0;
+  for (var i = 0; i < qs.length; i++) {
+    var r = qs[i].getAttribute('data-result');
+    if (r) { answered++; }
+    if (r === 'right') { right++; }
+  }
+  quiz.querySelector('.mq-score').textContent =
+    'Score: ' + right + ' / ' + qs.length + ' answered correctly (' + answered + ' answered)';
+}
+
+function mqReset(id) {
+  var quiz = document.getElementById(id);
+  var qs = quiz.querySelectorAll('.mq-q');
+  for (var i = 0; i < qs.length; i++) {
+    qs[i].classList.remove('mq-done');
+    qs[i].removeAttribute('data-result');
+    var opts = qs[i].querySelectorAll('.mq-opt');
+    for (var j = 0; j < opts.length; j++) {
+      opts[j].classList.remove('mq-correct');
+      opts[j].classList.remove('mq-wrong');
+    }
+    var fb = qs[i].querySelector('.mq-fb');
+    fb.hidden = true;
+    fb.innerHTML = '';
+    fb.className = 'mq-fb';
+  }
+  mqScore(quiz);
+}
+</script>
+
+## Normality
+Most models (t-tests, ANOVA, regression) assume that the residuals (errors) are approximately normal, not that every raw variable is normal. A skewed predictor is usually not a problem. A skewed outcome often leads to non-normal residuals, but not always. For example, in an independent samples t-test, you check each group separately; in a regression, you check the residuals. A pooled variable made up of two groups with different means can look non-normal even when each group is perfectly normal. That is why you sometimes check the variables first, and then check again after fitting the model.
+
 Normality of variables is an assumption for many analyses. Occasionally, data will be non-normal. Normality can be assessed in multiple ways:
 
 1. Descriptively, by looking at skewness and kurtosis
