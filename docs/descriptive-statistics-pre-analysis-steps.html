@@ -29,7 +29,7 @@ set in the _output.yml file.</p>" />
 <meta name="author" content="Dr Jess Radley" />
 
 
-<meta name="date" content="2026-10-22" />
+<meta name="date" content="2026-10-25" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -224,9 +224,9 @@ set in the _output.yml file.</p>" />
 <div id="check-the-variables" class="section level3 hasAnchor" number="7.1.1">
 <h3><span class="header-section-number">7.1.1</span> Check the variables<a href="descriptive-statistics-pre-analysis-steps.html#check-the-variables" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>JASP has three options for variable types.</p>
-<p><em>Nominal</em> - categorical with no inherent order</p>
-<p><em>Ordinal</em> - categorical with a meaningful order but intervals between categories are not necessarily equal</p>
-<p><em>Scale</em> - continuous numeric variables with meaningful distances</p>
+<p><strong>Nominal</strong> - categorical with no inherent order</p>
+<p><strong>Ordinal</strong> - categorical with a meaningful order but intervals between categories are not necessarily equal</p>
+<p><strong>Scale</strong> - continuous numeric variables with meaningful distances</p>
 <p><em>Tip</em>: Individual items on a questionnaire/Likert scale are often treated as an ‘ordinal’ variable whereas the summed score of all items is often treated as a ‘scale’ variable.</p>
 <ol style="list-style-type: decimal">
 <li>Has JASP automatically assigned the right variable type to each variable? If not, double-click on the header row and change the variable type.</li>
@@ -246,8 +246,9 @@ set in the _output.yml file.</p>" />
 <li><p>Let’s move from data view to analysis. Click on the green ‘Analyses’ button in the topleft corner. Then click on ‘Descriptives -&gt; ’Descriptive statistics’. You will see you now have three panels - data on the lefthand side, data analysis in the middle and output on the righthand side. You can use the arrows and three dots on either side of the analysis panel to change what you can see.</p></li>
 <li><p>Bring every variable except ‘id’ over from the box on the lefthand side to ‘variables’. You can use ‘Ctrl + A’ to select all variables and then ‘Ctrl’ to deselect ‘id’. Click ‘transpose descriptives table’. Under ‘statistics’, check that ‘minimum’ and ‘maximum’ are selected. Look at each variable. Do any of the minimum or maximums surprise you? Make a note of everything that doesn’t look right.</p></li>
 <li><p>Click on ‘Tables’ and then ‘Frequency tables’. This number of each distinct entry for nominal and ordinal variables. Is anything miscoded here? Make a note.</p></li>
-<li><p>You now need to edit the data file to fix these errors. That is called ‘data cleaning’. Whenever you make changes to the file, it is important to not write over the original file. Therefore click on the top left button -&gt; Export Data and then save the file somewhere on your computer. You might want to name this version ‘depression_anxiety_practice_data_v0.1_clean’ or similar. You might also want to include today’s date in the file. Then click on ‘Edit Data’ on the top left button. Find all the cells with impossible/improbable data, click on the cell and clear the data (e.g., by clicking on backspace) so that it becomes registered as missing. If you click on ‘Analyses’ and haven’t closed the file, you will see the analyses will have automatically updated to reflect any changes you have made in the file.</p></li>
+<li><p>You now need to edit the data file to fix these errors. That is called ‘data cleaning’. Whenever you make changes to the file, it is important to not write over the original file. Therefore click on the top left button -&gt; Save As and then save the file somewhere on your computer. You might want to name this version ‘depression_anxiety_practice_data_v0.1_clean’ or similar. You might also want to include today’s date in the file. Then click on ‘Edit Data’ on the top left button. Find all the cells with impossible/improbable data, click on the cell and clear the data (e.g., by clicking on backspace) so that it becomes registered as missing. If you click on ‘Analyses’ and haven’t closed the file, you will see the analyses will have automatically updated to reflect any changes you have made in the file.</p></li>
 <li><p>To double-check your data is now ‘clean’, you could use the filter option which is to the left of ‘id’. A box will pop up with variables down the left hand side and a calculator in the middle. Click on ‘age’ then ‘&gt;’ then type ‘110’. Then click ‘apply pass-through filter’. This will highlight all the rows where the participants age is listed as more than 110. If you want to get rid of the filter double-click on the rubbish bin.</p></li>
+<li><p>Earlier when you clicked ‘Save As’, you saved this as a .jasp file. If you want to save it as a file you can open in Excel, now click ‘Export Data’ and save it in your desired format.</p></li>
 </ol>
 <p><strong>Congratulations you have now cleaned your data!</strong></p>
 </div>
@@ -631,7 +632,20 @@ function mqReset(id) {
 </div>
 <div id="normality" class="section level2 hasAnchor" number="7.3">
 <h2><span class="header-section-number">7.3</span> Normality<a href="descriptive-statistics-pre-analysis-steps.html#normality" class="anchor-section" aria-label="Anchor link to header"></a></h2>
-<p>Most models (t-tests, ANOVA, regression) assume that the residuals (errors) are approximately normal, not that every raw variable is normal. A skewed predictor is usually not a problem. A skewed outcome often leads to non-normal residuals, but not always. For example, in an independent samples t-test, you check each group separately; in a regression, you check the residuals. A pooled variable made up of two groups with different means can look non-normal even when each group is perfectly normal. That is why you sometimes check the variables first, and then check again after fitting the model.</p>
+<p>A skewed (non-normal) predictor is usually not a problem. A skewed outcome often leads to non-normal residuals, but not always. A pooled variable made up of two groups with different means can look non-normal even when each group is perfectly normal. That is why you sometimes check the variables first, and then check again after fitting the model.</p>
+<p>When considering normality, we must consider both the i) distribution of the raw variables and the ii) distribution of the residuals (errors) from an analysis. Although most models have a ‘normality assumption’, these in fact differ between different statistical tests.</p>
+<ol style="list-style-type: decimal">
+<li>Open an independent t-test and look at the help file and find the wording on the assumption of normality. Now do the same for a linear regression. Consider how these two assumptions of normality are different.</li>
+</ol>
+<p>Therefore, for an independent t-test, it is the raw (dependent) variable that must be normally distributed (within each of the two groups). Whereas, for a linear regression, you are concerned with the whether the <em>residuals</em> are normally distributed.</p>
+<p><strong>Residual</strong>: A residual measures how far off a model’s prediction is from the actual observed data. For example a linear regression produces a line of best fit. Residuals are the distance of the raw variables from that line of best fit.</p>
+<div class="figure">
+<img src="images/linear_regression_residuals.png" alt="Residuals in a linear regression"  />
+<p class="caption">
+(#fig:linear regression)Residuals in a linear regression
+</p>
+</div>
+<p>Therefore, normality checks come <em>before</em> analyses (checking the distrubtion of variables) and also <em>after</em> analyses (checking the distribution of residuals.</p>
 <p>Normality of variables is an assumption for many analyses. Occasionally, data will be non-normal. Normality can be assessed in multiple ways:</p>
 <ol style="list-style-type: decimal">
 <li><p>Descriptively, by looking at skewness and kurtosis</p></li>

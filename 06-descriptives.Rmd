@@ -24,11 +24,11 @@ __Data dictionary__
 
 JASP has three options for variable types.
 
-_Nominal_ - categorical with no inherent order
+__Nominal__ - categorical with no inherent order
 
-_Ordinal_ - categorical with a meaningful order but intervals between categories are not necessarily equal 
+__Ordinal__ - categorical with a meaningful order but intervals between categories are not necessarily equal 
 
-_Scale_ - continuous numeric variables with meaningful distances 
+__Scale__ - continuous numeric variables with meaningful distances 
 
 _Tip_: Individual items on a questionnaire/Likert scale are often treated as an 'ordinal' variable whereas the summed score of all items is often treated as a 'scale' variable.
 
@@ -50,9 +50,11 @@ Although entering data by hand is less common nowadays, errors in data entry can
 
 5. Click on 'Tables' and then 'Frequency tables'. This number of each distinct entry for nominal and ordinal variables. Is anything miscoded here? Make a note.
 
-6. You now need to edit the data file to fix these errors. That is called 'data cleaning'. Whenever you make changes to the file, it is important to not write over the original file. Therefore click on the top left button -> Export Data and then save the file somewhere on your computer. You might want to name this version 'depression_anxiety_practice_data_v0.1_clean' or similar. You might also want to include today's date in the file. Then click on 'Edit Data' on the top left button. Find all the cells with impossible/improbable data, click on the cell and clear the data (e.g., by clicking on backspace) so that it becomes registered as missing. If you click on 'Analyses' and haven't closed the file, you will see the analyses will have automatically updated to reflect any changes you have made in the file.
+6. You now need to edit the data file to fix these errors. That is called 'data cleaning'. Whenever you make changes to the file, it is important to not write over the original file. Therefore click on the top left button -> Save As and then save the file somewhere on your computer. You might want to name this version 'depression_anxiety_practice_data_v0.1_clean' or similar. You might also want to include today's date in the file. Then click on 'Edit Data' on the top left button. Find all the cells with impossible/improbable data, click on the cell and clear the data (e.g., by clicking on backspace) so that it becomes registered as missing. If you click on 'Analyses' and haven't closed the file, you will see the analyses will have automatically updated to reflect any changes you have made in the file.
 
 7. To double-check your data is now 'clean', you could use the filter option which is to the left of 'id'. A box will pop up with variables down the left hand side and a calculator in the middle. Click on 'age' then '>' then type '110'. Then click 'apply pass-through filter'. This will highlight all the rows where the participants age is listed as more than 110. If you want to get rid of the filter double-click on the rubbish bin.
+
+8. Earlier when you clicked 'Save As', you saved this as a .jasp file. If you want to save it as a file you can open in Excel, now click 'Export Data' and save it in your desired format.
 
 __Congratulations you have now cleaned your data!__
 
@@ -358,7 +360,22 @@ function mqReset(id) {
 </script>
 
 ## Normality
-Most models (t-tests, ANOVA, regression) assume that the residuals (errors) are approximately normal, not that every raw variable is normal. A skewed predictor is usually not a problem. A skewed outcome often leads to non-normal residuals, but not always. For example, in an independent samples t-test, you check each group separately; in a regression, you check the residuals. A pooled variable made up of two groups with different means can look non-normal even when each group is perfectly normal. That is why you sometimes check the variables first, and then check again after fitting the model.
+A skewed (non-normal) predictor is usually not a problem. A skewed outcome often leads to non-normal residuals, but not always. A pooled variable made up of two groups with different means can look non-normal even when each group is perfectly normal. That is why you sometimes check the variables first, and then check again after fitting the model.
+
+When considering normality, we must consider both the i) distribution of the raw variables and the ii) distribution of the residuals (errors) from an analysis. Although most models have a 'normality assumption', these in fact differ between different statistical tests.
+
+1. Open an independent t-test and look at the help file and find the wording on the assumption of normality. Now do the same for a linear regression. Consider how these two assumptions of normality are different.
+
+Therefore, for an independent t-test, it is the raw (dependent) variable that must be normally distributed (within each of the two groups). Whereas, for a linear regression, you are concerned with the whether the _residuals_ are normally distributed.
+
+__Residual__: A residual measures how far off a model's prediction is from the actual observed data. For example a linear regression produces a line of best fit. Residuals are the distance of the raw variables from that line of best fit.
+
+
+```{r linear regression, echo=FALSE, fig.cap="Residuals in a linear regression"}
+knitr::include_graphics("images/linear_regression_residuals.png")
+```
+
+Therefore, normality checks come _before_ analyses (checking the distrubtion of variables) and also _after_ analyses (checking the distribution of residuals.
 
 Normality of variables is an assumption for many analyses. Occasionally, data will be non-normal. Normality can be assessed in multiple ways:
 
