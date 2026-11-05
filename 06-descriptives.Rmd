@@ -360,13 +360,11 @@ function mqReset(id) {
 </script>
 
 ## Normality
-A skewed (non-normal) predictor is usually not a problem. A skewed outcome often leads to non-normal residuals, but not always. A pooled variable made up of two groups with different means can look non-normal even when each group is perfectly normal. That is why you sometimes check the variables first, and then check again after fitting the model.
-
 When considering normality, we must consider both the i) distribution of the raw variables and the ii) distribution of the residuals (errors) from an analysis. Although most models have a 'normality assumption', these in fact differ between different statistical tests.
 
 1. Open an independent t-test and look at the help file and find the wording on the assumption of normality. Now do the same for a linear regression. Consider how these two assumptions of normality are different.
 
-Therefore, for an independent t-test, it is the raw (dependent) variable that must be normally distributed (within each of the two groups). Whereas, for a linear regression, you are concerned with the whether the _residuals_ are normally distributed.
+As you will have just seen, for an independent t-test, it is the raw (dependent) variable that must be normally distributed (within each of the two groups). Whereas, for a linear regression, you are concerned with the whether the _residuals_ are normally distributed.
 
 __Residual__: A residual measures how far off a model's prediction is from the actual observed data. For example a linear regression produces a line of best fit. Residuals are the distance of the raw variables from that line of best fit.
 
@@ -375,26 +373,72 @@ __Residual__: A residual measures how far off a model's prediction is from the a
 knitr::include_graphics("images/linear_regression_residuals.png")
 ```
 
-Therefore, normality checks come _before_ analyses (checking the distrubtion of variables) and also _after_ analyses (checking the distribution of residuals.
-
-Normality of variables is an assumption for many analyses. Occasionally, data will be non-normal. Normality can be assessed in multiple ways:
-
-1. Descriptively, by looking at skewness and kurtosis
-
-2. Testing using Shapiro-Wilk. If the test is significant (p < .05), that indicates a departure from normality
-
-3. Visually by inspecting plots
-
-If you find some indications of a variable being non-normally distributed, it may not be an issue especially if there is a large sample size. If all assessments of normality indicate that the non-normality is severe and the sample size is not particularly large...
-
-#### Transformation
--positive skew, square-root, logarithmic
--negative skew - options here?
-detail in JASP
-
-Check the data afterwards, how is the skew now?
-
-#### Non-parametric tests
-In particularly small sample sizes where data skew is severe
+Therefore, normality checks come _before_ analyses (checking the distribution of variables) and also _after_ analyses (checking the distribution of residuals).
 
 
+A skewed (non-normal) predictor/independent variqble is usually not a problem. A skewed outcome/dependent variable often leads to non-normal residuals, but not always. A pooled variable made up of two groups with different means can look non-normal even when each group is perfectly normal. That is why you sometimes check the variables first, and then check again after fitting the model.
+
+```{r pos neg skew, echo=FALSE, fig.cap="Positive skew and Negative skew"}
+knitr::include_graphics("images/pos_neg_skew.png")
+```
+
+
+### Normality of raw variables
+Normality can be assessed in multiple ways:
+
+1. Descriptively, by looking at skewness and kurtosis. Values close to zero suggest approximate normality. For skewness, values between -1 and +1 are approximately normal and for kurtosis, values in between -2 and +2 are approximately normal.
+
+2. Statistically, using the Shapiro-Wilk test. A significant result (p < .05) indicates a departure from normality.
+
+3. Visually by inspecting a histogram
+
+If you find some indications of a variable being non-normally distributed, it may not be an issue especially if there is a large sample size. If all assessments indicate that the non-normality is severe and the sample size is not particularly large, see section 7.3.3.
+
+```{r skewness kurtosis, echo=FALSE, fig.cap="skewness and kurtosis"}
+knitr::include_graphics("images/skewness_kurtosis.png")
+```
+
+#### Exercise
+Calculate a total score for GAD_7. Then click on 'Descriptives' -> 'Descriptive Statistics' and bring your GAD-7 total score into 'variables'. Then under 'Statistics', click 'Skewness', 'Kurtosis' and 'Shapiro-Wilk'. Under 'Basic Plot' click 'Distribution Plot' and then 'Display density'.
+
+1. Are the values for kurtosis and skewness outside of the normal range listed above? Is there Shapiro-Wilk test statistically significant?
+2. Is GAD-7 skewed? If so, is it positively skewed or negatively skewed?
+3. If GAD-7 will be used as an independent variable/predictor, do you need to do anything about the skew?
+
+### Normality of residuals
+
+For linear regression, ANOVAs and some other analysis, the normality assumption concerns the _residuals_ not the raw variables.
+
+After you fit your model, JASP has options to investigate the residuals. The main check for normality of residuals is by looking at a Q-Q plot standardised residuals.
+
+```{r qq plot, echo=FALSE, fig.cap="Q-Q plot standardised residuals"}
+knitr::include_graphics("images/qq_plot_residuals.png")
+```
+
+### If normality is violated
+
+If a check suggests non-normality, whether in the raw variables or in the model residuals, work through the following steps before deciding what to do.
+
+1. Consider your sample size. Many tests are fairly robust to non-normality when the sample is large, so modest departures are often not a serious problem. With a small sample, non-normality is more of a concern.
+
+2. Check for outliers or data entry errors. A few extreme values can make a distribution look non-normal, or produce a curve in a Q-Q plot. Check that the most extreme cases are genuine, and see whether the pattern persists without them. Only remove a case if you have a legitimate reason, and report that you did.
+
+3. Consider a transformation. If the outcome is positively skewed, a square root transformation can help for moderate skew and a log transformation for stronger skew (the variable must be positive, so add a constant if it contains zeros). For a negative skew, you will need to reflect the variable first. In JASP you can create a transformed variable using a computed column. After transforming, repeat your normality checks. Remember that results are then on the transformed scale, which changes how you interpret them.
+
+4. Use a method that does not rely on normality. Depending on the analysis, this could be a non-parametric test or bootstrapped confidence intervals (check the options for your analysis in JASP).
+
+5. Report what you did. State what you observed (for example, “the Q-Q plot showed positive skew in the residuals”), why you judged it acceptable or what you did about it, and ideally show that the conclusions are the same when you use an alternative approach (this is another example of a Sensitivity Analysis)
+
+#### Non-normality of raw variables - extra information
+
+If you are using a test with multiple groups, check normality within each group rather than for the entire pooled variable, because pooling groups with different means can make a variable look non-normal when each group is fine. 
+
+A non-parametric alternative is usually a direct replacement for the test, such as the Mann-Whitney U test in place of an independent t-test.
+
+#### Non-normality of residuals - extra information
+
+Non-normal residuals can be a symptom of a problem with the model rather than the data. Perhaps a predictor or interaction is missing, or perhaps the relationship between your predictor and outcome variables is truly non-linear. You can check this using the Residuals vs. predicted plot.
+
+If you choose to transform the outcome variable to fix non-normal residuals, refit the model after transforming and check the Q-Q plot again.
+
+A useful final check is to run the original and the adjusted analysis side by side (again called a Sensitivity Analysis). If the conclusions agree, the violation probably did not matter. If they disagree, trust the version that meets the assumptions.

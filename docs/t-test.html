@@ -29,7 +29,7 @@ set in the _output.yml file.</p>" />
 <meta name="author" content="Dr Jess Radley" />
 
 
-<meta name="date" content="2026-10-25" />
+<meta name="date" content="2026-11-05" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -95,7 +95,11 @@ set in the _output.yml file.</p>" />
 </ul></li>
 <li class="chapter" data-level="4" data-path="t-test.html"><a href="t-test.html"><i class="fa fa-check"></i><b>4</b> t-test</a>
 <ul>
-<li class="chapter" data-level="4.1" data-path="t-test.html"><a href="t-test.html#exercise"><i class="fa fa-check"></i><b>4.1</b> Exercise</a></li>
+<li class="chapter" data-level="4.1" data-path="t-test.html"><a href="t-test.html#independent-t-test"><i class="fa fa-check"></i><b>4.1</b> Independent t-test</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="t-test.html"><a href="t-test.html#exercise"><i class="fa fa-check"></i><b>4.1.1</b> Exercise</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="t-test.html"><a href="t-test.html#paired-t-test"><i class="fa fa-check"></i><b>4.2</b> Paired t-test</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="hypothesis-testing-vs.-hypothesis-generation.html"><a href="hypothesis-testing-vs.-hypothesis-generation.html"><i class="fa fa-check"></i><b>5</b> Hypothesis testing vs. hypothesis generation</a>
 <ul>
@@ -134,7 +138,12 @@ set in the _output.yml file.</p>" />
 <li class="chapter" data-level="7.2.5" data-path="descriptive-statistics-pre-analysis-steps.html"><a href="descriptive-statistics-pre-analysis-steps.html#sensitivity-analyses"><i class="fa fa-check"></i><b>7.2.5</b> Sensitivity analyses</a></li>
 <li class="chapter" data-level="7.2.6" data-path="descriptive-statistics-pre-analysis-steps.html"><a href="descriptive-statistics-pre-analysis-steps.html#quiz"><i class="fa fa-check"></i><b>7.2.6</b> Quiz</a></li>
 </ul></li>
-<li class="chapter" data-level="7.3" data-path="descriptive-statistics-pre-analysis-steps.html"><a href="descriptive-statistics-pre-analysis-steps.html#normality"><i class="fa fa-check"></i><b>7.3</b> Normality</a></li>
+<li class="chapter" data-level="7.3" data-path="descriptive-statistics-pre-analysis-steps.html"><a href="descriptive-statistics-pre-analysis-steps.html#normality"><i class="fa fa-check"></i><b>7.3</b> Normality</a>
+<ul>
+<li class="chapter" data-level="7.3.1" data-path="descriptive-statistics-pre-analysis-steps.html"><a href="descriptive-statistics-pre-analysis-steps.html#normality-of-raw-variables"><i class="fa fa-check"></i><b>7.3.1</b> Normality of raw variables</a></li>
+<li class="chapter" data-level="7.3.2" data-path="descriptive-statistics-pre-analysis-steps.html"><a href="descriptive-statistics-pre-analysis-steps.html#normality-of-residuals"><i class="fa fa-check"></i><b>7.3.2</b> Normality of residuals</a></li>
+<li class="chapter" data-level="7.3.3" data-path="descriptive-statistics-pre-analysis-steps.html"><a href="descriptive-statistics-pre-analysis-steps.html#if-normality-is-violated"><i class="fa fa-check"></i><b>7.3.3</b> If normality is violated</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>8</b> References</a></li>
 <li class="divider"></li>
@@ -159,14 +168,17 @@ set in the _output.yml file.</p>" />
             <section class="normal" id="section-">
 <div id="t-test" class="section level1 hasAnchor" number="4">
 <h1><span class="header-section-number">Chapter 4</span> t-test<a href="t-test.html#t-test" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<div id="independent-t-test" class="section level2 hasAnchor" number="4.1">
+<h2><span class="header-section-number">4.1</span> Independent t-test<a href="t-test.html#independent-t-test" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>An independent t-test is used to compare the mean of a dependent variable between two separate groups.</p>
 <p>Here is a video from the JASP video library on how to conduct an independent samples t-tests. You can find further videos, including assumption checks, plot and effect size here <a href="https://jasp-stats.github.io/jasp-video-library/All_T-Tests.html" class="uri">https://jasp-stats.github.io/jasp-video-library/All_T-Tests.html</a>.</p>
 <video width="600" controls>
   <source src="https://jasp-stats.github.io/jasp-video-library/assets/videos/All_T-Tests/1_TTest/TTest_1_Independent-Main-Analysis.mp4" type="video/mp4">
   Your browser does not support the video tag.
 </video>
 <p><a href="https://jasp-stats.github.io/jasp-video-library/assets/videos/All_T-Tests/1_TTest/TTest_1_Independent-Main-Analysis.mp4">Watch video in browser</a></p>
-<div id="exercise" class="section level2 hasAnchor" number="4.1">
-<h2><span class="header-section-number">4.1</span> Exercise<a href="t-test.html#exercise" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="exercise" class="section level3 hasAnchor" number="4.1.1">
+<h3><span class="header-section-number">4.1.1</span> Exercise<a href="t-test.html#exercise" class="anchor-section" aria-label="Anchor link to header"></a></h3>
 <p>Load the dataset ‘Exam Anxiety’ by clicking on the top-left icon-&gt; Open-&gt; Data Library -&gt; Books -&gt; Andy Field -&gt; Exam anxiety. This is a fictional dataset created by Andy Field <em>Field, A. P. (2017). Discovering Statistics Using IBM SPSS Statistics (5th ed.). London: Sage. [Fictional data set]</em>.</p>
 <p>Once you have the data loaded, click on ‘T-tests’ and then ‘Classical - Independent Samples T-Test’.</p>
 <ol style="list-style-type: decimal">
@@ -201,6 +213,127 @@ Levene’s/Brown-Forsythe’s test indicated that the assumption of equal varian
 <li><p>Click on the blue ‘R’ button at the top of the screen on the lefthand side to have a look at the R syntax. If you wanted to reproduce these analyses in R you can copy and paste that code into R studio.</p></li>
 <li><p>Scroll back up the right hand page to start of your analysis. Click on your title and click ‘export results’ and save this file. Then click on your title and click ‘copy’ and paste into a word document and save that file. Then email both files (the html file and the word document) to a peer. Compare your results. Share what you have learned so far about JASP.</p></li>
 </ol>
+</div>
+</div>
+<div id="paired-t-test" class="section level2 hasAnchor" number="4.2">
+<h2><span class="header-section-number">4.2</span> Paired t-test<a href="t-test.html#paired-t-test" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>A paired t-test is used to compare how the same group of people differ on an independent variable over two timepoints.</p>
+<p>Load the data ‘t-test_anova_practice_data’ into JASP.</p>
+<p><strong>Data dictionary</strong></p>
+<p>University students were randomised to receive a mindfulness intervention or a control condition. Various psychosocial characteristics were measured, like exercise level and social support. Outcome measures included depression, anxiety, stress and a total distress score calculated by adding these three mental health outcomes together.</p>
+<table>
+<colgroup>
+<col width="25%" />
+<col width="75%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left">Variable</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">ParticipantID</td>
+<td align="left">Participant ID (P001 to P240)</td>
+</tr>
+<tr class="even">
+<td align="left">Age</td>
+<td align="left">Age in years (18 to 30)</td>
+</tr>
+<tr class="odd">
+<td align="left">Gender</td>
+<td align="left">Gender (Woman, Man, Non-binary)</td>
+</tr>
+<tr class="even">
+<td align="left">Year_of_Study</td>
+<td align="left">Undergraduate year of study (1, 2, 3)</td>
+</tr>
+<tr class="odd">
+<td align="left">Accommodation</td>
+<td align="left">Living situation (Living at home, Living away from home)</td>
+</tr>
+<tr class="even">
+<td align="left">Exercise_Level</td>
+<td align="left">Self-reported weekly exercise level (Low, Moderate, High)</td>
+</tr>
+<tr class="odd">
+<td align="left">Social_Support</td>
+<td align="left">Perceived social support (Low, High)</td>
+</tr>
+<tr class="even">
+<td align="left">Condition</td>
+<td align="left">Intervention allocation (Control, Mindfulness)</td>
+</tr>
+<tr class="odd">
+<td align="left">Sleep_Hours</td>
+<td align="left">Average nightly sleep at baseline in hours</td>
+</tr>
+<tr class="even">
+<td align="left">DEP_T1</td>
+<td align="left">Depression subscale score (0 to 42) at baseline</td>
+</tr>
+<tr class="odd">
+<td align="left">DEP_T2</td>
+<td align="left">Depression subscale score (0 to 42) post-intervention</td>
+</tr>
+<tr class="even">
+<td align="left">DEP_T3</td>
+<td align="left">Depression subscale score (0 to 42) at follow-up</td>
+</tr>
+<tr class="odd">
+<td align="left">ANX_T1</td>
+<td align="left">Anxiety subscale score (0 to 42) at baseline</td>
+</tr>
+<tr class="even">
+<td align="left">ANX_T2</td>
+<td align="left">Anxiety subscale score (0 to 42) post-intervention</td>
+</tr>
+<tr class="odd">
+<td align="left">ANX_T3</td>
+<td align="left">Anxiety subscale score (0 to 42) at follow-up</td>
+</tr>
+<tr class="even">
+<td align="left">STR_T1</td>
+<td align="left">Stress subscale score (0 to 42) at baseline</td>
+</tr>
+<tr class="odd">
+<td align="left">STR_T2</td>
+<td align="left">Stress subscale score (0 to 42) post-intervention</td>
+</tr>
+<tr class="even">
+<td align="left">STR_T3</td>
+<td align="left">Stress subscale score (0 to 42) at follow-up</td>
+</tr>
+<tr class="odd">
+<td align="left">Total_Distress_T1</td>
+<td align="left">Total mental health difficulties (depression + anxiety + stress, 0 to 126) at baseline</td>
+</tr>
+<tr class="even">
+<td align="left">Total_Distress_T2</td>
+<td align="left">Total mental health difficulties (depression + anxiety + stress, 0 to 126) post-intervention</td>
+</tr>
+<tr class="odd">
+<td align="left">Total_Distress_T3</td>
+<td align="left">Total mental health difficulties (depression + anxiety + stress, 0 to 126) at follow-up</td>
+</tr>
+</tbody>
+</table>
+<ol style="list-style-type: decimal">
+<li><p>Let’s use a paired t-test to compare all participants’ total distress at T1 vs. their total distress at T2. Click on ‘T-tests’ -&gt; Paired Samples T-test and bring these two timepoints over to ‘Variable pair’. Click on the <strong>bold title Paired Samples T-Test</strong> and name it something that is more specific to your analysis. Add Cohen’s <em>d</em></p></li>
+<li><p>From what you can see, can you conclude anything about the direction of the effect i.e., at which timepoint scores were higher?</p></li>
+<li><p>Add descriptives. Looking at the mean between the two timepoints, what can you conclude about the directionality?</p></li>
+<li><p>Add ‘Raincloud plots’. This gives you a graph of how each participant changed between T1 and T2.</p></li>
+<li><p>With this information, add a note to the bottom of the table by clicking on the <em>italics Paired Samples T-Test</em> and then selecting ‘Add note’. A grey box should appear. Using the information you produced, report your results in this box. Report means, standard deviations, degrees of freedom, t-statistics, Cohen’s <em>d</em> to two decimal points, and report p values to three decimal points. Then, add an interpretation of the implications of these results.</p></li>
+</ol>
+<div style="background-color: #f7f7f8; border: 1px solid #e0e0e0; border-radius: 8px; padding: 15px 20px; margin: 15px 0;">
+<p>
+<strong>Reporting a paired samples t-test</strong>
+</p>
+<p>
+A paired samples t-test comparing [outcome] at T1 (M = ?, SD = ?) and T2 (M = ?, SD = ?) showed that [outcome] <em>was/was not significantly different</em> at each timepoint (t(<em>df</em>) = <em>t</em>, p = <em>p</em>, d = <em>d</em>).
+</p>
+</div>
 
 </div>
 </div>

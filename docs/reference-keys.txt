@@ -9,7 +9,9 @@ cross-sectional
 longitudinal
 beyond-the-basics
 t-test
+independent-t-test
 exercise
+paired-t-test
 hypothesis-testing-vs.-hypothesis-generation
 exploratory-vs.-confirmatory-research
 pre-registering-confirmatory-research
@@ -40,6 +42,10 @@ model-based-approaches
 sensitivity-analyses
 quiz
 normality
-transformation
-non-parametric-tests
+normality-of-raw-variables
+exercise-2
+normality-of-residuals
+if-normality-is-violated
+non-normality-of-raw-variables---extra-information
+non-normality-of-residuals---extra-information
 references
