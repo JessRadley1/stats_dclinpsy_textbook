@@ -68,7 +68,7 @@ There are three main reasons why data can be missing.
 |Missing at Random (MAR)| Missingness is related to _observed_ variables i.e., something you have measured | Younger participants skip an item more often, and age is recorded
 |Missing Not at Random (MNAR)| Missingness is related to the missing value itself | People experiencing the most severe suicidal thoughts skip PHQ-9 item 9
 
-When you discover data is missing, you have two options: 1) Imputation, 2) Deletion, 3) Model-based approaches
+When you discover data is missing, you have three options: 1) Imputation, 2) Deletion, 3) Model-based approaches
 
 If your data is MCAR, you can delete the individuals with missing data and analyse only those without missing data (also known as 'listwise deletion' or 'complete case analysis'), however do keep in mind the sample size needed from your power analysis.
 
@@ -423,9 +423,9 @@ If a check suggests non-normality, whether in the raw variables or in the model 
 
 2. Check for outliers or data entry errors. A few extreme values can make a distribution look non-normal, or produce a curve in a Q-Q plot. Check that the most extreme cases are genuine, and see whether the pattern persists without them. Only remove a case if you have a legitimate reason, and report that you did.
 
-3. Consider a transformation. If the outcome is positively skewed, a square root transformation can help for moderate skew and a log transformation for stronger skew (the variable must be positive, so add a constant if it contains zeros). For a negative skew, you will need to reflect the variable first. In JASP you can create a transformed variable using a computed column. After transforming, repeat your normality checks. Remember that results are then on the transformed scale, which changes how you interpret them.
+3. Use a method that does not rely on normality. Depending on the analysis, this could be a non-parametric test or bootstrapping (check the options for your analysis in JASP). You can read more about bootstrapping in the section below.
 
-4. Use a method that does not rely on normality. Depending on the analysis, this could be a non-parametric test or bootstrapped confidence intervals (check the options for your analysis in JASP).
+4. Consider a transformation. If the outcome is positively skewed, a square root transformation can help for moderate skew and a log transformation for stronger skew (the variable must be positive, so add a constant if it contains zeros). For a negative skew, you will need to reflect the variable first. In JASP you can create a transformed variable using a computed column. After transforming, repeat your normality checks. Remember that results are then on the transformed scale, which changes how you interpret them.
 
 5. Report what you did. State what you observed (for example, “the Q-Q plot showed positive skew in the residuals”), why you judged it acceptable or what you did about it, and ideally show that the conclusions are the same when you use an alternative approach (this is another example of a Sensitivity Analysis)
 
@@ -442,3 +442,13 @@ Non-normal residuals can be a symptom of a problem with the model rather than th
 If you choose to transform the outcome variable to fix non-normal residuals, refit the model after transforming and check the Q-Q plot again.
 
 A useful final check is to run the original and the adjusted analysis side by side (again called a Sensitivity Analysis). If the conclusions agree, the violation probably did not matter. If they disagree, trust the version that meets the assumptions.
+
+## Bootstrapping
+
+Bootstrapping is a way of dealing with data that violates the assumptions of statistical tests. Bootstrapping works by randomly sampling your data _with replacement_ (which means that some people will be resampled two or more times).
+
+```{r bootstrapping, echo=FALSE, fig.cap="Demonstration of how bootstrapping works"}
+knitr::include_graphics("images/bootstrap_people_resampling.png")
+```
+
+The way that you then use bootstrapping will depend on what statistical test you are running. It would be common to report the results of bootstrapping in addition to the standard output and compare (this is called a sensitivity analysis).

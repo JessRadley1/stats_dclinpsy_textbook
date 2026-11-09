@@ -87,7 +87,7 @@ University students were randomised to receive a mindfulness intervention or a c
 | Total_Distress_T2 | Total mental health difficulties (depression + anxiety + stress, 0 to 126) post-intervention |
 | Total_Distress_T3 | Total mental health difficulties (depression + anxiety + stress, 0 to 126) at follow-up |
 
-1. Let's use a paired t-test to compare all participants' total distress at T1 vs. their total distress at T2. Click on 'T-tests' -> Paired Samples T-test and bring these two timepoints over to 'Variable pair'. Click on the __bold title Paired Samples T-Test__ and name it something that is more specific to your analysis. Add Cohen's *d*
+1. Let's use a paired t-test to compare all participants' total distress at T1 vs. their total distress at T2. Click on 'T-tests' -> Paired Samples T-test and bring these two timepoints over to 'Variable pair'. Click on the __bold title Paired Samples T-Test__ and name it something that is more specific to your analysis. Add Cohen's *d* and confidence intervals.
 
 2. From what you can see, can you conclude anything about the direction of the effect i.e., at which timepoint scores were higher?
 

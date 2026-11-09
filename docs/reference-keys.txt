@@ -1,6 +1,7 @@
 fig:flow-cross-sectional
 fig:flow-longitudinal
 fig:flow-beyondbasics
+fig:bootstrapping
 about
 learning-objectives
 using-jasp
@@ -48,4 +49,5 @@ normality-of-residuals
 if-normality-is-violated
 non-normality-of-raw-variables---extra-information
 non-normality-of-residuals---extra-information
+bootstrapping
 references

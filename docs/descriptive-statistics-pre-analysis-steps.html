@@ -29,7 +29,7 @@ set in the _output.yml file.</p>" />
 <meta name="author" content="Dr Jess Radley" />
 
 
-<meta name="date" content="2026-11-05" />
+<meta name="date" content="2026-11-09" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -144,6 +144,7 @@ set in the _output.yml file.</p>" />
 <li class="chapter" data-level="7.3.2" data-path="descriptive-statistics-pre-analysis-steps.html"><a href="descriptive-statistics-pre-analysis-steps.html#normality-of-residuals"><i class="fa fa-check"></i><b>7.3.2</b> Normality of residuals</a></li>
 <li class="chapter" data-level="7.3.3" data-path="descriptive-statistics-pre-analysis-steps.html"><a href="descriptive-statistics-pre-analysis-steps.html#if-normality-is-violated"><i class="fa fa-check"></i><b>7.3.3</b> If normality is violated</a></li>
 </ul></li>
+<li class="chapter" data-level="7.4" data-path="descriptive-statistics-pre-analysis-steps.html"><a href="descriptive-statistics-pre-analysis-steps.html#bootstrapping"><i class="fa fa-check"></i><b>7.4</b> Bootstrapping</a></li>
 </ul></li>
 <li class="chapter" data-level="8" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>8</b> References</a></li>
 <li class="divider"></li>
@@ -296,7 +297,7 @@ set in the _output.yml file.</p>" />
 </tr>
 </tbody>
 </table>
-<p>When you discover data is missing, you have two options: 1) Imputation, 2) Deletion, 3) Model-based approaches</p>
+<p>When you discover data is missing, you have three options: 1) Imputation, 2) Deletion, 3) Model-based approaches</p>
 <p>If your data is MCAR, you can delete the individuals with missing data and analyse only those without missing data (also known as ‘listwise deletion’ or ‘complete case analysis’), however do keep in mind the sample size needed from your power analysis.</p>
 <div id="investigate-missingness" class="section level3 hasAnchor" number="7.2.1">
 <h3><span class="header-section-number">7.2.1</span> Investigate missingness<a href="descriptive-statistics-pre-analysis-steps.html#investigate-missingness" class="anchor-section" aria-label="Anchor link to header"></a></h3>
@@ -703,8 +704,8 @@ function mqReset(id) {
 <ol style="list-style-type: decimal">
 <li><p>Consider your sample size. Many tests are fairly robust to non-normality when the sample is large, so modest departures are often not a serious problem. With a small sample, non-normality is more of a concern.</p></li>
 <li><p>Check for outliers or data entry errors. A few extreme values can make a distribution look non-normal, or produce a curve in a Q-Q plot. Check that the most extreme cases are genuine, and see whether the pattern persists without them. Only remove a case if you have a legitimate reason, and report that you did.</p></li>
+<li><p>Use a method that does not rely on normality. Depending on the analysis, this could be a non-parametric test or bootstrapping (check the options for your analysis in JASP). You can read more about bootstrapping in the section below.</p></li>
 <li><p>Consider a transformation. If the outcome is positively skewed, a square root transformation can help for moderate skew and a log transformation for stronger skew (the variable must be positive, so add a constant if it contains zeros). For a negative skew, you will need to reflect the variable first. In JASP you can create a transformed variable using a computed column. After transforming, repeat your normality checks. Remember that results are then on the transformed scale, which changes how you interpret them.</p></li>
-<li><p>Use a method that does not rely on normality. Depending on the analysis, this could be a non-parametric test or bootstrapped confidence intervals (check the options for your analysis in JASP).</p></li>
 <li><p>Report what you did. State what you observed (for example, “the Q-Q plot showed positive skew in the residuals”), why you judged it acceptable or what you did about it, and ideally show that the conclusions are the same when you use an alternative approach (this is another example of a Sensitivity Analysis)</p></li>
 </ol>
 <div id="non-normality-of-raw-variables---extra-information" class="section level4 hasAnchor" number="7.3.3.1">
@@ -717,9 +718,20 @@ function mqReset(id) {
 <p>Non-normal residuals can be a symptom of a problem with the model rather than the data. Perhaps a predictor or interaction is missing, or perhaps the relationship between your predictor and outcome variables is truly non-linear. You can check this using the Residuals vs. predicted plot.</p>
 <p>If you choose to transform the outcome variable to fix non-normal residuals, refit the model after transforming and check the Q-Q plot again.</p>
 <p>A useful final check is to run the original and the adjusted analysis side by side (again called a Sensitivity Analysis). If the conclusions agree, the violation probably did not matter. If they disagree, trust the version that meets the assumptions.</p>
+</div>
+</div>
+</div>
+<div id="bootstrapping" class="section level2 hasAnchor" number="7.4">
+<h2><span class="header-section-number">7.4</span> Bootstrapping<a href="descriptive-statistics-pre-analysis-steps.html#bootstrapping" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Bootstrapping is a way of dealing with data that violates the assumptions of statistical tests. Bootstrapping works by randomly sampling your data <em>with replacement</em> (which means that some people will be resampled two or more times).</p>
+<div class="figure"><span style="display:block;" id="fig:bootstrapping"></span>
+<img src="images/bootstrap_people_resampling.png" alt="Demonstration of how bootstrapping works"  />
+<p class="caption">
+Figure 7.1: Demonstration of how bootstrapping works
+</p>
+</div>
+<p>The way that you then use bootstrapping will depend on what statistical test you are running. It would be common to report the results of bootstrapping in addition to the standard output and compare (this is called a sensitivity analysis).</p>
 
-</div>
-</div>
 </div>
 </div>
             </section>
