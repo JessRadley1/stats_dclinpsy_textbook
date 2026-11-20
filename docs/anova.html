@@ -1,0 +1,2102 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 8 ANOVA | A Practical Guide to Statistics</title>
+  <meta name="description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.</p>" />
+  <meta name="generator" content="bookdown 0.47 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 8 ANOVA | A Practical Guide to Statistics" />
+  <meta property="og:type" content="book" />
+  
+  <meta property="og:description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.</p>" />
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 8 ANOVA | A Practical Guide to Statistics" />
+  
+  <meta name="twitter:description" content="<p>This is a minimal example of using the bookdown package to write a book.
+The HTML output format for this example is bookdown::gitbook,
+set in the _output.yml file.</p>" />
+  
+
+<meta name="author" content="Dr Jess Radley" />
+
+
+<meta name="date" content="2026-11-20" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="descriptive-statistics-pre-analysis-steps.html"/>
+<link rel="next" href="references.html"/>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.1.0/anchor-sections.css" rel="stylesheet" />
+<link href="libs/anchor-sections-1.1.0/anchor-sections-hash.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.1.0/anchor-sections.js"></script>
+
+
+
+<style type="text/css">
+  
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">A Minimal Book Example</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> About</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#learning-objectives"><i class="fa fa-check"></i><b>1.1</b> Learning objectives</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="using-jasp.html"><a href="using-jasp.html"><i class="fa fa-check"></i><b>2</b> Using JASP</a></li>
+<li class="chapter" data-level="3" data-path="choosing-a-statistical-test.html"><a href="choosing-a-statistical-test.html"><i class="fa fa-check"></i><b>3</b> Choosing a statistical test</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="choosing-a-statistical-test.html"><a href="choosing-a-statistical-test.html#cross-sectional"><i class="fa fa-check"></i><b>3.1</b> Cross-sectional</a></li>
+<li class="chapter" data-level="3.2" data-path="choosing-a-statistical-test.html"><a href="choosing-a-statistical-test.html#longitudinal"><i class="fa fa-check"></i><b>3.2</b> Longitudinal</a></li>
+<li class="chapter" data-level="3.3" data-path="choosing-a-statistical-test.html"><a href="choosing-a-statistical-test.html#beyond-the-basics"><i class="fa fa-check"></i><b>3.3</b> Beyond the basics</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="t-test.html"><a href="t-test.html"><i class="fa fa-check"></i><b>4</b> t-test</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="t-test.html"><a href="t-test.html#independent-t-test"><i class="fa fa-check"></i><b>4.1</b> Independent t-test</a>
+<ul>
+<li class="chapter" data-level="4.1.1" data-path="t-test.html"><a href="t-test.html#exercise"><i class="fa fa-check"></i><b>4.1.1</b> Exercise</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="t-test.html"><a href="t-test.html#paired-t-test"><i class="fa fa-check"></i><b>4.2</b> Paired t-test</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="hypothesis-testing-vs.-hypothesis-generation.html"><a href="hypothesis-testing-vs.-hypothesis-generation.html"><i class="fa fa-check"></i><b>5</b> Hypothesis testing vs. hypothesis generation</a>
+<ul>
+<li class="chapter" data-level="5.1" data-path="hypothesis-testing-vs.-hypothesis-generation.html"><a href="hypothesis-testing-vs.-hypothesis-generation.html#exploratory-vs.-confirmatory-research"><i class="fa fa-check"></i><b>5.1</b> Exploratory vs. Confirmatory Research</a></li>
+<li class="chapter" data-level="5.2" data-path="hypothesis-testing-vs.-hypothesis-generation.html"><a href="hypothesis-testing-vs.-hypothesis-generation.html#pre-registering-confirmatory-research"><i class="fa fa-check"></i><b>5.2</b> Pre-registering Confirmatory Research</a></li>
+<li class="chapter" data-level="5.3" data-path="hypothesis-testing-vs.-hypothesis-generation.html"><a href="hypothesis-testing-vs.-hypothesis-generation.html#doing-both-exploratory-and-confirmatory-research"><i class="fa fa-check"></i><b>5.3</b> Doing both Exploratory and Confirmatory Research</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="significance.html"><a href="significance.html"><i class="fa fa-check"></i><b>6</b> Significance</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="significance.html"><a href="significance.html#statistical-significance"><i class="fa fa-check"></i><b>6.1</b> Statistical significance</a></li>
+<li class="chapter" data-level="6.2" data-path="significance.html"><a href="significance.html#measuring-variability-and-uncertainty"><i class="fa fa-check"></i><b>6.2</b> Measuring variability and uncertainty</a>
+<ul>
+<li class="chapter" data-level="6.2.1" data-path="significance.html"><a href="significance.html#exercise-1"><i class="fa fa-check"></i><b>6.2.1</b> Exercise</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="significance.html"><a href="significance.html#clinical-significance-and-effect-sizes"><i class="fa fa-check"></i><b>6.3</b> Clinical significance and effect sizes</a>
+<ul>
+<li class="chapter" data-level="6.3.1" data-path="significance.html"><a href="significance.html#effect-sizes"><i class="fa fa-check"></i><b>6.3.1</b> Effect sizes</a></li>
+<li class="chapter" data-level="6.3.2" data-path="significance.html"><a href="significance.html#minimally-clinically-important-differences-mcid"><i class="fa fa-check"></i><b>6.3.2</b> Minimally clinically important differences (MCID)</a></li>
+<li class="chapter" data-level="6.3.3" data-path="significance.html"><a href="significance.html#proportion-of-participants-reaching-clinically-meaningful-improvement"><i class="fa fa-check"></i><b>6.3.3</b> Proportion of participants reaching clinically meaningful improvement</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="descriptive-statistics-pre-analysis-steps.html"><a href="descriptive-statistics-pre-analysis-steps.html"><i class="fa fa-check"></i><b>7</b> Descriptive statistics &amp; Pre-analysis steps</a>
+<ul>
+<li class="chapter" data-level="7.1" data-path="descriptive-statistics-pre-analysis-steps.html"><a href="descriptive-statistics-pre-analysis-steps.html#data-cleaning"><i class="fa fa-check"></i><b>7.1</b> Data cleaning</a>
+<ul>
+<li class="chapter" data-level="7.1.1" data-path="descriptive-statistics-pre-analysis-steps.html"><a href="descriptive-statistics-pre-analysis-steps.html#check-the-variables"><i class="fa fa-check"></i><b>7.1.1</b> Check the variables</a></li>
+<li class="chapter" data-level="7.1.2" data-path="descriptive-statistics-pre-analysis-steps.html"><a href="descriptive-statistics-pre-analysis-steps.html#checking-that-missing-responses-are-coded-correctly"><i class="fa fa-check"></i><b>7.1.2</b> Checking that missing responses are coded correctly</a></li>
+<li class="chapter" data-level="7.1.3" data-path="descriptive-statistics-pre-analysis-steps.html"><a href="descriptive-statistics-pre-analysis-steps.html#checking-data-entry"><i class="fa fa-check"></i><b>7.1.3</b> Checking data entry</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="descriptive-statistics-pre-analysis-steps.html"><a href="descriptive-statistics-pre-analysis-steps.html#missingness"><i class="fa fa-check"></i><b>7.2</b> Missingness</a>
+<ul>
+<li class="chapter" data-level="7.2.1" data-path="descriptive-statistics-pre-analysis-steps.html"><a href="descriptive-statistics-pre-analysis-steps.html#investigate-missingness"><i class="fa fa-check"></i><b>7.2.1</b> Investigate missingness</a></li>
+<li class="chapter" data-level="7.2.2" data-path="descriptive-statistics-pre-analysis-steps.html"><a href="descriptive-statistics-pre-analysis-steps.html#imputation"><i class="fa fa-check"></i><b>7.2.2</b> Imputation</a></li>
+<li class="chapter" data-level="7.2.3" data-path="descriptive-statistics-pre-analysis-steps.html"><a href="descriptive-statistics-pre-analysis-steps.html#deletion"><i class="fa fa-check"></i><b>7.2.3</b> Deletion</a></li>
+<li class="chapter" data-level="7.2.4" data-path="descriptive-statistics-pre-analysis-steps.html"><a href="descriptive-statistics-pre-analysis-steps.html#model-based-approaches"><i class="fa fa-check"></i><b>7.2.4</b> Model-based approaches</a></li>
+<li class="chapter" data-level="7.2.5" data-path="descriptive-statistics-pre-analysis-steps.html"><a href="descriptive-statistics-pre-analysis-steps.html#sensitivity-analyses"><i class="fa fa-check"></i><b>7.2.5</b> Sensitivity analyses</a></li>
+<li class="chapter" data-level="7.2.6" data-path="descriptive-statistics-pre-analysis-steps.html"><a href="descriptive-statistics-pre-analysis-steps.html#quiz"><i class="fa fa-check"></i><b>7.2.6</b> Quiz</a></li>
+</ul></li>
+<li class="chapter" data-level="7.3" data-path="descriptive-statistics-pre-analysis-steps.html"><a href="descriptive-statistics-pre-analysis-steps.html#normality"><i class="fa fa-check"></i><b>7.3</b> Normality</a>
+<ul>
+<li class="chapter" data-level="7.3.1" data-path="descriptive-statistics-pre-analysis-steps.html"><a href="descriptive-statistics-pre-analysis-steps.html#normality-of-raw-variables"><i class="fa fa-check"></i><b>7.3.1</b> Normality of raw variables</a></li>
+<li class="chapter" data-level="7.3.2" data-path="descriptive-statistics-pre-analysis-steps.html"><a href="descriptive-statistics-pre-analysis-steps.html#normality-of-residuals"><i class="fa fa-check"></i><b>7.3.2</b> Normality of residuals</a></li>
+<li class="chapter" data-level="7.3.3" data-path="descriptive-statistics-pre-analysis-steps.html"><a href="descriptive-statistics-pre-analysis-steps.html#if-normality-is-violated"><i class="fa fa-check"></i><b>7.3.3</b> If normality is violated</a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="descriptive-statistics-pre-analysis-steps.html"><a href="descriptive-statistics-pre-analysis-steps.html#bootstrapping"><i class="fa fa-check"></i><b>7.4</b> Bootstrapping</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="anova.html"><a href="anova.html"><i class="fa fa-check"></i><b>8</b> ANOVA</a>
+<ul>
+<li class="chapter" data-level="8.1" data-path="anova.html"><a href="anova.html#anova-dataset"><i class="fa fa-check"></i><b>8.1</b> The dataset</a>
+<ul>
+<li class="chapter" data-level="8.1.1" data-path="anova.html"><a href="anova.html#anova-prep"><i class="fa fa-check"></i><b>8.1.1</b> Getting the data ready</a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="anova.html"><a href="anova.html#anova-why"><i class="fa fa-check"></i><b>8.2</b> What is an ANOVA, and why not just run lots of <em>t</em>-tests?</a></li>
+<li class="chapter" data-level="8.3" data-path="anova.html"><a href="anova.html#anova-choosing"><i class="fa fa-check"></i><b>8.3</b> Which ANOVA should I use?</a></li>
+<li class="chapter" data-level="8.4" data-path="anova.html"><a href="anova.html#anova-effect-sizes"><i class="fa fa-check"></i><b>8.4</b> Effect sizes for ANOVA</a></li>
+<li class="chapter" data-level="8.5" data-path="anova.html"><a href="anova.html#anova-oneway"><i class="fa fa-check"></i><b>8.5</b> One-way ANOVA</a>
+<ul>
+<li class="chapter" data-level="8.5.1" data-path="anova.html"><a href="anova.html#anova-oneway-jasp"><i class="fa fa-check"></i><b>8.5.1</b> Running a one-way ANOVA in JASP</a></li>
+<li class="chapter" data-level="8.5.2" data-path="anova.html"><a href="anova.html#anova-oneway-output"><i class="fa fa-check"></i><b>8.5.2</b> Reading the output</a></li>
+<li class="chapter" data-level="8.5.3" data-path="anova.html"><a href="anova.html#anova-oneway-assumptions"><i class="fa fa-check"></i><b>8.5.3</b> Checking the assumptions</a></li>
+<li class="chapter" data-level="8.5.4" data-path="anova.html"><a href="anova.html#anova-posthoc"><i class="fa fa-check"></i><b>8.5.4</b> Post hoc tests</a></li>
+<li class="chapter" data-level="8.5.5" data-path="anova.html"><a href="anova.html#anova-oneway-report"><i class="fa fa-check"></i><b>8.5.5</b> Reporting a one-way ANOVA</a></li>
+<li class="chapter" data-level="8.5.6" data-path="anova.html"><a href="anova.html#anova-oneway-exercise"><i class="fa fa-check"></i><b>8.5.6</b> Exercise</a></li>
+</ul></li>
+<li class="chapter" data-level="8.6" data-path="anova.html"><a href="anova.html#anova-factorial"><i class="fa fa-check"></i><b>8.6</b> Factorial (two-way) ANOVA</a>
+<ul>
+<li class="chapter" data-level="8.6.1" data-path="anova.html"><a href="anova.html#anova-interactions"><i class="fa fa-check"></i><b>8.6.1</b> Understanding interactions</a></li>
+<li class="chapter" data-level="8.6.2" data-path="anova.html"><a href="anova.html#anova-factorial-jasp"><i class="fa fa-check"></i><b>8.6.2</b> Running a factorial ANOVA in JASP</a></li>
+<li class="chapter" data-level="8.6.3" data-path="anova.html"><a href="anova.html#anova-factorial-output"><i class="fa fa-check"></i><b>8.6.3</b> Reading the output</a></li>
+<li class="chapter" data-level="8.6.4" data-path="anova.html"><a href="anova.html#anova-factorial-assumptions"><i class="fa fa-check"></i><b>8.6.4</b> Checking the assumptions</a></li>
+<li class="chapter" data-level="8.6.5" data-path="anova.html"><a href="anova.html#anova-unbalanced"><i class="fa fa-check"></i><b>8.6.5</b> A note on unbalanced designs</a></li>
+<li class="chapter" data-level="8.6.6" data-path="anova.html"><a href="anova.html#anova-factorial-report"><i class="fa fa-check"></i><b>8.6.6</b> Reporting a factorial ANOVA</a></li>
+<li class="chapter" data-level="8.6.7" data-path="anova.html"><a href="anova.html#anova-factorial-exercise"><i class="fa fa-check"></i><b>8.6.7</b> Exercise</a></li>
+</ul></li>
+<li class="chapter" data-level="8.7" data-path="anova.html"><a href="anova.html#anova-rm"><i class="fa fa-check"></i><b>8.7</b> Repeated measures ANOVA</a>
+<ul>
+<li class="chapter" data-level="8.7.1" data-path="anova.html"><a href="anova.html#anova-rm-setup"><i class="fa fa-check"></i><b>8.7.1</b> Setting up the data</a></li>
+<li class="chapter" data-level="8.7.2" data-path="anova.html"><a href="anova.html#anova-rm-jasp"><i class="fa fa-check"></i><b>8.7.2</b> Running a repeated measures ANOVA in JASP</a></li>
+<li class="chapter" data-level="8.7.3" data-path="anova.html"><a href="anova.html#anova-sphericity"><i class="fa fa-check"></i><b>8.7.3</b> Sphericity</a></li>
+<li class="chapter" data-level="8.7.4" data-path="anova.html"><a href="anova.html#anova-rm-output"><i class="fa fa-check"></i><b>8.7.4</b> Reading the output</a></li>
+<li class="chapter" data-level="8.7.5" data-path="anova.html"><a href="anova.html#anova-rm-nonparametric"><i class="fa fa-check"></i><b>8.7.5</b> Non-parametric alternative</a></li>
+<li class="chapter" data-level="8.7.6" data-path="anova.html"><a href="anova.html#anova-rm-report"><i class="fa fa-check"></i><b>8.7.6</b> Reporting a repeated measures ANOVA</a></li>
+<li class="chapter" data-level="8.7.7" data-path="anova.html"><a href="anova.html#anova-rm-exercise"><i class="fa fa-check"></i><b>8.7.7</b> Exercise</a></li>
+</ul></li>
+<li class="chapter" data-level="8.8" data-path="anova.html"><a href="anova.html#anova-mixed"><i class="fa fa-check"></i><b>8.8</b> Mixed ANOVA</a>
+<ul>
+<li class="chapter" data-level="8.8.1" data-path="anova.html"><a href="anova.html#anova-mixed-jasp"><i class="fa fa-check"></i><b>8.8.1</b> Running a mixed ANOVA in JASP</a></li>
+<li class="chapter" data-level="8.8.2" data-path="anova.html"><a href="anova.html#anova-mixed-output"><i class="fa fa-check"></i><b>8.8.2</b> Reading the output</a></li>
+<li class="chapter" data-level="8.8.3" data-path="anova.html"><a href="anova.html#anova-mixed-followup"><i class="fa fa-check"></i><b>8.8.3</b> Following up a significant interaction</a></li>
+<li class="chapter" data-level="8.8.4" data-path="anova.html"><a href="anova.html#anova-mixed-multiple"><i class="fa fa-check"></i><b>8.8.4</b> Analysing more than one outcome</a></li>
+<li class="chapter" data-level="8.8.5" data-path="anova.html"><a href="anova.html#anova-mixed-three"><i class="fa fa-check"></i><b>8.8.5</b> Adding another factor</a></li>
+<li class="chapter" data-level="8.8.6" data-path="anova.html"><a href="anova.html#anova-mixed-report"><i class="fa fa-check"></i><b>8.8.6</b> Reporting a mixed ANOVA</a></li>
+<li class="chapter" data-level="8.8.7" data-path="anova.html"><a href="anova.html#anova-mixed-exercise"><i class="fa fa-check"></i><b>8.8.7</b> Exercise</a></li>
+</ul></li>
+<li class="chapter" data-level="8.9" data-path="anova.html"><a href="anova.html#anova-ancova"><i class="fa fa-check"></i><b>8.9</b> ANCOVA</a>
+<ul>
+<li class="chapter" data-level="8.9.1" data-path="anova.html"><a href="anova.html#anova-ancova-jasp"><i class="fa fa-check"></i><b>8.9.1</b> Running an ANCOVA in JASP</a></li>
+<li class="chapter" data-level="8.9.2" data-path="anova.html"><a href="anova.html#anova-ancova-assumptions"><i class="fa fa-check"></i><b>8.9.2</b> The extra assumptions of ANCOVA</a></li>
+<li class="chapter" data-level="8.9.3" data-path="anova.html"><a href="anova.html#anova-ancova-output"><i class="fa fa-check"></i><b>8.9.3</b> Reading the output</a></li>
+<li class="chapter" data-level="8.9.4" data-path="anova.html"><a href="anova.html#anova-ancova-report"><i class="fa fa-check"></i><b>8.9.4</b> Reporting an ANCOVA</a></li>
+<li class="chapter" data-level="8.9.5" data-path="anova.html"><a href="anova.html#anova-ancova-exercise"><i class="fa fa-check"></i><b>8.9.5</b> Exercise</a></li>
+</ul></li>
+<li class="chapter" data-level="8.10" data-path="anova.html"><a href="anova.html#anova-beyond"><i class="fa fa-check"></i><b>8.10</b> Other ANOVA-related tests</a></li>
+<li class="chapter" data-level="8.11" data-path="anova.html"><a href="anova.html#anova-reporting-summary"><i class="fa fa-check"></i><b>8.11</b> Reporting ANOVA: a summary</a></li>
+<li class="chapter" data-level="8.12" data-path="anova.html"><a href="anova.html#anova-quiz"><i class="fa fa-check"></i><b>8.12</b> Quiz</a>
+<ul>
+<li class="chapter" data-level="8.12.1" data-path="anova.html"><a href="anova.html#check-your-understanding-anova"><i class="fa fa-check"></i><b>8.12.1</b> Check your understanding: ANOVA</a></li>
+</ul></li>
+<li class="chapter" data-level="8.13" data-path="anova.html"><a href="anova.html#anova-summary"><i class="fa fa-check"></i><b>8.13</b> Putting it all together</a>
+<ul>
+<li class="chapter" data-level="8.13.1" data-path="anova.html"><a href="anova.html#anova-final-exercise"><i class="fa fa-check"></i><b>8.13.1</b> Final exercise</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i><b>9</b> References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">A Practical Guide to Statistics</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="anova" class="section level1 hasAnchor" number="8">
+<h1><span class="header-section-number">Chapter 8</span> ANOVA<a href="anova.html#anova" class="anchor-section" aria-label="Anchor link to header"></a></h1>
+<p>In a previous chapter you used <em>t</em>-tests to compare <strong>two</strong> means. But research questions are rarely that tidy. You might want to compare three or more groups, measure the same people several times, or ask whether an effect is bigger for some people than for others. The <strong>Analysis of Variance (ANOVA)</strong> is a family of tests that extends the <em>t</em>-test to answer these questions.</p>
+<p>In this chapter you will work through five different types of ANOVA using one dataset, learn which research question each one answers, and practise reporting the results.</p>
+<p><strong>Learning objectives</strong></p>
+<ol style="list-style-type: decimal">
+<li>Match a research question and design to the correct type of ANOVA</li>
+<li>Run one-way, factorial, repeated measures and mixed ANOVAs, and ANCOVA, in JASP</li>
+<li>Check the assumptions of each ANOVA and decide what to do if they are violated</li>
+<li>Interpret main effects, interactions, post hoc tests and effect sizes</li>
+<li>Report the results of an ANOVA in a clear, standardised way</li>
+</ol>
+<div id="anova-dataset" class="section level2 hasAnchor" number="8.1">
+<h2><span class="header-section-number">8.1</span> The dataset<a href="anova.html#anova-dataset" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Load the dataset ‘t-test_anova_practice_data.csv’ into JASP by clicking Open -&gt; Computer and then finding where you have saved the dataset on your computer.</p>
+<p>This is a <strong>fictional</strong> study of 240 university students. Half of the students took part in an 8-week mindfulness programme (<em>Mindfulness</em>) and half did not (<em>Control</em>). Every student completed measures of depression, anxiety and stress at three time points: before the programme (T1, baseline), straight after it (T2, post-intervention), and three months later (T3, follow-up). Higher scores mean <em>more</em> distress.</p>
+<p><strong>Data dictionary</strong></p>
+<table>
+<colgroup>
+<col width="25%" />
+<col width="75%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Variable</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>ParticipantID</td>
+<td>Participant ID</td>
+</tr>
+<tr class="even">
+<td>Age</td>
+<td>Age in years</td>
+</tr>
+<tr class="odd">
+<td>Gender</td>
+<td>Man, Woman or Non-binary</td>
+</tr>
+<tr class="even">
+<td>Year_of_Study</td>
+<td>Year of university study (1, 2 or 3)</td>
+</tr>
+<tr class="odd">
+<td>Accommodation</td>
+<td>Living at home or Living away from home</td>
+</tr>
+<tr class="even">
+<td>Exercise_Level</td>
+<td>Self-reported exercise level (Low, Moderate or High)</td>
+</tr>
+<tr class="odd">
+<td>Social_Support</td>
+<td>Perceived social support (Low or High)</td>
+</tr>
+<tr class="even">
+<td>Condition</td>
+<td>Mindfulness or Control</td>
+</tr>
+<tr class="odd">
+<td>Sleep_Hours</td>
+<td>Average hours of sleep per night</td>
+</tr>
+<tr class="even">
+<td>DEP_T1, DEP_T2, DEP_T3</td>
+<td>Depression score at baseline, post-intervention and follow-up</td>
+</tr>
+<tr class="odd">
+<td>ANX_T1, ANX_T2, ANX_T3</td>
+<td>Anxiety score at baseline, post-intervention and follow-up</td>
+</tr>
+<tr class="even">
+<td>STR_T1, STR_T2, STR_T3</td>
+<td>Stress score at baseline, post-intervention and follow-up</td>
+</tr>
+<tr class="odd">
+<td>Total_Distress_T1/T2/T3</td>
+<td>Depression + Anxiety + Stress at each time point</td>
+</tr>
+</tbody>
+</table>
+<div id="anova-prep" class="section level3 hasAnchor" number="8.1.1">
+<h3><span class="header-section-number">8.1.1</span> Getting the data ready<a href="anova.html#anova-prep" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Before running any analysis, work through the pre-analysis steps from Chapter 7.</p>
+<ol style="list-style-type: decimal">
+<li><p>Check the variable types. Variables that you want to use as a <strong>grouping variable (a ‘factor’)</strong> must be <strong>nominal</strong> or <strong>ordinal</strong>; variables you want to use as an <strong>outcome</strong> must be <strong>scale</strong>.</p></li>
+<li><p><em>Tip</em>: JASP orders the levels of a text variable alphabetically, so <code>Exercise_Level</code> will appear as High, Low, Moderate rather than Low, Moderate, High. To fix this, double-click on the column name. Then under ‘label editor’, untick ‘automatically order labels by their values’. Then click on ‘Low’ (be careful not to click on the tick which will then filter out all those who were low on this variable) and then click on the up or down arrow at the side to change the order so that ‘moderate’ is in the middle. This makes your tables and plots much easier to read.</p></li>
+<li><p>Click on ‘Descriptives’ -&gt; ‘Descriptive Statistics’ and bring every variable except <code>ParticipantID</code> over to ‘Variables’. Check the minimum and maximum of each variable and look at the frequency tables for the categorical variables (see Section 7.1). Are there any impossible values? Is there any missing data? (There shouldn’t be: this dataset has been cleaned for you.)</p></li>
+<li><p>Use ‘Descriptive Statistics’ again, this time splitting by <code>Condition</code>, to check how many people are in each group.</p></li>
+</ol>
+</div>
+</div>
+<div id="anova-why" class="section level2 hasAnchor" number="8.2">
+<h2><span class="header-section-number">8.2</span> What is an ANOVA, and why not just run lots of <em>t</em>-tests?<a href="anova.html#anova-why" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Before you carry on: the number of people in each group matters for ANOVA. Designs where each group (or ‘cell’) has the same number of participants are called <strong>balanced</strong>, and designs where they don’t are <strong>unbalanced</strong>. Some of the groups in this dataset are balanced (e.g., 120 people in each <code>Condition</code>) and some are not (e.g., there are only 22 non-binary participants). Keep an eye out for what this means as we go.</p>
+<p>Imagine you want to compare depression across the three exercise levels. You could run three <em>t</em>-tests (Low vs Moderate, Low vs High, Moderate vs High). But every test you run carries a 5% chance of a false positive (a Type I error) if the null hypothesis is true. Across three tests the chance of getting <strong>at least one</strong> false positive climbs to around 14%, and it gets worse the more groups you have. ANOVA solves this by first asking <strong>one</strong> overall question: <em>are the group means different anywhere?</em></p>
+<p>It does this by comparing two kinds of variability:</p>
+<ul>
+<li><strong>Between-group variance</strong>: how much the group means differ from each other (the ‘signal’)</li>
+<li><strong>Within-group variance</strong>: how much individual people differ from each other within the same group (the ‘noise’)</li>
+</ul>
+<p>The <strong>F-ratio</strong> is simply:</p>
+<p><span class="math display">\[F = \frac{\text{variance between groups}}{\text{variance within groups}}\]</span></p>
+<p>If the groups really are the same, <em>F</em> will be close to 1. The bigger <em>F</em> is, the more the group differences stand out above the noise. If you only have two groups, ANOVA gives you exactly the same answer as a <em>t</em>-test (in fact, <em>F</em> = <em>t</em>²).</p>
+<p><strong>Key vocabulary</strong></p>
+<table>
+<colgroup>
+<col width="16%" />
+<col width="83%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Term</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Factor</td>
+<td>A categorical variable you are using to define groups or conditions (e.g., <code>Condition</code>)</td>
+</tr>
+<tr class="even">
+<td>Level</td>
+<td>One of the categories within a factor (e.g., ‘Mindfulness’ and ‘Control’ are the two levels of <code>Condition</code>)</td>
+</tr>
+<tr class="odd">
+<td>Between-subjects</td>
+<td>Different people are in each level of the factor (e.g., <code>Condition</code>)</td>
+</tr>
+<tr class="even">
+<td>Within-subjects</td>
+<td>The <em>same</em> people are measured at every level of the factor (e.g., <code>Time</code>). Also called ‘repeated measures’</td>
+</tr>
+<tr class="odd">
+<td>Main effect</td>
+<td>The effect of one factor on the outcome, averaging over the other factors</td>
+</tr>
+<tr class="even">
+<td>Interaction</td>
+<td>When the effect of one factor <em>depends on</em> the level of another factor</td>
+</tr>
+<tr class="odd">
+<td>Covariate</td>
+<td>A continuous variable that you want to statistically control for</td>
+</tr>
+<tr class="even">
+<td>Post hoc test</td>
+<td>A follow-up test that works out <em>which</em> groups differ, after a significant overall <em>F</em>-test</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="anova-choosing" class="section level2 hasAnchor" number="8.3">
+<h2><span class="header-section-number">8.3</span> Which ANOVA should I use?<a href="anova.html#anova-choosing" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Different types of ANOVA answer different kinds of questions. The key things to work out are: <strong>how many factors do I have?</strong>, <strong>are they between-subjects or within-subjects?</strong>, and <strong>do I have a continuous variable I want to control for?</strong> You will have seen this in the flow diagrams in Chapter 3.</p>
+<table>
+<colgroup>
+<col width="13%" />
+<col width="28%" />
+<col width="24%" />
+<col width="33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Type of ANOVA</th>
+<th>Design</th>
+<th>Question it answers</th>
+<th>Example from this dataset</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>One-way ANOVA</strong></td>
+<td>1 between-subjects factor with 3 or more levels</td>
+<td>Do three or more independent groups differ on the outcome?</td>
+<td>Does baseline depression differ between low, moderate and high exercisers?</td>
+</tr>
+<tr class="even">
+<td><strong>Factorial (two-way) ANOVA</strong></td>
+<td>2 or more between-subjects factors</td>
+<td>Does each factor affect the outcome? Does one factor <em>change</em> the effect of the other?</td>
+<td>Does the effect of mindfulness on stress depend on how much social support someone has?</td>
+</tr>
+<tr class="odd">
+<td><strong>Repeated measures ANOVA</strong></td>
+<td>1 within-subjects factor with 3 or more levels</td>
+<td>Does the outcome change across three or more time points or conditions in the same people?</td>
+<td>Did distress change from T1 to T2 to T3 in students who did mindfulness?</td>
+</tr>
+<tr class="even">
+<td><strong>Mixed ANOVA</strong></td>
+<td>At least 1 between-subjects factor <em>and</em> at least 1 within-subjects factor</td>
+<td>Does the <em>change over time</em> differ between groups?</td>
+<td>Did distress change differently over time in the mindfulness and control groups?</td>
+</tr>
+<tr class="odd">
+<td><strong>ANCOVA</strong></td>
+<td>1 or more between-subjects factors plus 1 or more continuous covariates</td>
+<td>Do groups differ on the outcome <em>after controlling for</em> a covariate?</td>
+<td>Do the mindfulness and control groups differ at T3 after controlling for baseline distress?</td>
+</tr>
+</tbody>
+</table>
+<p>Two important notes:</p>
+<ul>
+<li>If you only have <strong>two</strong> groups or <strong>two</strong> time points, you don’t need an ANOVA; a t-test (independent or paired) will do.</li>
+<li>ANOVA tells you whether there is a difference, not <em>what the difference looks like</em>. You always need to look at your descriptive statistics and plots as well.</li>
+</ul>
+</div>
+<div id="anova-effect-sizes" class="section level2 hasAnchor" number="8.4">
+<h2><span class="header-section-number">8.4</span> Effect sizes for ANOVA<a href="anova.html#anova-effect-sizes" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Chapter 6 explained why a <em>p</em> value is not enough and why we also need effect sizes (see Section 6.3.1). For ANOVA, JASP offers four effect sizes, which come in two pairs:</p>
+<table>
+<colgroup>
+<col width="9%" />
+<col width="2%" />
+<col width="53%" />
+<col width="34%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Effect size</th>
+<th>Symbol</th>
+<th>What it tells you</th>
+<th>When to use it</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Eta squared</td>
+<td>η²</td>
+<td>Proportion of the <em>total</em> variance in your sample’s outcome that is explained by the factor</td>
+<td>One-way ANOVA (easy to understand, but it overestimates the population effect)</td>
+</tr>
+<tr class="even">
+<td>Partial eta squared</td>
+<td>η<sub>p</sub>²</td>
+<td>Proportion of variance explained by the factor <em>after removing variance explained by the other factors in the model</em></td>
+<td>Factorial, repeated measures, mixed and ANCOVA designs</td>
+</tr>
+<tr class="odd">
+<td>Omega squared</td>
+<td>ω²</td>
+<td>Like η², but corrected for bias, so a better estimate of the effect in the <em>population</em></td>
+<td>One-way designs and small samples</td>
+</tr>
+<tr class="even">
+<td>Partial omega squared</td>
+<td>ω<sub>p</sub>²</td>
+<td>Like η<sub>p</sub>², but corrected for bias, so a better estimate of the population effect once other factors are removed</td>
+<td>Factorial, repeated measures, mixed and ANCOVA designs, especially small samples</td>
+</tr>
+</tbody>
+</table>
+<p>In short: the <strong>eta</strong> versions describe the effect in your <em>sample</em> and tend to be slightly too large, whereas the <strong>omega</strong> versions correct for this to estimate the effect in the <em>population</em>; and the <strong>partial</strong> versions only compare the effect to the leftover (error) variance, ignoring variance explained by other factors, whereas the non-partial versions compare it to the <em>total</em> variance.</p>
+<p><strong>Rule of thumb.</strong> For all four, the usual guidelines (based on Cohen, 1988, who proposed them for η²) are <strong>.01 = small, .06 = medium, .14 = large</strong>. As always, these are rough guides: a ‘small’ effect can still be clinically important (see Section 6.3). Because omega is bias-corrected, ω² will usually be a little smaller than η² for the same data, and partial values will be larger than non-partial values in designs with several factors, so effect sizes are not directly comparable across studies with different designs. Always say which one you are reporting.</p>
+<p>For <em>post hoc</em> comparisons between two groups, JASP gives you Cohen’s <em>d</em> (.2 = small, .5 = medium, .8 = large).</p>
+</div>
+<div id="anova-oneway" class="section level2 hasAnchor" number="8.5">
+<h2><span class="header-section-number">8.5</span> One-way ANOVA<a href="anova.html#anova-oneway" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><strong>The question</strong>: Does baseline depression (<code>DEP_T1</code>) differ between students with low, moderate and high levels of exercise?</p>
+<p>We use the baseline (T1) measurement here because it was taken before the mindfulness programme started, so <code>Condition</code> shouldn’t have had any effect yet.</p>
+<ul>
+<li><strong>Outcome (dependent variable)</strong>: <code>DEP_T1</code> (scale)</li>
+<li><strong>Factor (independent variable)</strong>: <code>Exercise_Level</code> (3 levels: Low, Moderate, High)</li>
+<li><strong>Null hypothesis</strong>: the mean depression score is the same in all three exercise groups</li>
+<li><strong>Alternative hypothesis</strong>: at least one group has a different mean depression score</li>
+</ul>
+<div id="anova-oneway-jasp" class="section level3 hasAnchor" number="8.5.1">
+<h3><span class="header-section-number">8.5.1</span> Running a one-way ANOVA in JASP<a href="anova.html#anova-oneway-jasp" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ol style="list-style-type: decimal">
+<li><p>Click ‘ANOVA’ -&gt; ‘Classical’ -&gt; ‘ANOVA’. Bring <code>DEP_T1</code> into ‘Dependent Variable’ and <code>Exercise_Level</code> into ‘Fixed Factors’. Click on the <strong>bold title</strong> and rename the analysis something more specific, for example <strong>A One-Way ANOVA of Baseline Depression by Exercise Level</strong>.</p></li>
+<li><p>Under ‘Display’, tick ‘Descriptive statistics’. Under ‘Estimates of effect size’ tick η² and ω².</p></li>
+<li><p>Open ‘Assumption Checks’ and tick ‘Homogeneity tests’ and ‘Q-Q plot of residuals’.</p></li>
+<li><p>Open ‘Descriptive Plots’. Bring <code>Exercise_Level</code> into ‘Horizontal axis’ and tick ‘Display error bars’ (95% confidence interval).</p></li>
+<li><p>Open ‘Post Hoc Tests’. Bring <code>Exercise_Level</code> into the box on the right. Tick ‘Effect size’ and ‘Confidence intervals’ and make sure ‘Tukey’ is ticked under ‘Correction’.</p></li>
+</ol>
+<p><em>Tip</em>: The wording of some menus changes a little between versions of JASP. If you can’t find an option, click on the blue ‘i’ button for the help file.</p>
+</div>
+<div id="anova-oneway-output" class="section level3 hasAnchor" number="8.5.2">
+<h3><span class="header-section-number">8.5.2</span> Reading the output<a href="anova.html#anova-oneway-output" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><strong>ANOVA table.</strong> You should see something like this:</p>
+<table>
+<colgroup>
+<col width="22%" />
+<col width="22%" />
+<col width="4%" />
+<col width="17%" />
+<col width="8%" />
+<col width="11%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Cases</th>
+<th>Sum of Squares</th>
+<th>df</th>
+<th>Mean Square</th>
+<th><em>F</em></th>
+<th><em>p</em></th>
+<th>η²</th>
+<th>ω²</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Exercise_Level</td>
+<td>1554</td>
+<td>2</td>
+<td>776.9</td>
+<td>20.76</td>
+<td>&lt; .001</td>
+<td>.1491</td>
+<td>.1414</td>
+</tr>
+<tr class="even">
+<td>Residuals</td>
+<td>886</td>
+<td>237</td>
+<td>37.41</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>df</strong>: the degrees of freedom. The first is for the factor (number of groups − 1 = 2). The second is for the residuals (total sample size − number of groups = 240 − 3 = 237). You need both when you report <em>F</em>.</li>
+<li><strong>Mean Square</strong>: Sum of Squares divided by df. The <em>F</em> value is the factor’s Mean Square divided by the Residual Mean Square (776.87 / 37.41 = 20.76).</li>
+<li><strong>η² and ω²</strong>: about 14–15% of the variance in baseline depression is explained by exercise level. By the rules of thumb above, this is a <em>large</em> effect.</li>
+</ul>
+<p><strong>Descriptive statistics.</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th>Exercise_Level</th>
+<th><em>N</em></th>
+<th>Mean</th>
+<th>SD</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Low</td>
+<td>80</td>
+<td>14.65</td>
+<td>6.912</td>
+</tr>
+<tr class="even">
+<td>Moderate</td>
+<td>80</td>
+<td>10.70</td>
+<td>5.764</td>
+</tr>
+<tr class="odd">
+<td>High</td>
+<td>80</td>
+<td>8.50</td>
+<td>5.589</td>
+</tr>
+</tbody>
+</table>
+<p>Remember: the ANOVA only tells us that <em>at least one</em> group differs. The descriptives and plot suggest depression goes down as exercise goes up, but we need the post hoc tests to find out which groups actually differ from each other.</p>
+</div>
+<div id="anova-oneway-assumptions" class="section level3 hasAnchor" number="8.5.3">
+<h3><span class="header-section-number">8.5.3</span> Checking the assumptions<a href="anova.html#anova-oneway-assumptions" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>A one-way ANOVA has four assumptions. As in the <em>t</em>-test chapter, think about which are about <strong>study design</strong> and which are about <strong>statistical analysis</strong>.</p>
+<table>
+<colgroup>
+<col width="26%" />
+<col width="6%" />
+<col width="66%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Assumption</th>
+<th>Type</th>
+<th>How to check</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Continuous outcome</td>
+<td>Design</td>
+<td>Is the outcome measured on a scale with meaningful distances?</td>
+</tr>
+<tr class="even">
+<td>Independence of observations</td>
+<td>Design</td>
+<td>Is each person in one group only, and did participants not influence each other’s scores?</td>
+</tr>
+<tr class="odd">
+<td>Normally distributed <strong>residuals</strong></td>
+<td>Analysis</td>
+<td>Q-Q plot of residuals; skewness and kurtosis; Shapiro-Wilk</td>
+</tr>
+<tr class="even">
+<td>Homogeneity of variance</td>
+<td>Analysis</td>
+<td>Levene’s test (or Brown-Forsythe); compare the group standard deviations</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Normality.</strong> Remember from Section 7.3 that for ANOVA the normality assumption concerns the <em>residuals</em>, not the raw variable. Look at the Q-Q plot of residuals: if the points follow the diagonal line reasonably well, you are fine.</p>
+<p><strong>Homogeneity of variance.</strong> Levene’s test gives <em>F</em>(2, 237) = 2.76, <em>p</em> = .066. This is not significant at the .05 level, but it is close, so it is sensible to check the</p>
+<p><strong>If assumptions are violated</strong>: use Welch’s ANOVA (and the Games-Howell post hoc test) if variances are unequal, especially if group sizes are unequal. Use Kruskal-Wallis (with Dunn’s post hoc test) or bootstrapping if normality is badly violated and the sample is small. Always report what you did and whether the conclusions changed.</p>
+</div>
+<div id="anova-posthoc" class="section level3 hasAnchor" number="8.5.4">
+<h3><span class="header-section-number">8.5.4</span> Post hoc tests<a href="anova.html#anova-posthoc" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>When a one-way ANOVA is significant and there are three or more groups, you follow up with <strong>post hoc tests</strong> to see which pairs of groups differ. These compare every pair of groups, but adjust the <em>p</em> values so that you don’t inflate the false-positive rate.</p>
+<table>
+<colgroup>
+<col width="11%" />
+<col width="88%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Post hoc test</th>
+<th>Use when</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Tukey</td>
+<td>The standard choice for all pairwise comparisons when variances are roughly equal</td>
+</tr>
+<tr class="even">
+<td>Scheffé</td>
+<td>Very conservative; used for complex comparisons</td>
+</tr>
+<tr class="odd">
+<td>Bonferroni</td>
+<td>Simple and conservative; multiplies each <em>p</em> by the number of tests</td>
+</tr>
+<tr class="even">
+<td>Holm</td>
+<td>Like Bonferroni, but always at least as powerful. A good general-purpose alternative</td>
+</tr>
+</tbody>
+</table>
+<p>Your Tukey table should look like this:</p>
+<table>
+<colgroup>
+<col width="27%" />
+<col width="21%" />
+<col width="21%" />
+<col width="15%" />
+<col width="14%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Comparison</th>
+<th>Mean difference</th>
+<th>95% CI</th>
+<th>Cohen’s <em>d</em></th>
+<th><em>p</em><sub>tukey</sub></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Low − Moderate</td>
+<td>3.95</td>
+<td>[1.67, 6.23]</td>
+<td>0.65</td>
+<td>&lt; .001</td>
+</tr>
+<tr class="even">
+<td>Low − High</td>
+<td>6.15</td>
+<td>[3.87, 8.43]</td>
+<td>1.01</td>
+<td>&lt; .001</td>
+</tr>
+<tr class="odd">
+<td>Moderate − High</td>
+<td>2.20</td>
+<td>[−0.08, 4.48]</td>
+<td>0.36</td>
+<td>.061</td>
+</tr>
+</tbody>
+</table>
+<p>Students with low exercise levels had significantly higher baseline depression than both other groups. The difference between moderate and high exercisers is small and, using Tukey’s correction, does not reach significance at the .05 level.</p>
+<p><strong>A word of warning about ‘shopping around’.</strong> Look what happens to the Moderate − High comparison under different corrections:</p>
+<table>
+<thead>
+<tr class="header">
+<th>Correction</th>
+<th>Approximate <em>p</em> for Moderate − High</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Tukey</td>
+<td>.061</td>
+</tr>
+<tr class="even">
+<td>Bonferroni</td>
+<td>.07</td>
+</tr>
+<tr class="odd">
+<td>Holm</td>
+<td>.024</td>
+</tr>
+</tbody>
+</table>
+<p>A result that is ‘non-significant’ under one correction can be ‘significant’ under another. The right thing to do is to <strong>decide on your post hoc test before you look at the results</strong> (ideally in your pre-registration, see Chapter 5), justify it from your design (e.g., equal group sizes and roughly equal variances point to Tukey), and report it. Picking the correction that gives you the answer you want is a form of <em>p</em>-hacking. Where a result is borderline, as it is here, it is more honest to say so and to focus on the size and confidence interval of the difference rather than on the <em>p</em> value alone.</p>
+</div>
+<div id="anova-oneway-report" class="section level3 hasAnchor" number="8.5.5">
+<h3><span class="header-section-number">8.5.5</span> Reporting a one-way ANOVA<a href="anova.html#anova-oneway-report" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><strong>Reporting a one-way ANOVA</strong></p>
+<p>A one-way between-subjects ANOVA was used to compare [outcome] across [groups]. [Outcome] <em>differed significantly/did not differ significantly</em> between groups, <em>F</em>(<em>df</em><sub>between</sub>, <em>df</em><sub>within</sub>) = <em>F</em>, <em>p</em> = <em>p</em>, ω² = ω². [Post hoc test] post hoc comparisons showed that [Group 1] (<em>M</em> = ?, <em>SD</em> = ?) [differed from/did not differ from] [Group 2] (<em>M</em> = ?, <em>SD</em> = ?), mean difference = ?, 95% CI [?, ?], <em>p</em> = <em>p</em>, <em>d</em> = <em>d</em>.</p>
+<p><strong>Completed example</strong></p>
+<p>A one-way between-subjects ANOVA indicated that baseline depression differed significantly between students with low (<em>M</em> = 14.65, <em>SD</em> = 6.91), moderate (<em>M</em> = 10.70, <em>SD</em> = 5.76) and high (<em>M</em> = 8.50, <em>SD</em> = 5.59) levels of exercise, <em>F</em>(2, 237) = 20.76, <em>p</em> &lt; .001, ω² = .14. Levene’s test indicated that the assumption of equal variances was met, <em>F</em>(2, 237) = 2.76, <em>p</em> = .066, and a Welch ANOVA gave the same conclusion, <em>F</em>(2, 156.80) = 19.11, <em>p</em> &lt; .001. Tukey post hoc comparisons showed that students with low exercise levels reported significantly higher depression than those with moderate exercise (mean difference = 3.95, 95% CI [1.67, 6.23], <em>p</em> &lt; .001, <em>d</em> = 0.65) and those with high exercise (mean difference = 6.15, 95% CI [3.87, 8.43], <em>p</em> &lt; .001, <em>d</em> = 1.01). Moderate and high exercisers did not differ significantly (mean difference = 2.20, 95% CI [−0.08, 4.48], <em>p</em> = .061, <em>d</em> = 0.36).</p>
+<p><em>Note</em>: report <em>F</em> and <em>d</em> to two decimal places and <em>p</em> to three decimal places, as in the <em>t</em>-test chapter. Where <em>p</em> is smaller than .001, write <em>p</em> &lt; .001.</p>
+</div>
+<div id="anova-oneway-exercise" class="section level3 hasAnchor" number="8.5.6">
+<h3><span class="header-section-number">8.5.6</span> Exercise<a href="anova.html#anova-oneway-exercise" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Now it’s your turn. Run a one-way ANOVA to determine whether baseline <strong>anxiety</strong> (<code>ANX_T1</code>) differs between men, women and non-binary students (<code>Gender</code>).</p>
+<ol style="list-style-type: decimal">
+<li>Run the ANOVA with the same options as above. Add η² and ω². Report the result in a note underneath the table.</li>
+<li>This design is unbalanced (100 men, 118 women and 22 non-binary participants). Run the assumption checks. Why might unequal group sizes make you more careful about the homogeneity of variance assumption?</li>
+<li>Run post hoc tests twice: once with Tukey and once with Games-Howell. Do the conclusions differ?</li>
+<li>Run the Welch and Kruskal-Wallis versions as a sensitivity analysis. Does your conclusion change?</li>
+<li>Write up the results using the template above.</li>
+</ol>
+<details>
+<summary>
+Click to see what you should find
+</summary>
+<ul>
+<li>Group means (SD): Man 6.90 (5.86), Woman 10.51 (6.50), Non-binary 12.73 (6.78).</li>
+<li><em>F</em>(2, 237) = 12.78, <em>p</em> &lt; .001, η² = .10, ω² = .09. This is a medium-to-large effect.</li>
+<li>Levene’s test was not significant (<em>p</em> ≈ .54), although the Man group is somewhat positively skewed (skewness ≈ 0.81).</li>
+<li>Post hoc (Tukey): Men reported significantly lower anxiety than women (mean difference = −3.61, <em>p</em> &lt; .001, <em>d</em> = −0.58) and non-binary participants (mean difference = −5.83, <em>p</em> &lt; .001, <em>d</em> = −0.93). Women and non-binary participants did not differ significantly (mean difference = −2.22, <em>p</em> = .281, <em>d</em> = −0.35). Games-Howell gives the same pattern (the Man vs Non-binary <em>p</em> rises to about .002, but is still significant).</li>
+<li>Welch: <em>F</em>(2, 58.07) = 12.77, <em>p</em> &lt; .001. Kruskal-Wallis: <em>H</em>(2) = 24.18, <em>p</em> &lt; .001. Same conclusions.</li>
+<li>The non-binary group is small (<em>n</em> = 22), so the Non-binary comparisons are less precise (note the wide confidence intervals) and a non-significant difference between women and non-binary students should not be read as ‘no difference’.</li>
+</ul>
+</details>
+</div>
+</div>
+<div id="anova-factorial" class="section level2 hasAnchor" number="8.6">
+<h2><span class="header-section-number">8.6</span> Factorial (two-way) ANOVA<a href="anova.html#anova-factorial" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>A one-way ANOVA has one factor. A <strong>factorial ANOVA</strong> has two or more factors, which are all crossed with each other (every level of one factor appears with every level of the other). A factorial ANOVA answers <strong>three</strong> questions at once:</p>
+<ol style="list-style-type: decimal">
+<li>Is there a <strong>main effect</strong> of Factor A? (Averaging over Factor B, do the levels of A differ?)</li>
+<li>Is there a <strong>main effect</strong> of Factor B? (Averaging over Factor A, do the levels of B differ?)</li>
+<li>Is there an <strong>interaction</strong> between A and B? (Does the effect of A <em>depend on</em> the level of B?)</li>
+</ol>
+<p><strong>The question</strong>: Does the effect of mindfulness on stress at follow-up (<code>STR_T3</code>) depend on how much social support a student has?</p>
+<ul>
+<li><strong>Outcome</strong>: <code>STR_T3</code> (scale)</li>
+<li><strong>Factor A</strong>: <code>Condition</code> (Mindfulness, Control)</li>
+<li><strong>Factor B</strong>: <code>Social_Support</code> (High, Low)</li>
+<li>This is a <strong>2 × 2 between-subjects design</strong> (two factors, each with two levels). There are four groups, each with 60 participants, so the design is balanced.</li>
+</ul>
+<div id="anova-interactions" class="section level3 hasAnchor" number="8.6.1">
+<h3><span class="header-section-number">8.6.1</span> Understanding interactions<a href="anova.html#anova-interactions" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The interaction is usually the most interesting part of a factorial ANOVA, and the easiest way to understand it is to look at a plot of the means. Lines that are <strong>parallel</strong> mean no interaction. Lines that are <strong>not parallel</strong> (they converge, diverge or cross) indicate an interaction.</p>
+<div class="figure"><span style="display:block;" id="fig:fig-interaction-patterns"></span>
+<img src="_main_files/figure-html/fig-interaction-patterns-1.png" alt="Examples of interaction patterns. Solid line = level B1, dashed line = level B2." width="864" />
+<p class="caption">
+Figure 8.1: Examples of interaction patterns. Solid line = level B1, dashed line = level B2.
+</p>
+</div>
+<p>If there is a significant interaction, <strong>be careful about interpreting the main effects on their own</strong>, because the main effect is an average that may hide the fact that the effect is very different at different levels of the other factor. Instead, follow up the interaction with <strong>simple main effects</strong> (see below).</p>
+</div>
+<div id="anova-factorial-jasp" class="section level3 hasAnchor" number="8.6.2">
+<h3><span class="header-section-number">8.6.2</span> Running a factorial ANOVA in JASP<a href="anova.html#anova-factorial-jasp" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ol style="list-style-type: decimal">
+<li><p>Click ‘ANOVA’ -&gt; ‘Classical’ -&gt; ‘ANOVA’. Bring <code>STR_T3</code> into ‘Dependent Variable’, and both <code>Condition</code> and <code>Social_Support</code> into ‘Fixed Factors’. Rename the analysis, for example <strong>A 2 × 2 ANOVA of Follow-up Stress by Condition and Social Support</strong>.</p></li>
+<li><p>Click on ‘Model’. You will see that JASP includes both main effects <em>and</em> the interaction (<code>Condition * Social_Support</code>) by default. Leave it like this. Notice the ‘Sum of squares’ is set to ‘Type III’; this is the default and the one to use in most psychology research (it only really matters when the design is unbalanced, which we’ll come back to).</p></li>
+<li><p>Under ‘Display’, tick ‘Descriptive statistics’ and under ‘Estimates of effect size’ tick partial η² and ω².</p></li>
+<li><p>Under ‘Assumption Checks’ tick ‘Homogeneity tests’ and ‘Q-Q plot of residuals’.</p></li>
+<li><p>Under ‘Descriptive Plots’, bring <code>Social_Support</code> into ‘Horizontal axis’ and <code>Condition</code> into ‘Separate lines’. Tick ‘Display error bars’.</p></li>
+<li><p>Under ‘Simple Main Effects’, set ‘Simple effect factor’ to <code>Condition</code> and bring <code>Social_Support</code> into ‘Moderator factor 1’. This asks: <em>what is the effect of Condition at each level of Social_Support?</em></p></li>
+</ol>
+<p><em>Tip</em>: You do not need post hoc tests here as each factor has only two levels. If one of your factors had three or more levels, you would add post hoc tests for that factor, just like in the one-way ANOVA.</p>
+</div>
+<div id="anova-factorial-output" class="section level3 hasAnchor" number="8.6.3">
+<h3><span class="header-section-number">8.6.3</span> Reading the output<a href="anova.html#anova-factorial-output" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><strong>Descriptive statistics</strong> (stress at T3):</p>
+<table>
+<thead>
+<tr class="header">
+<th>Condition</th>
+<th>Social_Support</th>
+<th><em>N</em></th>
+<th>Mean</th>
+<th>SD</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Control</td>
+<td>High</td>
+<td>60</td>
+<td>11.77</td>
+<td>5.09</td>
+</tr>
+<tr class="even">
+<td>Control</td>
+<td>Low</td>
+<td>60</td>
+<td>13.27</td>
+<td>5.97</td>
+</tr>
+<tr class="odd">
+<td>Mindfulness</td>
+<td>High</td>
+<td>60</td>
+<td>6.67</td>
+<td>5.18</td>
+</tr>
+<tr class="even">
+<td>Mindfulness</td>
+<td>Low</td>
+<td>60</td>
+<td>11.93</td>
+<td>5.96</td>
+</tr>
+</tbody>
+</table>
+<p>The lines are clearly <strong>not parallel</strong>. For students with high social support, mindfulness is associated with much lower stress than the control condition (6.67 vs 11.77). For students with low social support, the difference is much smaller (11.93 vs 13.27). That is what an interaction looks like.</p>
+<p><strong>ANOVA table.</strong> You should find:</p>
+<table>
+<colgroup>
+<col width="34%" />
+<col width="18%" />
+<col width="4%" />
+<col width="14%" />
+<col width="6%" />
+<col width="9%" />
+<col width="6%" />
+<col width="5%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Cases</th>
+<th>Sum of Squares</th>
+<th>df</th>
+<th>Mean Square</th>
+<th><em>F</em></th>
+<th><em>p</em></th>
+<th>η<sub>p</sub>²</th>
+<th>ω²</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Condition</td>
+<td>620.82</td>
+<td>1</td>
+<td>620.82</td>
+<td>20.04</td>
+<td>&lt; .001</td>
+<td>.078</td>
+<td>.067</td>
+</tr>
+<tr class="even">
+<td>Social_Support</td>
+<td>686.82</td>
+<td>1</td>
+<td>686.82</td>
+<td>22.17</td>
+<td>&lt; .001</td>
+<td>.086</td>
+<td>.074</td>
+</tr>
+<tr class="odd">
+<td>Condition ✻ Social_Support</td>
+<td>212.82</td>
+<td>1</td>
+<td>212.82</td>
+<td>6.87</td>
+<td>.009</td>
+<td>.028</td>
+<td>.021</td>
+</tr>
+<tr class="even">
+<td>Residuals</td>
+<td>7309.53</td>
+<td>236</td>
+<td>30.97</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>There is a significant <strong>main effect of Condition</strong>: averaged over social support, mindfulness students had lower stress than controls.</li>
+<li>There is a significant <strong>main effect of Social_Support</strong>: averaged over condition, students with high social support had lower stress.</li>
+<li>There is a significant <strong>interaction</strong>: the effect of mindfulness depends on the level of social support. Because the interaction is significant, we must not stop at the main effects.</li>
+</ul>
+<p><strong>Simple main effects.</strong> This is the follow-up to a significant interaction. It tests the effect of one factor separately at each level of the other:</p>
+<table style="width:100%;">
+<colgroup>
+<col width="28%" />
+<col width="48%" />
+<col width="13%" />
+<col width="8%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Level of Social_Support</th>
+<th>Mean difference (Mindfulness − Control)</th>
+<th><em>F</em>(1, 236)</th>
+<th><em>p</em></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>High</td>
+<td>−5.10</td>
+<td>25.19</td>
+<td>&lt; .001</td>
+</tr>
+<tr class="even">
+<td>Low</td>
+<td>−1.33</td>
+<td>1.72</td>
+<td>.191</td>
+</tr>
+</tbody>
+</table>
+<p>So mindfulness significantly reduced stress for students with <strong>high</strong> social support, but there was no significant effect for students with <strong>low</strong> social support. Note that JASP uses the residual error term from the whole model for these tests, which is why they have the same denominator degrees of freedom (236) as the main ANOVA.</p>
+<p><em>Tip</em>: You could just as easily have asked the question the other way round (the effect of social support within each condition). Which way round you do it should depend on your research question. Here, the question of interest is <em>for whom</em> does mindfulness work, so we looked at the effect of Condition at each level of Social_Support.</p>
+</div>
+<div id="anova-factorial-assumptions" class="section level3 hasAnchor" number="8.6.4">
+<h3><span class="header-section-number">8.6.4</span> Checking the assumptions<a href="anova.html#anova-factorial-assumptions" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>The assumptions are the same as for the one-way ANOVA and apply to every cell of the design. Levene’s test was not significant, <em>F</em>(3, 236) = 0.61, <em>p</em> = .611. The Q-Q plot of residuals looks good, and a Shapiro-Wilk test of the residuals is non-significant, <em>W</em> = 0.99, <em>p</em> = .138. Both assumptions are met.</p>
+</div>
+<div id="anova-unbalanced" class="section level3 hasAnchor" number="8.6.5">
+<h3><span class="header-section-number">8.6.5</span> A note on unbalanced designs<a href="anova.html#anova-unbalanced" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>When group sizes are unequal, the factors become partly correlated with each other, and the way the variance is divided between the effects depends on the order in which they are entered. JASP’s default (<strong>Type III sums of squares</strong>) tests each effect after accounting for all the others, which is the sensible default for most psychology designs. You do not need to change this setting, but it is worth knowing that if you run your analysis in another package (e.g., SPSS or R) you should check that you are using the same type of sums of squares if you want identical results.</p>
+</div>
+<div id="anova-factorial-report" class="section level3 hasAnchor" number="8.6.6">
+<h3><span class="header-section-number">8.6.6</span> Reporting a factorial ANOVA<a href="anova.html#anova-factorial-report" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><strong>Reporting a factorial ANOVA</strong></p>
+<p>A [number] × [number] between-subjects ANOVA was conducted to examine the effects of [Factor A] and [Factor B] on [outcome]. There was a <em>significant/non-significant</em> main effect of [Factor A], <em>F</em>(<em>df</em><sub>effect</sub>, <em>df</em><sub>error</sub>) = <em>F</em>, <em>p</em> = <em>p</em>, η<sub>p</sub>² = η<sub>p</sub>², a <em>significant/non-significant</em> main effect of [Factor B], <em>F</em>(<em>df</em>, <em>df</em>) = <em>F</em>, <em>p</em> = <em>p</em>, η<sub>p</sub>² = η<sub>p</sub>², and a <em>significant/non-significant</em> [Factor A] × [Factor B] interaction, <em>F</em>(<em>df</em>, <em>df</em>) = <em>F</em>, <em>p</em> = <em>p</em>, η<sub>p</sub>² = η<sub>p</sub>². [If the interaction is significant:] Simple main effects analysis showed that…</p>
+<p><strong>Completed example</strong></p>
+<p>A 2 (Condition: Mindfulness, Control) × 2 (Social support: High, Low) between-subjects ANOVA was conducted on stress at follow-up. There was a significant main effect of condition, <em>F</em>(1, 236) = 20.04, <em>p</em> &lt; .001, η<sub>p</sub>² = .08, and a significant main effect of social support, <em>F</em>(1, 236) = 22.17, <em>p</em> &lt; .001, η<sub>p</sub>² = .09. These were qualified by a significant Condition × Social Support interaction, <em>F</em>(1, 236) = 6.87, <em>p</em> = .009, η<sub>p</sub>² = .03. Simple main effects showed that mindfulness reduced stress for students with high social support (<em>M</em><sub>Mindfulness</sub> = 6.67, <em>SD</em> = 5.18; <em>M</em><sub>Control</sub> = 11.77, <em>SD</em> = 5.09; mean difference = −5.10), <em>F</em>(1, 236) = 25.19, <em>p</em> &lt; .001, but not for students with low social support (<em>M</em><sub>Mindfulness</sub> = 11.93, <em>SD</em> = 5.96; <em>M</em><sub>Control</sub> = 13.27, <em>SD</em> = 5.97; mean difference = −1.33), <em>F</em>(1, 236) = 1.72, <em>p</em> = .191. Levene’s test indicated that the assumption of equal variances was met, <em>F</em>(3, 236) = 0.61, <em>p</em> = .611.</p>
+<p><em>Tip</em>: When there is a significant interaction, describe it <em>in words</em> (who benefits, and who doesn’t), not just with numbers. Notice that the example above leads with the interaction and explains the main effects in light of it.</p>
+</div>
+<div id="anova-factorial-exercise" class="section level3 hasAnchor" number="8.6.7">
+<h3><span class="header-section-number">8.6.7</span> Exercise<a href="anova.html#anova-factorial-exercise" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Run a two-way ANOVA to see whether baseline depression (<code>DEP_T1</code>) is affected by <code>Exercise_Level</code> and <code>Social_Support</code>.</p>
+<ol style="list-style-type: decimal">
+<li>Which design is this (e.g., 3 × 2)? Is it balanced?</li>
+<li>Set up the analysis with a descriptives plot (put <code>Exercise_Level</code> on the horizontal axis). Do the lines look parallel?</li>
+<li>Is the interaction significant? Given that, how should you interpret the main effects?</li>
+<li>Add post hoc tests for <code>Exercise_Level</code>. Why do you need them for this factor, but not for <code>Social_Support</code>?</li>
+<li>Check the assumptions and write up your results using the template above.</li>
+</ol>
+<details>
+<summary>
+Click to see what you should find
+</summary>
+<ul>
+<li>This is a 3 × 2 design with cells of between 36 and 44 participants, so it is <strong>unbalanced</strong>; Type III sums of squares are appropriate.</li>
+<li>Main effect of Exercise_Level: <em>F</em>(2, 234) = 22.98, <em>p</em> &lt; .001, η<sub>p</sub>² = .16.</li>
+<li>Main effect of Social_Support: <em>F</em>(1, 234) = 30.96, <em>p</em> &lt; .001, η<sub>p</sub>² = .12.</li>
+<li>Interaction: <em>F</em>(2, 234) = 1.72, <em>p</em> = .182, η<sub>p</sub>² = .01. The interaction is <strong>not</strong> significant, so the lines are roughly parallel and it is reasonable to interpret the main effects separately: depression is higher for those with low exercise and for those with low social support, and the two effects add together without influencing one another.</li>
+<li>You need post hoc tests for Exercise_Level because it has three levels, so a significant main effect doesn’t tell you which levels differ. Social_Support only has two levels, so a significant main effect already tells you that High and Low differ.</li>
+<li>Levene’s test is non-significant (<em>p</em> ≈ .67) and the residuals look approximately normal.</li>
+</ul>
+</details>
+</div>
+</div>
+<div id="anova-rm" class="section level2 hasAnchor" number="8.7">
+<h2><span class="header-section-number">8.7</span> Repeated measures ANOVA<a href="anova.html#anova-rm" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>In a <strong>repeated measures ANOVA</strong>, the <em>same</em> participants are measured on three or more occasions (or under three or more conditions). It is the extension of the paired <em>t</em>-test to more than two time points. Because each person acts as their own comparison, stable differences between people (e.g., one person is just generally more anxious than another) are removed from the error term, which makes the test more powerful than a between-subjects design.</p>
+<p><strong>The question</strong>: Did total distress change across the three time points (baseline, post-intervention and follow-up) for students who took part in the mindfulness programme?</p>
+<ul>
+<li><strong>Outcome</strong>: <code>Total_Distress</code> measured at T1, T2 and T3 (scale)</li>
+<li><strong>Within-subjects factor</strong>: <code>Time</code> (3 levels: T1, T2, T3)</li>
+<li>We only want to include students in the <strong>Mindfulness</strong> condition, so we first need to apply a filter.</li>
+</ul>
+<div id="anova-rm-setup" class="section level3 hasAnchor" number="8.7.1">
+<h3><span class="header-section-number">8.7.1</span> Setting up the data<a href="anova.html#anova-rm-setup" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ol style="list-style-type: decimal">
+<li><p>Click on the filter icon to the left of <code>ParticipantID</code>. Create a filter so that only the Mindfulness group is included, for example by clicking on the ‘R code’ tab and typing <code>Condition == "Mindfulness"</code>. Apply the filter. You should now see that rows in the Control condition are greyed out.</p></li>
+<li><p>Your data are in ‘wide format’: each row is one person, and each time point is a separate column (<code>Total_Distress_T1</code>, <code>Total_Distress_T2</code>, <code>Total_Distress_T3</code>). JASP wants repeated measures data in exactly this form, so no restructuring is needed.</p></li>
+</ol>
+</div>
+<div id="anova-rm-jasp" class="section level3 hasAnchor" number="8.7.2">
+<h3><span class="header-section-number">8.7.2</span> Running a repeated measures ANOVA in JASP<a href="anova.html#anova-rm-jasp" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ol start="3" style="list-style-type: decimal">
+<li><p>Click ‘ANOVA’ -&gt; ‘Classical’ -&gt; ‘Repeated Measures ANOVA’.</p></li>
+<li><p>Under ‘Repeated Measures Factors’, click on ‘RM Factor 1’ and rename it <code>Time</code>. Then rename ‘Level 1’, ‘Level 2’ and ‘Level 3’ to <code>T1</code>, <code>T2</code> and <code>T3</code>.</p></li>
+<li><p>Bring <code>Total_Distress_T1</code>, <code>Total_Distress_T2</code> and <code>Total_Distress_T3</code> into ‘Repeated Measures Cells’. <strong>The order matters</strong>: make sure T1 goes in the first slot, T2 in the second and T3 in the third.</p></li>
+<li><p>Under ‘Display’, tick ‘Descriptive statistics’. Under ‘Estimates of effect size’, tick partial η² and general η² (and ω² if you like).</p></li>
+<li><p>Under ‘Assumption Checks’, tick ‘Sphericity tests’. Under ‘Sphericity Corrections’, tick ‘Greenhouse-Geisser’ (we’ll explain why in a moment).</p></li>
+<li><p>Under ‘Post Hoc Tests’, bring <code>Time</code> over to the right-hand box, tick ‘Holm’ (and ‘Bonferroni’ if you want to compare) and tick ‘Effect size’.</p></li>
+<li><p>Under ‘Descriptive Plots’, bring <code>Time</code> into ‘Horizontal axis’ and display error bars.</p></li>
+</ol>
+</div>
+<div id="anova-sphericity" class="section level3 hasAnchor" number="8.7.3">
+<h3><span class="header-section-number">8.7.3</span> Sphericity<a href="anova.html#anova-sphericity" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Repeated measures ANOVA has one assumption that between-subjects ANOVAs don’t: <strong>sphericity</strong>. Sphericity means that the variances of the <em>differences</em> between every pair of time points are roughly equal (i.e., the variance of T1 − T2 is similar to the variance of T1 − T3 and the variance of T2 − T3). It is only an issue when you have <strong>three or more</strong> levels of the within-subjects factor.</p>
+<ul>
+<li><strong>Mauchly’s test of sphericity</strong> tests this assumption. A <em>non-significant</em> result (<em>p</em> &gt; .05) means sphericity is met. A <em>significant</em> result means it is violated.</li>
+<li>If sphericity is violated, the <em>F</em>-test is too liberal (too many false positives). The solution is to apply a <strong>correction</strong> that adjusts the degrees of freedom downwards. The amount of violation is measured by <strong>epsilon (ε)</strong>, which ranges from 1/(<em>k</em> − 1) (the worst case, where <em>k</em> = the number of time points) to 1 (perfect sphericity).</li>
+<li><strong>Greenhouse-Geisser</strong> is the more conservative correction. <strong>Huynh-Feldt</strong> is more liberal. A common rule of thumb: use Greenhouse-Geisser if ε &lt; .75 and Huynh-Feldt if ε &gt; .75. Many researchers simply always use Greenhouse-Geisser.</li>
+</ul>
+</div>
+<div id="anova-rm-output" class="section level3 hasAnchor" number="8.7.4">
+<h3><span class="header-section-number">8.7.4</span> Reading the output<a href="anova.html#anova-rm-output" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><strong>Descriptive statistics</strong> (Mindfulness group only, <em>N</em> = 120):</p>
+<table>
+<thead>
+<tr class="header">
+<th>Time</th>
+<th>Mean</th>
+<th>SD</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>T1</td>
+<td>35.70</td>
+<td>17.65</td>
+</tr>
+<tr class="even">
+<td>T2</td>
+<td>25.50</td>
+<td>15.16</td>
+</tr>
+<tr class="odd">
+<td>T3</td>
+<td>23.25</td>
+<td>14.50</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Test of sphericity.</strong> Mauchly’s <em>W</em> = .98, <em>p</em> = .263, so sphericity is met. The Greenhouse-Geisser ε is .98, which is very close to 1, so the correction makes almost no difference.</p>
+<p><strong>Within Subjects Effects:</strong></p>
+<table>
+<colgroup>
+<col width="11%" />
+<col width="25%" />
+<col width="17%" />
+<col width="3%" />
+<col width="13%" />
+<col width="7%" />
+<col width="8%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Cases</th>
+<th>Sphericity correction</th>
+<th>Sum of Squares</th>
+<th>df</th>
+<th>Mean Square</th>
+<th><em>F</em></th>
+<th><em>p</em></th>
+<th>η<sub>p</sub>²</th>
+<th>η²<sub>G</sub></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Time</td>
+<td>None</td>
+<td>10564.20</td>
+<td>2</td>
+<td>5282.10</td>
+<td>277.40</td>
+<td>&lt; .001</td>
+<td>.70</td>
+<td>.11</td>
+</tr>
+<tr class="even">
+<td>Residuals</td>
+<td>None</td>
+<td>4531.80</td>
+<td>238</td>
+<td>19.04</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>There was a significant effect of time. The partial η² of .70 is very large. (Generalised η², η²<sub>G</sub>, is smaller because it keeps variance due to differences between people in the denominator. Partial η² in repeated measures designs tends to be large for exactly this reason, so make sure you say which one you are reporting.)</p>
+<p><strong>Post hoc tests.</strong> As with the one-way ANOVA, a significant overall effect only tells us that distress changed <em>somewhere</em>. The post hoc tests (Holm-corrected) show where:</p>
+<table>
+<thead>
+<tr class="header">
+<th>Comparison</th>
+<th>Mean difference</th>
+<th><em>p</em><sub>holm</sub></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>T1 − T2</td>
+<td>10.20</td>
+<td>&lt; .001</td>
+</tr>
+<tr class="even">
+<td>T1 − T3</td>
+<td>12.45</td>
+<td>&lt; .001</td>
+</tr>
+<tr class="odd">
+<td>T2 − T3</td>
+<td>2.25</td>
+<td>&lt; .001</td>
+</tr>
+</tbody>
+</table>
+<p>Distress fell by about 10 points between baseline and post-intervention, fell by a smaller further 2 points between post-intervention and follow-up, and all three differences are significant.</p>
+<p><em>Tip</em>: JASP may give slightly different <em>t</em> values for within-subjects post hoc tests than you would get if you ran paired <em>t</em>-tests (JASP uses the pooled error term from the model), but the conclusions should be the same.</p>
+<p><strong>Be careful about what you conclude.</strong> This analysis only includes the mindfulness group. It shows that distress went down in this group, but it can’t tell us <em>whether mindfulness caused that</em>: people might have improved anyway over time, or because they were tested repeatedly, or due to regression to the mean (unusually high scores tend to drop on retesting). To find out, we need to compare with the control group. Try running the same analysis for the Control group (change the filter). You will see that there is also a significant effect of time in the control group (<em>F</em>(2, 238) = 14.49, <em>p</em> &lt; .001, η<sub>p</sub>² = .11), but it is much smaller (control distress fell from 33.10 to 30.17).</p>
+</div>
+<div id="anova-rm-nonparametric" class="section level3 hasAnchor" number="8.7.5">
+<h3><span class="header-section-number">8.7.5</span> Non-parametric alternative<a href="anova.html#anova-rm-nonparametric" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>If the assumptions are badly violated, the non-parametric alternative to a one-way repeated measures ANOVA is the <strong>Friedman test</strong>. In recent versions of JASP you can find it under ‘Nonparametrics’ in the Repeated Measures ANOVA options. For the mindfulness group, the result is χ²(2) = 158.25, <em>p</em> &lt; .001, which agrees with the ANOVA.</p>
+</div>
+<div id="anova-rm-report" class="section level3 hasAnchor" number="8.7.6">
+<h3><span class="header-section-number">8.7.6</span> Reporting a repeated measures ANOVA<a href="anova.html#anova-rm-report" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><strong>Reporting a repeated measures ANOVA</strong></p>
+<p>A one-way repeated measures ANOVA was conducted to compare [outcome] across [time points/conditions]. Mauchly’s test indicated that the assumption of sphericity <em>was met/was violated</em> (<em>W</em> = <em>W</em>, <em>p</em> = <em>p</em>) [if violated: so Greenhouse-Geisser corrected degrees of freedom were used (ε = ε)]. There was a <em>significant/non-significant</em> effect of [within-subjects factor] on [outcome], <em>F</em>(<em>df</em><sub>effect</sub>, <em>df</em><sub>error</sub>) = <em>F</em>, <em>p</em> = <em>p</em>, η<sub>p</sub>² = η<sub>p</sub>². [Post hoc test] post hoc comparisons showed that…</p>
+<p><strong>Completed example</strong></p>
+<p>A one-way repeated measures ANOVA was conducted to examine whether total distress changed over time in students who completed the mindfulness programme (<em>N</em> = 120). Mauchly’s test indicated that the assumption of sphericity was met, <em>W</em> = .98, <em>p</em> = .263. There was a significant effect of time on distress, <em>F</em>(2, 238) = 277.40, <em>p</em> &lt; .001, η<sub>p</sub>² = .70. Holm-corrected post hoc comparisons showed that distress decreased significantly from baseline (<em>M</em> = 35.70, <em>SD</em> = 17.65) to post-intervention (<em>M</em> = 25.50, <em>SD</em> = 15.16; mean difference = 10.20, <em>p</em> &lt; .001) and again to follow-up (<em>M</em> = 23.25, <em>SD</em> = 14.50; mean difference from baseline = 12.45, <em>p</em> &lt; .001). There was also a smaller, but significant, decrease between post-intervention and follow-up (mean difference = 2.25, <em>p</em> &lt; .001).</p>
+<p><em>If sphericity is violated</em>, the only things that change are that you report the Mauchly result as significant, say which correction you used with its ε, and report the corrected (non-integer) degrees of freedom shown in JASP, e.g., <em>F</em>(1.62, 192.78) = …</p>
+</div>
+<div id="anova-rm-exercise" class="section level3 hasAnchor" number="8.7.7">
+<h3><span class="header-section-number">8.7.7</span> Exercise<a href="anova.html#anova-rm-exercise" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ol style="list-style-type: decimal">
+<li>Using the filter, run a repeated measures ANOVA on <strong>stress</strong> (<code>STR_T1</code>, <code>STR_T2</code>, <code>STR_T3</code>) for the Mindfulness group only. Is sphericity met? Which correction (if any) should you report?</li>
+<li>Which time points differ from each other? Is it different from the pattern for total distress?</li>
+<li>Now change the filter to the Control group and repeat the analysis. How do the effect sizes compare?</li>
+<li>Write up the results for the Mindfulness group.</li>
+</ol>
+<details>
+<summary>
+Click to see what you should find
+</summary>
+<ul>
+<li><strong>Sphericity</strong>: Mauchly’s test is significant in the Mindfulness group (<em>W</em> = .91, <em>p</em> = .003, Greenhouse-Geisser ε = .92), so you should report the Greenhouse-Geisser corrected results.</li>
+<li><strong>Mindfulness group</strong>: stress changed significantly over time, with a large effect (uncorrected <em>F</em>(2, 238) = 117.39, η<sub>p</sub>² = .50; the corrected degrees of freedom are about 1.83 and 218.01, and <em>p</em> remains &lt; .001). The pattern is a large drop between T1 and T2 followed by a smaller further drop between T2 and T3, like total distress.</li>
+<li><strong>Control group</strong>: stress also changed significantly, but the effect is far smaller (uncorrected <em>F</em>(2, 238) = 6.79, η<sub>p</sub>² = .05). Mauchly’s test is significant here too (<em>W</em> = .84, <em>p</em> &lt; .001, ε = .86), so the Greenhouse-Geisser correction applies, and the effect remains significant after correction.</li>
+<li>Your write-up should follow the template above, state which correction you used and its ε, and report the corrected (non-integer) degrees of freedom shown in JASP.</li>
+</ul>
+</details>
+</div>
+</div>
+<div id="anova-mixed" class="section level2 hasAnchor" number="8.8">
+<h2><span class="header-section-number">8.8</span> Mixed ANOVA<a href="anova.html#anova-mixed" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>The repeated measures analysis above has a limitation: it can’t tell us whether the <em>mindfulness programme</em> is responsible for the change. For that we need to compare the change in the mindfulness group to the change in the control group. This is exactly what a <strong>mixed ANOVA</strong> does. It combines:</p>
+<ul>
+<li>a <strong>within-subjects factor</strong> (here, <code>Time</code>: T1, T2, T3), and</li>
+<li>a <strong>between-subjects factor</strong> (here, <code>Condition</code>: Mindfulness, Control).</li>
+</ul>
+<p>(‘Mixed’ because it mixes between- and within-subjects factors. It is also called a ‘split-plot’ ANOVA.) It is one of the most common designs in clinical psychology: a treatment trial where people are randomised to groups and measured before and after treatment.</p>
+<p><strong>The question</strong>: Did the change in total distress over time differ between students in the mindfulness and control conditions?</p>
+<p>A mixed ANOVA gives three effects:</p>
+<table>
+<colgroup>
+<col width="16%" />
+<col width="83%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Effect</th>
+<th>What it tells you</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Main effect of Time</td>
+<td>Did distress change over time (averaging over both groups)?</td>
+</tr>
+<tr class="even">
+<td>Main effect of Condition</td>
+<td>Did the groups differ overall (averaging over all time points)?</td>
+</tr>
+<tr class="odd">
+<td><strong>Time × Condition interaction</strong></td>
+<td><strong>Did the groups change differently over time?</strong> This is usually the effect that answers a treatment-trial question.</td>
+</tr>
+</tbody>
+</table>
+<div id="anova-mixed-jasp" class="section level3 hasAnchor" number="8.8.1">
+<h3><span class="header-section-number">8.8.1</span> Running a mixed ANOVA in JASP<a href="anova.html#anova-mixed-jasp" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ol style="list-style-type: decimal">
+<li><p><strong>Remove the filter</strong> you applied earlier (double-click the rubbish bin icon, or choose to include all rows) so that both conditions are included.</p></li>
+<li><p>Click ‘ANOVA’ -&gt; ‘Classical’ -&gt; ‘Repeated Measures ANOVA’. Set up the within-subjects factor exactly as before: rename ‘RM Factor 1’ to <code>Time</code>, rename the levels <code>T1</code>, <code>T2</code>, <code>T3</code>, and bring <code>Total_Distress_T1</code>, <code>Total_Distress_T2</code> and <code>Total_Distress_T3</code> into ‘Repeated Measures Cells’ in order.</p></li>
+<li><p>Bring <code>Condition</code> into <strong>‘Between Subject Factors’</strong>. This is what makes it a mixed ANOVA.</p></li>
+<li><p>Under ‘Display’, tick ‘Descriptive statistics’ and partial η² and general η². Under ‘Assumption Checks’ tick both ‘Sphericity tests’ and ‘Homogeneity tests’. Under ‘Sphericity Corrections’ tick ‘Greenhouse-Geisser’.</p></li>
+<li><p>Under ‘Descriptive Plots’, bring <code>Time</code> into ‘Horizontal axis’ and <code>Condition</code> into ‘Separate lines’. Tick ‘Display error bars’.</p></li>
+</ol>
+</div>
+<div id="anova-mixed-output" class="section level3 hasAnchor" number="8.8.2">
+<h3><span class="header-section-number">8.8.2</span> Reading the output<a href="anova.html#anova-mixed-output" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><strong>Descriptive statistics</strong> (total distress):</p>
+<table>
+<thead>
+<tr class="header">
+<th>Condition</th>
+<th>T1 <em>M</em> (<em>SD</em>)</th>
+<th>T2 <em>M</em> (<em>SD</em>)</th>
+<th>T3 <em>M</em> (<em>SD</em>)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Control</td>
+<td>33.10 (17.63)</td>
+<td>30.73 (14.18)</td>
+<td>30.17 (14.80)</td>
+</tr>
+<tr class="even">
+<td>Mindfulness</td>
+<td>35.70 (17.65)</td>
+<td>25.50 (15.16)</td>
+<td>23.25 (14.50)</td>
+</tr>
+</tbody>
+</table>
+<p>The groups start off in a similar place at T1, and then the lines diverge: distress drops substantially in the mindfulness group, but only a little in the control group.</p>
+<p><strong>Assumption checks.</strong></p>
+<ul>
+<li><strong>Sphericity</strong>: Mauchly’s <em>W</em> = .995, <em>p</em> = .550, so sphericity is met (Greenhouse-Geisser ε = .995).</li>
+<li><strong>Homogeneity of variance</strong> (Levene’s test at each time point): T1 <em>p</em> = .597, T2 <em>p</em> = .249, T3 <em>p</em> = .915. All non-significant, so the assumption is met.</li>
+<li>Also check the Q-Q plot of residuals, as before.</li>
+</ul>
+<p><strong>Within Subjects Effects:</strong></p>
+<table>
+<colgroup>
+<col width="28%" />
+<col width="21%" />
+<col width="4%" />
+<col width="17%" />
+<col width="9%" />
+<col width="10%" />
+<col width="7%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Cases</th>
+<th>Sum of Squares</th>
+<th>df</th>
+<th>Mean Square</th>
+<th><em>F</em></th>
+<th><em>p</em></th>
+<th>η<sub>p</sub>²</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Time</td>
+<td>8050.03</td>
+<td>2</td>
+<td>4025.02</td>
+<td>205.95</td>
+<td>&lt; .001</td>
+<td>.46</td>
+</tr>
+<tr class="even">
+<td>Time ✻ Condition</td>
+<td>3095.23</td>
+<td>2</td>
+<td>1547.62</td>
+<td>79.19</td>
+<td>&lt; .001</td>
+<td>.25</td>
+</tr>
+<tr class="odd">
+<td>Residuals</td>
+<td></td>
+<td>476</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Between Subjects Effects:</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th>Cases</th>
+<th>Sum of Squares</th>
+<th>df</th>
+<th>Mean Square</th>
+<th><em>F</em></th>
+<th><em>p</em></th>
+<th>η<sub>p</sub>²</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Condition</td>
+<td>1824.05</td>
+<td>1</td>
+<td>1824.05</td>
+<td>2.60</td>
+<td>.108</td>
+<td>.01</td>
+</tr>
+<tr class="even">
+<td>Residuals</td>
+<td></td>
+<td>238</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>Let’s interpret each effect.</p>
+<ul>
+<li><strong>Time × Condition (the key result)</strong>: this is significant and large, <em>F</em>(2, 476) = 79.19, <em>p</em> &lt; .001, η<sub>p</sub>² = .25. The change in distress over time was different in the two groups. This is the evidence that the <em>mindfulness programme</em> (not just the passage of time) is associated with improvement.</li>
+<li><strong>Main effect of Time</strong>: distress went down over time overall. This is the least informative result here because it is averaged over both groups (and we already know it hides the fact that most of the improvement was in the mindfulness group).</li>
+<li><strong>Main effect of Condition</strong>: not significant, <em>F</em>(1, 238) = 2.60, <em>p</em> = .108. <strong>This does not mean that mindfulness didn’t work!</strong> The main effect of Condition averages over all three time points, <em>including baseline</em>, when the groups were the same. So it dilutes the group difference that emerges after the intervention. This is a classic situation in trial designs: the main effect of group is often uninformative, and the interaction is what you care about.</li>
+</ul>
+</div>
+<div id="anova-mixed-followup" class="section level3 hasAnchor" number="8.8.3">
+<h3><span class="header-section-number">8.8.3</span> Following up a significant interaction<a href="anova.html#anova-mixed-followup" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Just like in the factorial ANOVA, a significant interaction needs following up to describe <em>how</em> the pattern differs. There are two natural ways to do this in a mixed design.</p>
+<p><strong>Option 1: Compare the groups at each time point.</strong> Run three independent samples <em>t</em>-tests (Chapter 4), comparing Mindfulness and Control on total distress at T1, T2 and T3. Because you are running three tests, apply a Bonferroni correction (multiply each <em>p</em> by 3, or compare it to .05/3 = .017). You should find:</p>
+<table>
+<colgroup>
+<col width="4%" />
+<col width="43%" />
+<col width="8%" />
+<col width="19%" />
+<col width="17%" />
+<col width="5%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Time</th>
+<th>Mean difference (Mindfulness − Control)</th>
+<th><em>t</em>(238)</th>
+<th><em>p</em> (uncorrected)</th>
+<th><em>p</em> (Bonferroni)</th>
+<th><em>d</em></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>T1</td>
+<td>2.60</td>
+<td>1.14</td>
+<td>.255</td>
+<td>.765</td>
+<td>0.15</td>
+</tr>
+<tr class="even">
+<td>T2</td>
+<td>−5.23</td>
+<td>−2.76</td>
+<td>.006</td>
+<td>.019</td>
+<td>−0.36</td>
+</tr>
+<tr class="odd">
+<td>T3</td>
+<td>−6.92</td>
+<td>−3.66</td>
+<td>&lt; .001</td>
+<td>&lt; .001</td>
+<td>−0.47</td>
+</tr>
+</tbody>
+</table>
+<p>So the groups were not significantly different at baseline (good: this is what we hope to see in a trial), and the mindfulness group had significantly lower distress than the control group at both post-intervention and follow-up.</p>
+<p><strong>Option 2: Look at the change over time within each group.</strong> Use the filter (as in the previous section) to run a one-way repeated measures ANOVA separately in each condition. We have already done this: distress changed a great deal in the mindfulness group (<em>F</em>(2, 238) = 277.40, η<sub>p</sub>² = .70) but only a little in the control group (<em>F</em>(2, 238) = 14.49, η<sub>p</sub>² = .11).</p>
+<p><em>Tip</em>: You can also ask JASP for post hoc tests of the <em>Time × Condition</em> term, but this produces 15 comparisons (every cell against every other cell), most of which are not of interest, and the correction for 15 tests reduces your power. It is usually better to choose a small number of meaningful follow-up tests like the ones above, and to decide which ones before you look at the results.</p>
+</div>
+<div id="anova-mixed-multiple" class="section level3 hasAnchor" number="8.8.4">
+<h3><span class="header-section-number">8.8.4</span> Analysing more than one outcome<a href="anova.html#anova-mixed-multiple" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>In practice, you might want to run the mixed ANOVA on depression, anxiety and stress separately. If you do, you are running three tests rather than one, so you should either correct for this (e.g., use <em>α</em> = .05/3 = .017 for each) or decide in advance which outcome is primary (see Chapter 5). Using Greenhouse-Geisser corrected results where Mauchly’s test was significant, the Time × Condition interaction results for each outcome are:</p>
+<table style="width:100%;">
+<colgroup>
+<col width="11%" />
+<col width="23%" />
+<col width="23%" />
+<col width="26%" />
+<col width="8%" />
+<col width="5%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Outcome</th>
+<th>Mauchly’s <em>W</em> (<em>p</em>)</th>
+<th>Greenhouse-Geisser ε</th>
+<th><em>F</em> (corrected df)</th>
+<th><em>p</em></th>
+<th>η<sub>p</sub>²</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Depression</td>
+<td>.95 (.002)</td>
+<td>.95</td>
+<td><em>F</em>(1.90, 452.30) = 33.66</td>
+<td>&lt; .001</td>
+<td>.12</td>
+</tr>
+<tr class="even">
+<td>Anxiety</td>
+<td>.94 (&lt; .001)</td>
+<td>.94</td>
+<td><em>F</em>(1.88, 447.17) = 24.44</td>
+<td>&lt; .001</td>
+<td>.09</td>
+</tr>
+<tr class="odd">
+<td>Stress</td>
+<td>.89 (&lt; .001)</td>
+<td>.90</td>
+<td><em>F</em>(1.80, 429.56) = 35.64</td>
+<td>&lt; .001</td>
+<td>.13</td>
+</tr>
+</tbody>
+</table>
+<p>All three outcomes show a significant Time × Condition interaction, even after correcting for the number of outcomes. (Note that for Stress, Levene’s test is borderline at T1 and significant at T2, so you would want to report this and check the sensitivity of your conclusions.)</p>
+</div>
+<div id="anova-mixed-three" class="section level3 hasAnchor" number="8.8.5">
+<h3><span class="header-section-number">8.8.5</span> Adding another factor<a href="anova.html#anova-mixed-three" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>You are not limited to one between-subjects factor. Earlier, we found that the effect of mindfulness on stress depended on social support. We can ask whether this also applies to the <em>change in distress over time</em> by adding <code>Social_Support</code> as a second between-subjects factor. This gives a 3 (Time) × 2 (Condition) × 2 (Social support) mixed ANOVA. The new effect to look at is the <strong>three-way interaction</strong> (Time × Condition × Social_Support), which asks whether the Time × Condition interaction is itself different for people with high versus low social support. For total distress, this three-way interaction is significant, <em>F</em>(2, 472) = 9.57, <em>p</em> &lt; .001, η<sub>p</sub>² = .04. Three-way interactions are difficult to interpret, so always plot them (put <code>Time</code> on the horizontal axis, <code>Condition</code> as separate lines, and <code>Social_Support</code> as separate plots) and follow them up by running the Time × Condition analysis separately in each social support group.</p>
+</div>
+<div id="anova-mixed-report" class="section level3 hasAnchor" number="8.8.6">
+<h3><span class="header-section-number">8.8.6</span> Reporting a mixed ANOVA<a href="anova.html#anova-mixed-report" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><strong>Reporting a mixed ANOVA</strong></p>
+<p>A [number] (Time) × [number] (Group) mixed ANOVA was conducted on [outcome]. Mauchly’s test indicated that the assumption of sphericity <em>was met/was violated</em> (<em>W</em> = <em>W</em>, <em>p</em> = <em>p</em>). [Report homogeneity of variance.] There was a <em>significant/non-significant</em> main effect of [within factor], <em>F</em>(<em>df</em>, <em>df</em>) = <em>F</em>, <em>p</em> = <em>p</em>, η<sub>p</sub>² = η<sub>p</sub>², a <em>significant/non-significant</em> main effect of [between factor], <em>F</em>(<em>df</em>, <em>df</em>) = <em>F</em>, <em>p</em> = <em>p</em>, η<sub>p</sub>² = η<sub>p</sub>², and a <em>significant/non-significant</em> [within factor] × [between factor] interaction, <em>F</em>(<em>df</em>, <em>df</em>) = <em>F</em>, <em>p</em> = <em>p</em>, η<sub>p</sub>² = η<sub>p</sub>². [Follow-up tests describing the interaction.]</p>
+<p><strong>Completed example</strong></p>
+<p>A 3 (Time: T1, T2, T3) × 2 (Condition: Mindfulness, Control) mixed ANOVA was conducted on total distress. Mauchly’s test indicated that the assumption of sphericity was met, <em>W</em> = .995, <em>p</em> = .550, and Levene’s test was non-significant at each time point (all <em>p</em>s &gt; .05). There was a significant main effect of time, <em>F</em>(2, 476) = 205.95, <em>p</em> &lt; .001, η<sub>p</sub>² = .46, but the main effect of condition was not significant, <em>F</em>(1, 238) = 2.60, <em>p</em> = .108, η<sub>p</sub>² = .01. Importantly, there was a significant Time × Condition interaction, <em>F</em>(2, 476) = 79.19, <em>p</em> &lt; .001, η<sub>p</sub>² = .25, indicating that distress changed differently over time in the two groups. Bonferroni-corrected independent samples <em>t</em>-tests showed that the groups did not differ at baseline (Mindfulness <em>M</em> = 35.70, <em>SD</em> = 17.65; Control <em>M</em> = 33.10, <em>SD</em> = 17.63; <em>t</em>(238) = 1.14, <em>p</em> = .765, <em>d</em> = 0.15), but the mindfulness group reported significantly lower distress than the control group at post-intervention (<em>M</em> = 25.50, <em>SD</em> = 15.16 vs <em>M</em> = 30.73, <em>SD</em> = 14.18; <em>t</em>(238) = −2.76, <em>p</em> = .019, <em>d</em> = −0.36) and at follow-up (<em>M</em> = 23.25, <em>SD</em> = 14.50 vs <em>M</em> = 30.17, <em>SD</em> = 14.80; <em>t</em>(238) = −3.66, <em>p</em> &lt; .001, <em>d</em> = −0.47).</p>
+</div>
+<div id="anova-mixed-exercise" class="section level3 hasAnchor" number="8.8.7">
+<h3><span class="header-section-number">8.8.7</span> Exercise<a href="anova.html#anova-mixed-exercise" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ol style="list-style-type: decimal">
+<li>Run a mixed ANOVA on <strong>depression</strong> (<code>DEP_T1</code>, <code>DEP_T2</code>, <code>DEP_T3</code>) with <code>Condition</code> as the between-subjects factor.</li>
+<li>Is sphericity met? If not, which line of the output should you read (the ‘None’ line or the ‘Greenhouse-Geisser’ line)?</li>
+<li>Which of the three effects (Time, Condition, Time × Condition) answers the question ‘Does mindfulness reduce depression more than no intervention?’</li>
+<li>Look at the descriptives plot. Describe, in a sentence, what the interaction looks like.</li>
+<li>Write up the results.</li>
+</ol>
+<details>
+<summary>
+Click to see what you should find
+</summary>
+<ul>
+<li>Mauchly’s test is significant (<em>W</em> = .95, <em>p</em> = .002), so use the Greenhouse-Geisser line (ε = .95).</li>
+<li>Time × Condition: <em>F</em>(1.90, 452.30) = 33.66, <em>p</em> &lt; .001, η<sub>p</sub>² = .12. Main effect of time: <em>F</em>(1.90, 452.30) = 90.66, <em>p</em> &lt; .001, η<sub>p</sub>² = .28 (using the corrected df). Main effect of condition: <em>F</em>(1, 238) = 0.62, <em>p</em> = .430, η<sub>p</sub>² = .003.</li>
+<li>The interaction is the effect that answers the question. Depression decreased more in the mindfulness group (<em>M</em> = 12.00 at T1 to <em>M</em> = 7.70 at T3) than in the control group (<em>M</em> = 10.57 to <em>M</em> = 9.42).</li>
+</ul>
+</details>
+</div>
+</div>
+<div id="anova-ancova" class="section level2 hasAnchor" number="8.9">
+<h2><span class="header-section-number">8.9</span> ANCOVA<a href="anova.html#anova-ancova" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p><strong>ANCOVA</strong> (Analysis of Covariance) is an ANOVA with one or more <strong>continuous covariates</strong> added. A covariate is a variable that isn’t your main interest but that is related to your outcome, so it adds ‘noise’ you would like to remove. ANCOVA does two things:</p>
+<ol style="list-style-type: decimal">
+<li>It <strong>adjusts the group means</strong> to what they would be if everyone had the same score on the covariate.</li>
+<li>It usually <strong>increases power</strong>, because variance explained by the covariate is removed from the error term.</li>
+</ol>
+<p>In treatment trials, the most useful covariate is usually the <strong>baseline score</strong> on the outcome. Instead of asking ‘did the groups change differently over time?’ (mixed ANOVA), we ask ‘do the groups differ at follow-up, <em>after controlling for where they started</em>?’ Both approaches are legitimate, and they answer slightly different questions. In randomised trials with a baseline measure, ANCOVA is often preferred as it tends to be more powerful.</p>
+<p><strong>The question</strong>: Do the mindfulness and control groups differ in total distress at follow-up (T3), after controlling for baseline total distress (T1)?</p>
+<ul>
+<li><strong>Outcome</strong>: <code>Total_Distress_T3</code> (scale)</li>
+<li><strong>Factor</strong>: <code>Condition</code> (Mindfulness, Control)</li>
+<li><strong>Covariate</strong>: <code>Total_Distress_T1</code> (scale)</li>
+</ul>
+<div id="anova-ancova-jasp" class="section level3 hasAnchor" number="8.9.1">
+<h3><span class="header-section-number">8.9.1</span> Running an ANCOVA in JASP<a href="anova.html#anova-ancova-jasp" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ol style="list-style-type: decimal">
+<li><p>Click ‘ANOVA’ -&gt; ‘Classical’ -&gt; ‘ANCOVA’. Bring <code>Total_Distress_T3</code> into ‘Dependent Variable’, <code>Condition</code> into ‘Fixed Factors’ and <code>Total_Distress_T1</code> into <strong>‘Covariates’</strong>. Rename the analysis, for example <strong>An ANCOVA of Follow-up Distress by Condition, Controlling for Baseline Distress</strong>.</p></li>
+<li><p>Under ‘Display’, tick ‘Descriptive statistics’ and partial η².</p></li>
+<li><p>Under ‘Marginal Means’, bring <code>Condition</code> over to the right-hand box. This gives the <strong>adjusted</strong> (‘estimated marginal’) means: the group means at the average value of the covariate. Tick ‘Confidence intervals’ if you wish.</p></li>
+<li><p>Under ‘Assumption Checks’, tick ‘Homogeneity tests’ and ‘Q-Q plot of residuals’.</p></li>
+</ol>
+</div>
+<div id="anova-ancova-assumptions" class="section level3 hasAnchor" number="8.9.2">
+<h3><span class="header-section-number">8.9.2</span> The extra assumptions of ANCOVA<a href="anova.html#anova-ancova-assumptions" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>In addition to the usual assumptions (independence, normality of residuals, homogeneity of variance), ANCOVA has two more:</p>
+<ul>
+<li><strong>Linearity</strong>: the relationship between the covariate and the outcome must be linear. Check this with a scatterplot of <code>Total_Distress_T1</code> against <code>Total_Distress_T3</code> (‘Descriptives’ -&gt; ‘Plots’ -&gt; ‘Correlation plot’, or use the residuals vs. fitted plot). Here the relationship is strong and linear (<em>r</em> = .89).</li>
+<li><strong>Homogeneity of regression slopes</strong>: the relationship between the covariate and the outcome must be the same in each group. In other words, there should be <strong>no Condition × covariate interaction</strong>. To test it, click on ‘Model’ and add the interaction term <code>Condition * Total_Distress_T1</code> to the model, and check that it is <strong>not</strong> significant. Here, it isn’t, <em>F</em>(1, 236) = 0.45, <em>p</em> = .503. Once you have checked, remove the term again before interpreting your final ANCOVA.</li>
+</ul>
+<p>The other assumptions are met here: Levene’s test is non-significant (<em>p</em> = .660) and a Shapiro-Wilk test of the residuals is non-significant (<em>p</em> = .157).</p>
+<p><em>Tip</em>: If the slopes are <em>not</em> homogeneous (a significant interaction), a standard ANCOVA isn’t appropriate, since the effect of the group depends on the covariate. Instead you would report and interpret the interaction directly.</p>
+</div>
+<div id="anova-ancova-output" class="section level3 hasAnchor" number="8.9.3">
+<h3><span class="header-section-number">8.9.3</span> Reading the output<a href="anova.html#anova-ancova-output" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<table>
+<colgroup>
+<col width="26%" />
+<col width="21%" />
+<col width="4%" />
+<col width="17%" />
+<col width="10%" />
+<col width="10%" />
+<col width="7%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Cases</th>
+<th>Sum of Squares</th>
+<th>df</th>
+<th>Mean Square</th>
+<th><em>F</em></th>
+<th><em>p</em></th>
+<th>η<sub>p</sub>²</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Condition</td>
+<td>4773.48</td>
+<td>1</td>
+<td>4773.48</td>
+<td>186.73</td>
+<td>&lt; .001</td>
+<td>.44</td>
+</tr>
+<tr class="even">
+<td>Total_Distress_T1</td>
+<td>45010.62</td>
+<td>1</td>
+<td>45010.62</td>
+<td>1760.74</td>
+<td>&lt; .001</td>
+<td>.88</td>
+</tr>
+<tr class="odd">
+<td>Residuals</td>
+<td>6058.54</td>
+<td>237</td>
+<td>25.56</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>The covariate (baseline distress) strongly predicts follow-up distress. This is not a surprise (it is rare for the covariate not to be significant), and we don’t usually interpret this line.</li>
+<li>Even after controlling for baseline, there is a significant effect of <strong>Condition</strong>.</li>
+</ul>
+<p><strong>Adjusted means</strong> (from ‘Marginal Means’, evaluated at the mean baseline distress of 34.40):</p>
+<table>
+<thead>
+<tr class="header">
+<th>Condition</th>
+<th>Unadjusted mean at T3</th>
+<th>Adjusted mean at T3</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Control</td>
+<td>30.17</td>
+<td>31.18</td>
+</tr>
+<tr class="even">
+<td>Mindfulness</td>
+<td>23.25</td>
+<td>22.24</td>
+</tr>
+</tbody>
+</table>
+<p>After adjusting for baseline, the mindfulness group’s distress at follow-up was 8.94 points lower than the control group’s (95% CI [−10.23, −7.65]). Compare this with the unadjusted difference of 6.92 points. The mindfulness group started slightly higher at baseline (35.70 vs 33.10), so adjusting for baseline <em>increases</em> the estimated effect of mindfulness. Always report the adjusted means, not the raw means, when interpreting an ANCOVA.</p>
+</div>
+<div id="anova-ancova-report" class="section level3 hasAnchor" number="8.9.4">
+<h3><span class="header-section-number">8.9.4</span> Reporting an ANCOVA<a href="anova.html#anova-ancova-report" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p><strong>Reporting an ANCOVA</strong></p>
+<p>A one-way between-subjects ANCOVA was conducted to compare [outcome] between [groups], controlling for [covariate]. [Assumption checks.] After controlling for [covariate], there was a <em>significant/non-significant</em> effect of [factor] on [outcome], <em>F</em>(<em>df</em><sub>effect</sub>, <em>df</em><sub>error</sub>) = <em>F</em>, <em>p</em> = <em>p</em>, η<sub>p</sub>² = η<sub>p</sub>². Adjusted means were [Group 1] (<em>M</em><sub>adj</sub> = ?) and [Group 2] (<em>M</em><sub>adj</sub> = ?).</p>
+<p><strong>Completed example</strong></p>
+<p>A one-way between-subjects ANCOVA was conducted to compare total distress at follow-up between the mindfulness and control conditions, controlling for baseline total distress. The assumptions of homogeneity of regression slopes (<em>F</em>(1, 236) = 0.45, <em>p</em> = .503) and homogeneity of variance (Levene’s test <em>p</em> = .660) were met. After controlling for baseline distress, there was a significant effect of condition on follow-up distress, <em>F</em>(1, 237) = 186.73, <em>p</em> &lt; .001, η<sub>p</sub>² = .44. Adjusted mean distress was lower in the mindfulness condition (<em>M</em><sub>adj</sub> = 22.24) than in the control condition (<em>M</em><sub>adj</sub> = 31.18), an adjusted mean difference of −8.94 (95% CI [−10.23, −7.65]).</p>
+</div>
+<div id="anova-ancova-exercise" class="section level3 hasAnchor" number="8.9.5">
+<h3><span class="header-section-number">8.9.5</span> Exercise<a href="anova.html#anova-ancova-exercise" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<ol style="list-style-type: decimal">
+<li>Run an ANCOVA on <strong>anxiety at follow-up</strong> (<code>ANX_T3</code>) with <code>Condition</code> as the factor and <code>ANX_T1</code> as the covariate.</li>
+<li>Check the homogeneity of regression slopes assumption.</li>
+<li>Compare the unadjusted and adjusted means. Does adjusting for baseline change the conclusion?</li>
+<li>Now try adding <code>Sleep_Hours</code> as a <em>second</em> covariate. Is it significant? Does it change the effect of Condition? Why might <code>Sleep_Hours</code> be a less useful covariate than <code>ANX_T1</code>?</li>
+<li>Write up your results.</li>
+</ol>
+</div>
+</div>
+<div id="anova-beyond" class="section level2 hasAnchor" number="8.10">
+<h2><span class="header-section-number">8.10</span> Other ANOVA-related tests<a href="anova.html#anova-beyond" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>There are other members of the ANOVA family that we don’t have space to cover in detail, but you may come across:</p>
+<table>
+<colgroup>
+<col width="22%" />
+<col width="77%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Test</th>
+<th>What it is</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>MANOVA</strong></td>
+<td>ANOVA with <em>several outcome variables analysed together</em> (e.g., depression, anxiety and stress at once). Available in JASP under ‘ANOVA’ -&gt; ‘Classical’ -&gt; ‘MANOVA’. Useful when outcomes are correlated, but harder to interpret</td>
+</tr>
+<tr class="even">
+<td><strong>Welch’s ANOVA</strong></td>
+<td>A version of one-way ANOVA that doesn’t assume equal variances</td>
+</tr>
+<tr class="odd">
+<td><strong>Kruskal-Wallis test</strong></td>
+<td>Non-parametric alternative to one-way between-subjects ANOVA</td>
+</tr>
+<tr class="even">
+<td><strong>Friedman test</strong></td>
+<td>Non-parametric alternative to one-way repeated measures ANOVA</td>
+</tr>
+<tr class="odd">
+<td><strong>Bayesian ANOVA</strong></td>
+<td>Available in JASP; quantifies the evidence for and against an effect rather than giving a <em>p</em> value</td>
+</tr>
+<tr class="even">
+<td><strong>Linear mixed-effects models</strong></td>
+<td>A more flexible alternative to repeated measures and mixed ANOVA that copes with missing data at some time points, unequally spaced measurements and more complex designs (see Chapter 3, ‘Beyond the basics’)</td>
+</tr>
+</tbody>
+</table>
+<p>An important limitation of repeated measures and mixed ANOVA is that they use <strong>listwise deletion</strong>: anyone with a missing time point is dropped from the analysis (see Section 7.2). Our practice dataset is complete, but real clinical data rarely is. If you have a lot of missing data at follow-up, a linear mixed-effects model is usually a better choice.</p>
+</div>
+<div id="anova-reporting-summary" class="section level2 hasAnchor" number="8.11">
+<h2><span class="header-section-number">8.11</span> Reporting ANOVA: a summary<a href="anova.html#anova-reporting-summary" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>Whichever type of ANOVA you run, a good write-up includes:</p>
+<ol style="list-style-type: decimal">
+<li><strong>The test and the design</strong>: say what kind of ANOVA you used and describe the factors and their levels (e.g., ‘a 3 × 2 mixed ANOVA with Time (T1, T2, T3) as a within-subjects factor and Condition (Mindfulness, Control) as a between-subjects factor’).</li>
+<li><strong>Descriptive statistics</strong>: means and standard deviations for each group (and each time point), either in the text or in a table, along with a plot.</li>
+<li><strong>Assumption checks</strong>: say which assumptions you checked, how, and whether they were met. If they were not, say what you did (e.g., Welch correction, Greenhouse-Geisser correction) and whether the conclusion was the same under an alternative approach (a sensitivity analysis; see Section 7.3.3).</li>
+<li><strong>The test statistic for every effect you are interested in</strong>: <em>F</em>(<em>df</em><sub>effect</sub>, <em>df</em><sub>error</sub>) = <em>F</em>, the <em>p</em> value and an effect size. Include the non-significant ones, too.</li>
+<li><strong>Follow-up tests</strong>: name the post hoc test or correction used, and describe which groups or time points differed, with the size and direction of the difference (mean difference, 95% CI and/or Cohen’s <em>d</em>).</li>
+<li><strong>Interpretation in words</strong>: what does the pattern <em>mean</em> for your research question? Where there is an interaction, describe it in plain language.</li>
+</ol>
+<p><strong>Formatting conventions</strong> (as in the <em>t</em>-test chapter)</p>
+<ul>
+<li>Italicise statistical symbols (<em>F</em>, <em>p</em>, <em>M</em>, <em>SD</em>, <em>t</em>, <em>d</em>) but not Greek letters (η², ω², ε).</li>
+<li>Report <em>F</em>, <em>t</em> and effect sizes to two decimal places and <em>p</em> values to three decimal places. For <em>p</em> &lt; .001, write <em>p</em> &lt; .001.</li>
+<li>Always give both degrees of freedom for <em>F</em>: <em>F</em>(2, 237), not <em>F</em>(2).</li>
+<li>If you used a Welch or Greenhouse-Geisser correction, report the corrected (non-integer) degrees of freedom.</li>
+<li>State <em>which</em> effect size you are reporting (η², partial η², generalised η² or ω²) because they differ, particularly in repeated measures designs.</li>
+</ul>
+<p><strong>Quick reference: what to report</strong></p>
+<table>
+<colgroup>
+<col width="9%" />
+<col width="27%" />
+<col width="31%" />
+<col width="31%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>ANOVA</th>
+<th>Effects to report</th>
+<th>Checks to report</th>
+<th>Follow-up</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>One-way</td>
+<td>Factor</td>
+<td>Normality of residuals, Levene’s test</td>
+<td>Post hoc tests (Tukey, or Games-Howell if variances unequal)</td>
+</tr>
+<tr class="even">
+<td>Factorial</td>
+<td>Main effect A, main effect B, A × B</td>
+<td>Normality of residuals, Levene’s test</td>
+<td>Simple main effects if interaction significant; post hoc for factors with 3+ levels</td>
+</tr>
+<tr class="odd">
+<td>Repeated measures</td>
+<td>Within-subjects factor</td>
+<td>Sphericity (Mauchly’s test) and correction if needed</td>
+<td>Post hoc tests (Holm or Bonferroni)</td>
+</tr>
+<tr class="even">
+<td>Mixed</td>
+<td>Within factor, between factor, within × between</td>
+<td>Sphericity, Levene’s test at each time point</td>
+<td>Compare groups at each time point and/or change within each group</td>
+</tr>
+<tr class="odd">
+<td>ANCOVA</td>
+<td>Factor (adjusted), covariate</td>
+<td>Normality, Levene’s test, linearity, homogeneity of slopes</td>
+<td>Adjusted means; post hoc tests if 3+ groups</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Using JASP to help you write up</strong>: as in the <em>t</em>-test chapter, you can click on the italic title of any table and select ‘Add note’ to write your results directly underneath. You can click on the blue ‘R’ button to see the R syntax behind your analysis, and use ‘Export results’ or ‘Copy’ to send your output to a Word document.</p>
+</div>
+<div id="anova-quiz" class="section level2 hasAnchor" number="8.12">
+<h2><span class="header-section-number">8.12</span> Quiz<a href="anova.html#anova-quiz" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<div id="check-your-understanding-anova" class="section level3 hasAnchor" number="8.12.1">
+<h3><span class="header-section-number">8.12.1</span> Check your understanding: ANOVA<a href="anova.html#check-your-understanding-anova" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Work through each question, then click on ‘Show answer’ to check your thinking.</p>
+<p><strong>1.</strong> A researcher wants to compare depression scores in three independent groups. Why is a one-way ANOVA preferable to running three separate <em>t</em>-tests?</p>
+<ul>
+<li><ol style="list-style-type: lower-alpha">
+<li><em>t</em>-tests can’t be used on depression scores</li>
+</ol></li>
+<li><ol start="2" style="list-style-type: lower-alpha">
+<li>Running multiple <em>t</em>-tests inflates the overall chance of a false positive</li>
+</ol></li>
+<li><ol start="3" style="list-style-type: lower-alpha">
+<li>ANOVA doesn’t need any assumptions</li>
+</ol></li>
+<li><ol start="4" style="list-style-type: lower-alpha">
+<li><em>t</em>-tests give larger effect sizes</li>
+</ol></li>
+</ul>
+<details>
+<summary>
+Show answer
+</summary>
+<p><strong>(b)</strong>. Every test carries a chance of a Type I error, so running several increases the familywise error rate. ANOVA asks one overall question first.</p>
+</details>
+<p><strong>2.</strong> A study measures anxiety in the same 50 patients before treatment, after treatment and at 6-month follow-up. Which test is most appropriate?</p>
+<ul>
+<li><ol style="list-style-type: lower-alpha">
+<li>One-way between-subjects ANOVA</li>
+</ol></li>
+<li><ol start="2" style="list-style-type: lower-alpha">
+<li>Factorial ANOVA</li>
+</ol></li>
+<li><ol start="3" style="list-style-type: lower-alpha">
+<li>Repeated measures ANOVA</li>
+</ol></li>
+<li><ol start="4" style="list-style-type: lower-alpha">
+<li>Independent samples <em>t</em>-test</li>
+</ol></li>
+</ul>
+<details>
+<summary>
+Show answer
+</summary>
+<p><strong>(c)</strong>. The same people are measured on three occasions, so Time is a within-subjects factor.</p>
+</details>
+<p><strong>3.</strong> Participants are randomised to CBT, medication or waiting list, and are measured before and after treatment. Which design is this?</p>
+<ul>
+<li><ol style="list-style-type: lower-alpha">
+<li>A one-way ANOVA</li>
+</ol></li>
+<li><ol start="2" style="list-style-type: lower-alpha">
+<li>A 3 × 2 mixed ANOVA</li>
+</ol></li>
+<li><ol start="3" style="list-style-type: lower-alpha">
+<li>A 3 × 2 repeated measures ANOVA</li>
+</ol></li>
+<li><ol start="4" style="list-style-type: lower-alpha">
+<li>A paired <em>t</em>-test</li>
+</ol></li>
+</ul>
+<details>
+<summary>
+Show answer
+</summary>
+<p><strong>(b)</strong>. Treatment group (3 levels) is between-subjects and time (2 levels) is within-subjects. The Group × Time interaction would test whether the treatments led to different amounts of change.</p>
+</details>
+<p><strong>4.</strong> In a 2 × 2 factorial ANOVA, the interaction is significant. What should you do?</p>
+<ul>
+<li><ol style="list-style-type: lower-alpha">
+<li>Interpret only the main effects</li>
+</ol></li>
+<li><ol start="2" style="list-style-type: lower-alpha">
+<li>Ignore the interaction as it is less important than the main effects</li>
+</ol></li>
+<li><ol start="3" style="list-style-type: lower-alpha">
+<li>Follow up the interaction with simple main effects and describe the pattern in words</li>
+</ol></li>
+<li><ol start="4" style="list-style-type: lower-alpha">
+<li>Rerun the analysis with a different test</li>
+</ol></li>
+</ul>
+<details>
+<summary>
+Show answer
+</summary>
+<p><strong>(c)</strong>. A significant interaction means the effect of one factor depends on the other, so main effects (which are averages) can be misleading.</p>
+</details>
+<p><strong>5.</strong> In a repeated measures ANOVA with three time points, Mauchly’s test is significant (<em>p</em> = .01) and the Greenhouse-Geisser ε = .65. What should you do?</p>
+<ul>
+<li><ol style="list-style-type: lower-alpha">
+<li>Carry on and read the ‘None’ (sphericity assumed) line</li>
+</ol></li>
+<li><ol start="2" style="list-style-type: lower-alpha">
+<li>Report the Greenhouse-Geisser corrected degrees of freedom and <em>p</em> value</li>
+</ol></li>
+<li><ol start="3" style="list-style-type: lower-alpha">
+<li>Delete participants until the test is not significant</li>
+</ol></li>
+<li><ol start="4" style="list-style-type: lower-alpha">
+<li>Switch to an independent <em>t</em>-test</li>
+</ol></li>
+</ul>
+<details>
+<summary>
+Show answer
+</summary>
+<p><strong>(b)</strong>. A significant Mauchly’s test means sphericity is violated, so use a corrected result. With ε below .75, Greenhouse-Geisser is the usual choice.</p>
+</details>
+<p><strong>6.</strong> In a one-way ANOVA with unequal group sizes, Levene’s test is significant. Which approach is most sensible?</p>
+<ul>
+<li><ol style="list-style-type: lower-alpha">
+<li>Use Welch’s ANOVA and Games-Howell post hoc tests</li>
+</ol></li>
+<li><ol start="2" style="list-style-type: lower-alpha">
+<li>Use Tukey’s test as normal</li>
+</ol></li>
+<li><ol start="3" style="list-style-type: lower-alpha">
+<li>Remove the largest group</li>
+</ol></li>
+<li><ol start="4" style="list-style-type: lower-alpha">
+<li>Ignore it, as ANOVA is always robust</li>
+</ol></li>
+</ul>
+<details>
+<summary>
+Show answer
+</summary>
+<p><strong>(a)</strong>. Welch’s ANOVA and Games-Howell don’t assume equal variances. Violations of this assumption are most problematic when group sizes are unequal.</p>
+</details>
+<p><strong>7.</strong> In a mixed ANOVA of a treatment trial, the Time × Group interaction is significant but the main effect of Group is not. What is the most reasonable conclusion?</p>
+<ul>
+<li><ol style="list-style-type: lower-alpha">
+<li>The treatment didn’t work, because the main effect of Group is not significant</li>
+</ol></li>
+<li><ol start="2" style="list-style-type: lower-alpha">
+<li>The groups changed differently over time; the main effect of Group averages over time points, including baseline, when the groups were equivalent</li>
+</ol></li>
+<li><ol start="3" style="list-style-type: lower-alpha">
+<li>The data must contain an error</li>
+</ol></li>
+<li><ol start="4" style="list-style-type: lower-alpha">
+<li>Sphericity must have been violated</li>
+</ol></li>
+</ul>
+<details>
+<summary>
+Show answer
+</summary>
+<p><strong>(b)</strong>. This is a very common pattern in trial data. The interaction is the effect that tests whether groups changed differently.</p>
+</details>
+<p><strong>8.</strong> An ANOVA gives η<sub>p</sub>² = .08. According to common rules of thumb, this is…</p>
+<ul>
+<li><ol style="list-style-type: lower-alpha">
+<li>A negligible effect</li>
+</ol></li>
+<li><ol start="2" style="list-style-type: lower-alpha">
+<li>A small effect</li>
+</ol></li>
+<li><ol start="3" style="list-style-type: lower-alpha">
+<li>A medium effect</li>
+</ol></li>
+<li><ol start="4" style="list-style-type: lower-alpha">
+<li>A large effect</li>
+</ol></li>
+</ul>
+<details>
+<summary>
+Show answer
+</summary>
+<p><strong>(c)</strong>. The rules of thumb are about .01 = small, .06 = medium, .14 = large. Remember that these are rough guides; the clinical importance of an effect depends on context (see Chapter 6).</p>
+</details>
+<p><strong>9.</strong> What does ANCOVA do?</p>
+<ul>
+<li><ol style="list-style-type: lower-alpha">
+<li>Compares group means after statistically adjusting for a continuous covariate</li>
+</ol></li>
+<li><ol start="2" style="list-style-type: lower-alpha">
+<li>Compares two groups on several outcomes at once</li>
+</ol></li>
+<li><ol start="3" style="list-style-type: lower-alpha">
+<li>Removes outliers</li>
+</ol></li>
+<li><ol start="4" style="list-style-type: lower-alpha">
+<li>Tests whether the data are normally distributed</li>
+</ol></li>
+</ul>
+<details>
+<summary>
+Show answer
+</summary>
+<p><strong>(a)</strong>. ANCOVA adjusts group means for a covariate, which often increases power. The assumption of homogeneity of regression slopes must also be checked.</p>
+</details>
+<p><strong>10.</strong> Which of the following is the best way to report a one-way ANOVA result?</p>
+<ul>
+<li><ol style="list-style-type: lower-alpha">
+<li>‘The ANOVA was significant (<em>p</em> &lt; .05).’</li>
+</ol></li>
+<li><ol start="2" style="list-style-type: lower-alpha">
+<li>‘There was a difference between groups, <em>F</em> = 20.76.’</li>
+</ol></li>
+<li><ol start="3" style="list-style-type: lower-alpha">
+<li>‘Depression differed significantly between exercise groups, <em>F</em>(2, 237) = 20.76, <em>p</em> &lt; .001, ω² = .14.’</li>
+</ol></li>
+<li><ol start="4" style="list-style-type: lower-alpha">
+<li>‘Depression was higher in the low exercise group.’</li>
+</ol></li>
+</ul>
+<details>
+<summary>
+Show answer
+</summary>
+<p><strong>(c)</strong>. A good report states what was compared, gives the test statistic with both degrees of freedom, the exact <em>p</em> value (or <em>p</em> &lt; .001) and an effect size. It should then be followed by descriptive statistics and post hoc tests.</p>
+</details>
+</div>
+</div>
+<div id="anova-summary" class="section level2 hasAnchor" number="8.13">
+<h2><span class="header-section-number">8.13</span> Putting it all together<a href="anova.html#anova-summary" class="anchor-section" aria-label="Anchor link to header"></a></h2>
+<p>You have now met five types of ANOVA, each of which answers a different question about the same dataset.</p>
+<table>
+<colgroup>
+<col width="42%" />
+<col width="14%" />
+<col width="43%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Question about the data</th>
+<th>Analysis</th>
+<th>Key result</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Does baseline depression differ by exercise level?</td>
+<td>One-way ANOVA</td>
+<td>Yes (<em>F</em>(2, 237) = 20.76, ω² = .14); low exercisers are the most depressed</td>
+</tr>
+<tr class="even">
+<td>Does the effect of mindfulness on stress depend on social support?</td>
+<td>2 × 2 factorial ANOVA</td>
+<td>Yes, there is an interaction (<em>F</em>(1, 236) = 6.87); mindfulness helped only those with high social support</td>
+</tr>
+<tr class="odd">
+<td>Did distress change over time in the mindfulness group?</td>
+<td>Repeated measures ANOVA</td>
+<td>Yes (<em>F</em>(2, 238) = 277.40, η<sub>p</sub>² = .70)</td>
+</tr>
+<tr class="even">
+<td>Did distress change differently over time in the two conditions?</td>
+<td>Mixed ANOVA</td>
+<td>Yes (Time × Condition <em>F</em>(2, 476) = 79.19, η<sub>p</sub>² = .25)</td>
+</tr>
+<tr class="odd">
+<td>Do the conditions differ at follow-up after controlling for baseline?</td>
+<td>ANCOVA</td>
+<td>Yes (<em>F</em>(1, 237) = 186.73, η<sub>p</sub>² = .44)</td>
+</tr>
+</tbody>
+</table>
+<p>Finally, think about the <strong>bigger picture</strong>. All of these analyses are on a fictional dataset, and so the results do not tell us anything about real mindfulness programmes. But notice how the choice of analysis changed what we learned. Looking only at the main effect of Condition in the mixed ANOVA would have told us nothing (<em>p</em> = .108), while the interaction told us a lot. Looking at the overall effect of mindfulness on stress would have hidden the fact that it only worked for students with high social support. And looking only at the mindfulness group would have told us that distress dropped, but not whether mindfulness was responsible. Choosing the analysis that matches your research question <em>before</em> you look at the data (see Chapter 5) is one of the most important steps in a good analysis.</p>
+<div id="anova-final-exercise" class="section level3 hasAnchor" number="8.13.1">
+<h3><span class="header-section-number">8.13.1</span> Final exercise<a href="anova.html#anova-final-exercise" class="anchor-section" aria-label="Anchor link to header"></a></h3>
+<p>Write a short results section (about 300–400 words) for a hypothetical paper on this study. It should include:</p>
+<ol style="list-style-type: decimal">
+<li>A description of the sample (use Descriptives to summarise <code>Age</code>, <code>Gender</code> and <code>Condition</code>).</li>
+<li>A mixed ANOVA on one outcome of your choice (depression, anxiety, stress or total distress), including assumption checks, the main effects, the interaction and appropriate follow-up tests.</li>
+<li>A sentence explaining whether your conclusion changes if you analyse the same outcome using an ANCOVA with the baseline score as the covariate.</li>
+<li>One figure (a descriptives plot from JASP) with a caption.</li>
+</ol>
+<p>Then export your JASP results (click on the title of your analysis and select ‘Export results’) and swap your write-up with a peer. Can they work out from your write-up alone exactly what you did?</p>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="descriptive-statistics-pre-analysis-steps.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+  "sharing": {
+    "github": false,
+    "facebook": true,
+    "twitter": true,
+    "linkedin": false,
+    "weibo": false,
+    "instapaper": false,
+    "vk": false,
+    "whatsapp": false,
+    "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+  },
+  "fontsettings": {
+    "theme": "white",
+    "family": "sans",
+    "size": 2
+  },
+  "edit": {
+    "link": "https://github.com/USERNAME/REPO/edit/BRANCH/07-anova.Rmd",
+    "text": "Edit"
+  },
+  "history": {
+    "link": null,
+    "text": null
+  },
+  "view": {
+    "link": null,
+    "text": null
+  },
+  "download": ["_main.pdf", "_main.epub"],
+  "search": {
+    "engine": "fuse",
+    "options": null
+  },
+  "toc": {
+    "collapse": "subsection"
+  }
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/latest.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
