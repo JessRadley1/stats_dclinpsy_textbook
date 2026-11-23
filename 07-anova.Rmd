@@ -272,19 +272,8 @@ A one-way ANOVA has one factor. A **factorial ANOVA** has two or more factors, w
 
 The interaction is usually the most interesting part of a factorial ANOVA, and the easiest way to understand it is to look at a plot of the means. Lines that are **parallel** mean no interaction. Lines that are **not parallel** (they converge, diverge or cross) indicate an interaction.
 
-```{r fig-interaction-patterns, fig.height=3.4, fig.width=9, fig.cap="Examples of interaction patterns. Solid line = level B1, dashed line = level B2."}
-op <- par(mfrow = c(1, 3), mar = c(4, 4, 3, 1))
-x <- 1:2
-plot_pattern <- function(b1, b2, title) {
-  plot(x, b1, type = "b", pch = 16, lty = 1, ylim = c(0, 10), xaxt = "n",
-       xlim = c(0.8, 2.2), xlab = "Factor A", ylab = "Mean outcome", main = title)
-  axis(1, at = x, labels = c("A1", "A2"))
-  lines(x, b2, type = "b", pch = 17, lty = 2)
-}
-plot_pattern(c(3, 5), c(6, 8), "No interaction (parallel)")
-plot_pattern(c(3, 4), c(4, 9), "Interaction (diverging)")
-plot_pattern(c(3, 8), c(8, 3), "Crossover interaction")
-par(op)
+```{r fixed anova interactions, echo=FALSE, fig.cap="Mean total distress at baseline"}
+knitr::include_graphics("images/figure_interaction_patterns.png")
 ```
 
 If there is a significant interaction, **be careful about interpreting the main effects on their own**, because the main effect is an average that may hide the fact that the effect is very different at different levels of the other factor. Instead, follow up the interaction with **simple main effects** (see below).
@@ -541,10 +530,6 @@ A mixed ANOVA gives three effects:
 | ----------- | ------------- | ------------- | ------------- |
 | Control     | 33.10 (17.63) | 30.73 (14.18) | 30.17 (14.80) |
 | Mindfulness | 35.70 (17.65) | 25.50 (15.16) | 23.25 (14.50) |
-
-```{r fixed anova interactions, echo=FALSE, fig.cap="Mean total distress at baseline"}
-knitr::include_graphics("images/figure_interaction_patterns.png")
-```
 
 
 The groups start off in a similar place at T1, and then the lines diverge: distress drops substantially in the mindfulness group, but only a little in the control group.

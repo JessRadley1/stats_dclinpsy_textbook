@@ -2,7 +2,6 @@ fig:flow-cross-sectional
 fig:flow-longitudinal
 fig:flow-beyondbasics
 fig:bootstrapping
-fig:fig-interaction-patterns
 about
 learning-objectives
 using-jasp
